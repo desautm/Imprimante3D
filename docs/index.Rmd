@@ -1,9 +1,9 @@
 ---
-title: "Presentation Ninja"
-subtitle: "⚔<br/>with xaringan"
-author: "Yihui Xie"
-institute: "RStudio, PBC"
-date: "2016/12/12 (updated: `r Sys.Date()`)"
+title: "Comment utiliser les mathématiques..."
+subtitle: "... pour imprimer en 3D"
+author: "[Marc-André Désautels](https://madesautels.rbind.io) "
+institute: "Cégep Saint-Jean-sur-Richelieu"
+date: "Octobre 2022 <br><br> Présentation disponible à https://desautm.github.io/Imprimante3D <br> Code disponible à  https://github.com/desautm/Imprimante3D"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -11,6 +11,11 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+---
+class: center, middle
+
+<iframe width="800" height="600" src="https://www.youtube.com/embed/m_QhY1aABsE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
 ---
 
 background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
