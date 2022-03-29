@@ -17,38 +17,25 @@ class: center, middle
 <iframe width="800" height="600" src="https://www.youtube.com/embed/m_QhY1aABsE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ---
-
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
-
-```{r setup, include=FALSE}
-options(htmltools.dir.version = FALSE)
-```
-
-???
-
-Image credit: [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Sharingan_triple.svg)
-
----
-class: center, middle
-
-# xaringan
-
-### /ʃaː.'riŋ.ɡan/
-
----
 class: inverse, center, middle
 
-# Get Started
+# Le commencement
 
 ---
 
-# Hello World
+# STL pour STéréoLitographie
 
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
+- Ce format ne comporte notamment pas d'informations concernant la couleur, la texture ou les autres paramètres habituels d'un modèle de conception assistée par ordinateur.
 
-```{r eval=FALSE, tidy=FALSE}
-remotes::install_github("yihui/xaringan")
-```
+- Le **format de fichier STL** ne décrit que la géométrie de surface d'un objet en 3 dimensions.
+
+- Cette surface est nécessairement fermée et définie par une série de triangles (ou de facettes). 
+
+- Chaque triangle est défini par les coordonnées cartésiennes (x, y, z) dans un trièdre direct de son vecteur normal unitaire (n) orienté vers l'extérieur de l'objet et de ses trois sommets (vertex/vertices en anglais) ordonnés dans le sens trigonométrique. 
+
+- Chaque triangle doit partager 2 sommets avec chacun des triangles le juxtaposant. Dit autrement, le sommet d'un triangle ne doit pas être sur l'arête d'un autre triangle. Il n'y a pas d'information d'échelle. 
+
+- L'unité de longueur est arbitraire.
 
 --
 
