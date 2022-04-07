@@ -1266,7 +1266,7 @@ class:middle, center
 ---
 class:middle, center
 
-![Animation de l'algorithme pour simplifier une droite](/tikz/simplify_line.gif)
+![Animation de l'algorithme pour simplifier une droite](../tikz/simplify_line.gif)
 
 
 
