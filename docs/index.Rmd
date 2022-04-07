@@ -16,7 +16,8 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(
-  cache=TRUE
+  cache=TRUE,
+  echo=FALSE
 )
 ```
 
@@ -91,6 +92,1182 @@ end facet
 \end{tikzpicture}
 ```
 ]
+
+---
+class:middle, center
+
+![toto](http://www.ams.org/images/fcarc-march2014-trunccube.jpg)
+
+---
+class:middle, center
+
+![toto](http://www.ams.org/images/fcarc-march2014-slice.zonotope.small.jpg)
+---
+class: inverse, center, middle
+
+# Couper le solide en polygones
+
+---
+
+# On veut trouver l'intersection d'un plan avec le solide
+
+- Le solide est composé de plusiers triangles.
+
+- Chaque triangle est composé de trois segments de droites.
+
+- On veut donc savoir si un segment de droite croise le plan.
+
+---
+class: middle, center
+
+```{tikz, echo=FALSE}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+\coordinate (pt1)  at (0.1196,0.6535);
+\coordinate (pt2)  at (0.5265,0.9261);
+\coordinate (pt3)  at (0.5549,0.9242);
+\coordinate (pt4)  at (0.8823,0.8447);
+\coordinate (pt5)  at (0.9000,0.8000);
+\coordinate (pt6)  at (0.7480,0.4984);
+\coordinate (pt7)  at (0.7745,0.4851);
+\coordinate (pt8)  at (0.9599,0.3148);
+\coordinate (pt9)  at (0.9315,0.3148);
+\coordinate (pt10) at (0.7763,0.0725);
+\coordinate (pt11) at (0.7498,0.0971);
+\coordinate (pt12) at (0.4943,0.5135);
+\coordinate (pt13) at (0.4622,0.4813);
+\coordinate (pt14) at (0.2502,0.0877);
+\coordinate (pt15) at (0.2275,0.1123);
+\coordinate (pt16) at (0.1083,0.6176);
+
+\draw (0,0) rectangle (1,1);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,3,5,...,15}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,16}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+
+% \draw[blue, very thick] (0.65145,0)--++(0,1);
+
+% \draw[red, very thick] (0,0.56555)--++(0.65145,0);
+
+% \draw[red, very thick] (0.65145,0.39995)--(1,0.39995);
+
+% \draw[blue, very thick, opacity = 0.5] (0.3562,0)--(0.3562,0.56555);
+
+% \draw[blue, very thick, opacity = 0.5] (0.32305,0.56555)--(0.32305,1);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8539,0.39995)--(0.8539,0);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8284,0.39995)--(0.8284,1);
+
+% \coordinate (midpt1) at (0.1139,0.6356);
+% \coordinate (midpt2) at (0.5407,0.9251);
+% \coordinate (midpt3) at (0.8912,0.8223);
+% \coordinate (midpt4) at (0.7612,0.4917);
+% \coordinate (midpt5) at (0.9457,0.3148);
+% \coordinate (midpt6) at (0.7631,0.0848);
+% \coordinate (midpt7) at (0.4783,0.4974);
+% \coordinate (midpt8) at (0.2388,0.1000);
+
+% \draw[fill=orange, fill opacity = 0.5] 
+% 	(midpt1)--
+% 	(midpt2)--
+% 	(midpt3)--
+% 	(midpt4)--
+% 	(midpt5)--
+% 	(midpt6)--
+% 	(midpt7)--
+% 	(midpt8)--
+% 	cycle;
+
+% \foreach \num in {1,2,...,8}{
+% 	\draw[fill=orange] (midpt\num) circle (0.25pt);
+% }
+
+\end{tikzpicture}
+```
+
+---
+class: middle, center
+
+```{tikz, echo=FALSE}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+\coordinate (pt1)  at (0.1196,0.6535);
+\coordinate (pt2)  at (0.5265,0.9261);
+\coordinate (pt3)  at (0.5549,0.9242);
+\coordinate (pt4)  at (0.8823,0.8447);
+\coordinate (pt5)  at (0.9000,0.8000);
+\coordinate (pt6)  at (0.7480,0.4984);
+\coordinate (pt7)  at (0.7745,0.4851);
+\coordinate (pt8)  at (0.9599,0.3148);
+\coordinate (pt9)  at (0.9315,0.3148);
+\coordinate (pt10) at (0.7763,0.0725);
+\coordinate (pt11) at (0.7498,0.0971);
+\coordinate (pt12) at (0.4943,0.5135);
+\coordinate (pt13) at (0.4622,0.4813);
+\coordinate (pt14) at (0.2502,0.0877);
+\coordinate (pt15) at (0.2275,0.1123);
+\coordinate (pt16) at (0.1083,0.6176);
+
+\draw (0,0) rectangle (1,1);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,3,5,...,15}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,16}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+
+\draw[blue, very thick] (0.65145,0)--++(0,1);
+
+% \draw[red, very thick] (0,0.56555)--++(0.65145,0);
+
+% \draw[red, very thick] (0.65145,0.39995)--(1,0.39995);
+
+% \draw[blue, very thick, opacity = 0.5] (0.3562,0)--(0.3562,0.56555);
+
+% \draw[blue, very thick, opacity = 0.5] (0.32305,0.56555)--(0.32305,1);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8539,0.39995)--(0.8539,0);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8284,0.39995)--(0.8284,1);
+
+% \coordinate (midpt1) at (0.1139,0.6356);
+% \coordinate (midpt2) at (0.5407,0.9251);
+% \coordinate (midpt3) at (0.8912,0.8223);
+% \coordinate (midpt4) at (0.7612,0.4917);
+% \coordinate (midpt5) at (0.9457,0.3148);
+% \coordinate (midpt6) at (0.7631,0.0848);
+% \coordinate (midpt7) at (0.4783,0.4974);
+% \coordinate (midpt8) at (0.2388,0.1000);
+
+% \draw[fill=orange, fill opacity = 0.5] 
+% 	(midpt1)--
+% 	(midpt2)--
+% 	(midpt3)--
+% 	(midpt4)--
+% 	(midpt5)--
+% 	(midpt6)--
+% 	(midpt7)--
+% 	(midpt8)--
+% 	cycle;
+
+% \foreach \num in {1,2,...,8}{
+% 	\draw[fill=orange] (midpt\num) circle (0.25pt);
+% }
+
+\end{tikzpicture}
+```
+
+---
+class: middle, center
+
+```{tikz, echo=FALSE}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+\coordinate (pt1)  at (0.1196,0.6535);
+\coordinate (pt2)  at (0.5265,0.9261);
+\coordinate (pt3)  at (0.5549,0.9242);
+\coordinate (pt4)  at (0.8823,0.8447);
+\coordinate (pt5)  at (0.9000,0.8000);
+\coordinate (pt6)  at (0.7480,0.4984);
+\coordinate (pt7)  at (0.7745,0.4851);
+\coordinate (pt8)  at (0.9599,0.3148);
+\coordinate (pt9)  at (0.9315,0.3148);
+\coordinate (pt10) at (0.7763,0.0725);
+\coordinate (pt11) at (0.7498,0.0971);
+\coordinate (pt12) at (0.4943,0.5135);
+\coordinate (pt13) at (0.4622,0.4813);
+\coordinate (pt14) at (0.2502,0.0877);
+\coordinate (pt15) at (0.2275,0.1123);
+\coordinate (pt16) at (0.1083,0.6176);
+
+\draw (0,0) rectangle (1,1);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,3,5,...,15}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,16}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+
+\draw[blue, very thick] (0.65145,0)--++(0,1);
+\draw[red, very thick] (0,0.56555)--++(0.65145,0);
+
+% \draw[red, very thick] (0.65145,0.39995)--(1,0.39995);
+
+% \draw[blue, very thick, opacity = 0.5] (0.3562,0)--(0.3562,0.56555);
+
+% \draw[blue, very thick, opacity = 0.5] (0.32305,0.56555)--(0.32305,1);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8539,0.39995)--(0.8539,0);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8284,0.39995)--(0.8284,1);
+
+% \coordinate (midpt1) at (0.1139,0.6356);
+% \coordinate (midpt2) at (0.5407,0.9251);
+% \coordinate (midpt3) at (0.8912,0.8223);
+% \coordinate (midpt4) at (0.7612,0.4917);
+% \coordinate (midpt5) at (0.9457,0.3148);
+% \coordinate (midpt6) at (0.7631,0.0848);
+% \coordinate (midpt7) at (0.4783,0.4974);
+% \coordinate (midpt8) at (0.2388,0.1000);
+
+% \draw[fill=orange, fill opacity = 0.5] 
+% 	(midpt1)--
+% 	(midpt2)--
+% 	(midpt3)--
+% 	(midpt4)--
+% 	(midpt5)--
+% 	(midpt6)--
+% 	(midpt7)--
+% 	(midpt8)--
+% 	cycle;
+
+% \foreach \num in {1,2,...,8}{
+% 	\draw[fill=orange] (midpt\num) circle (0.25pt);
+% }
+
+\end{tikzpicture}
+```
+
+---
+class: middle, center
+
+```{tikz, echo=FALSE}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+\coordinate (pt1)  at (0.1196,0.6535);
+\coordinate (pt2)  at (0.5265,0.9261);
+\coordinate (pt3)  at (0.5549,0.9242);
+\coordinate (pt4)  at (0.8823,0.8447);
+\coordinate (pt5)  at (0.9000,0.8000);
+\coordinate (pt6)  at (0.7480,0.4984);
+\coordinate (pt7)  at (0.7745,0.4851);
+\coordinate (pt8)  at (0.9599,0.3148);
+\coordinate (pt9)  at (0.9315,0.3148);
+\coordinate (pt10) at (0.7763,0.0725);
+\coordinate (pt11) at (0.7498,0.0971);
+\coordinate (pt12) at (0.4943,0.5135);
+\coordinate (pt13) at (0.4622,0.4813);
+\coordinate (pt14) at (0.2502,0.0877);
+\coordinate (pt15) at (0.2275,0.1123);
+\coordinate (pt16) at (0.1083,0.6176);
+
+\draw (0,0) rectangle (1,1);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,3,5,...,15}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,16}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+
+\draw[blue, very thick] (0.65145,0)--++(0,1);
+\draw[red, very thick] (0,0.56555)--++(0.65145,0);
+\draw[red, very thick] (0.65145,0.39995)--(1,0.39995);
+
+% \draw[blue, very thick, opacity = 0.5] (0.3562,0)--(0.3562,0.56555);
+
+% \draw[blue, very thick, opacity = 0.5] (0.32305,0.56555)--(0.32305,1);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8539,0.39995)--(0.8539,0);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8284,0.39995)--(0.8284,1);
+
+% \coordinate (midpt1) at (0.1139,0.6356);
+% \coordinate (midpt2) at (0.5407,0.9251);
+% \coordinate (midpt3) at (0.8912,0.8223);
+% \coordinate (midpt4) at (0.7612,0.4917);
+% \coordinate (midpt5) at (0.9457,0.3148);
+% \coordinate (midpt6) at (0.7631,0.0848);
+% \coordinate (midpt7) at (0.4783,0.4974);
+% \coordinate (midpt8) at (0.2388,0.1000);
+
+% \draw[fill=orange, fill opacity = 0.5] 
+% 	(midpt1)--
+% 	(midpt2)--
+% 	(midpt3)--
+% 	(midpt4)--
+% 	(midpt5)--
+% 	(midpt6)--
+% 	(midpt7)--
+% 	(midpt8)--
+% 	cycle;
+
+% \foreach \num in {1,2,...,8}{
+% 	\draw[fill=orange] (midpt\num) circle (0.25pt);
+% }
+
+\end{tikzpicture}
+```
+
+---
+class: middle, center
+
+```{tikz, echo=FALSE}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+\coordinate (pt1)  at (0.1196,0.6535);
+\coordinate (pt2)  at (0.5265,0.9261);
+\coordinate (pt3)  at (0.5549,0.9242);
+\coordinate (pt4)  at (0.8823,0.8447);
+\coordinate (pt5)  at (0.9000,0.8000);
+\coordinate (pt6)  at (0.7480,0.4984);
+\coordinate (pt7)  at (0.7745,0.4851);
+\coordinate (pt8)  at (0.9599,0.3148);
+\coordinate (pt9)  at (0.9315,0.3148);
+\coordinate (pt10) at (0.7763,0.0725);
+\coordinate (pt11) at (0.7498,0.0971);
+\coordinate (pt12) at (0.4943,0.5135);
+\coordinate (pt13) at (0.4622,0.4813);
+\coordinate (pt14) at (0.2502,0.0877);
+\coordinate (pt15) at (0.2275,0.1123);
+\coordinate (pt16) at (0.1083,0.6176);
+
+\draw (0,0) rectangle (1,1);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,3,5,...,15}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,16}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+
+\draw[blue, very thick] (0.65145,0)--++(0,1);
+\draw[red, very thick] (0,0.56555)--++(0.65145,0);
+\draw[red, very thick] (0.65145,0.39995)--(1,0.39995);
+\draw[blue, very thick, opacity = 0.5] (0.3562,0)--(0.3562,0.56555);
+
+% \draw[blue, very thick, opacity = 0.5] (0.32305,0.56555)--(0.32305,1);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8539,0.39995)--(0.8539,0);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8284,0.39995)--(0.8284,1);
+
+% \coordinate (midpt1) at (0.1139,0.6356);
+% \coordinate (midpt2) at (0.5407,0.9251);
+% \coordinate (midpt3) at (0.8912,0.8223);
+% \coordinate (midpt4) at (0.7612,0.4917);
+% \coordinate (midpt5) at (0.9457,0.3148);
+% \coordinate (midpt6) at (0.7631,0.0848);
+% \coordinate (midpt7) at (0.4783,0.4974);
+% \coordinate (midpt8) at (0.2388,0.1000);
+
+% \draw[fill=orange, fill opacity = 0.5] 
+% 	(midpt1)--
+% 	(midpt2)--
+% 	(midpt3)--
+% 	(midpt4)--
+% 	(midpt5)--
+% 	(midpt6)--
+% 	(midpt7)--
+% 	(midpt8)--
+% 	cycle;
+
+% \foreach \num in {1,2,...,8}{
+% 	\draw[fill=orange] (midpt\num) circle (0.25pt);
+% }
+
+\end{tikzpicture}
+```
+
+---
+class: middle, center
+
+```{tikz, echo=FALSE}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+\coordinate (pt1)  at (0.1196,0.6535);
+\coordinate (pt2)  at (0.5265,0.9261);
+\coordinate (pt3)  at (0.5549,0.9242);
+\coordinate (pt4)  at (0.8823,0.8447);
+\coordinate (pt5)  at (0.9000,0.8000);
+\coordinate (pt6)  at (0.7480,0.4984);
+\coordinate (pt7)  at (0.7745,0.4851);
+\coordinate (pt8)  at (0.9599,0.3148);
+\coordinate (pt9)  at (0.9315,0.3148);
+\coordinate (pt10) at (0.7763,0.0725);
+\coordinate (pt11) at (0.7498,0.0971);
+\coordinate (pt12) at (0.4943,0.5135);
+\coordinate (pt13) at (0.4622,0.4813);
+\coordinate (pt14) at (0.2502,0.0877);
+\coordinate (pt15) at (0.2275,0.1123);
+\coordinate (pt16) at (0.1083,0.6176);
+
+\draw (0,0) rectangle (1,1);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,3,5,...,15}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,16}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+
+\draw[blue, very thick] (0.65145,0)--++(0,1);
+\draw[red, very thick] (0,0.56555)--++(0.65145,0);
+\draw[red, very thick] (0.65145,0.39995)--(1,0.39995);
+\draw[blue, very thick, opacity = 0.5] (0.3562,0)--(0.3562,0.56555);
+\draw[blue, very thick, opacity = 0.5] (0.32305,0.56555)--(0.32305,1);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8539,0.39995)--(0.8539,0);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8284,0.39995)--(0.8284,1);
+
+% \coordinate (midpt1) at (0.1139,0.6356);
+% \coordinate (midpt2) at (0.5407,0.9251);
+% \coordinate (midpt3) at (0.8912,0.8223);
+% \coordinate (midpt4) at (0.7612,0.4917);
+% \coordinate (midpt5) at (0.9457,0.3148);
+% \coordinate (midpt6) at (0.7631,0.0848);
+% \coordinate (midpt7) at (0.4783,0.4974);
+% \coordinate (midpt8) at (0.2388,0.1000);
+
+% \draw[fill=orange, fill opacity = 0.5] 
+% 	(midpt1)--
+% 	(midpt2)--
+% 	(midpt3)--
+% 	(midpt4)--
+% 	(midpt5)--
+% 	(midpt6)--
+% 	(midpt7)--
+% 	(midpt8)--
+% 	cycle;
+
+% \foreach \num in {1,2,...,8}{
+% 	\draw[fill=orange] (midpt\num) circle (0.25pt);
+% }
+
+\end{tikzpicture}
+```
+
+---
+class: middle, center
+
+```{tikz, echo=FALSE}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+\coordinate (pt1)  at (0.1196,0.6535);
+\coordinate (pt2)  at (0.5265,0.9261);
+\coordinate (pt3)  at (0.5549,0.9242);
+\coordinate (pt4)  at (0.8823,0.8447);
+\coordinate (pt5)  at (0.9000,0.8000);
+\coordinate (pt6)  at (0.7480,0.4984);
+\coordinate (pt7)  at (0.7745,0.4851);
+\coordinate (pt8)  at (0.9599,0.3148);
+\coordinate (pt9)  at (0.9315,0.3148);
+\coordinate (pt10) at (0.7763,0.0725);
+\coordinate (pt11) at (0.7498,0.0971);
+\coordinate (pt12) at (0.4943,0.5135);
+\coordinate (pt13) at (0.4622,0.4813);
+\coordinate (pt14) at (0.2502,0.0877);
+\coordinate (pt15) at (0.2275,0.1123);
+\coordinate (pt16) at (0.1083,0.6176);
+
+\draw (0,0) rectangle (1,1);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,3,5,...,15}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,16}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+
+\draw[blue, very thick] (0.65145,0)--++(0,1);
+\draw[red, very thick] (0,0.56555)--++(0.65145,0);
+\draw[red, very thick] (0.65145,0.39995)--(1,0.39995);
+\draw[blue, very thick, opacity = 0.5] (0.3562,0)--(0.3562,0.56555);
+\draw[blue, very thick, opacity = 0.5] (0.32305,0.56555)--(0.32305,1);
+\draw[blue, very thick, opacity = 0.5] (0.8539,0.39995)--(0.8539,0);
+
+% \draw[blue, very thick, opacity = 0.5] (0.8284,0.39995)--(0.8284,1);
+
+% \coordinate (midpt1) at (0.1139,0.6356);
+% \coordinate (midpt2) at (0.5407,0.9251);
+% \coordinate (midpt3) at (0.8912,0.8223);
+% \coordinate (midpt4) at (0.7612,0.4917);
+% \coordinate (midpt5) at (0.9457,0.3148);
+% \coordinate (midpt6) at (0.7631,0.0848);
+% \coordinate (midpt7) at (0.4783,0.4974);
+% \coordinate (midpt8) at (0.2388,0.1000);
+
+% \draw[fill=orange, fill opacity = 0.5] 
+% 	(midpt1)--
+% 	(midpt2)--
+% 	(midpt3)--
+% 	(midpt4)--
+% 	(midpt5)--
+% 	(midpt6)--
+% 	(midpt7)--
+% 	(midpt8)--
+% 	cycle;
+
+% \foreach \num in {1,2,...,8}{
+% 	\draw[fill=orange] (midpt\num) circle (0.25pt);
+% }
+
+\end{tikzpicture}
+```
+
+---
+class: middle, center
+
+```{tikz, echo=FALSE}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+\coordinate (pt1)  at (0.1196,0.6535);
+\coordinate (pt2)  at (0.5265,0.9261);
+\coordinate (pt3)  at (0.5549,0.9242);
+\coordinate (pt4)  at (0.8823,0.8447);
+\coordinate (pt5)  at (0.9000,0.8000);
+\coordinate (pt6)  at (0.7480,0.4984);
+\coordinate (pt7)  at (0.7745,0.4851);
+\coordinate (pt8)  at (0.9599,0.3148);
+\coordinate (pt9)  at (0.9315,0.3148);
+\coordinate (pt10) at (0.7763,0.0725);
+\coordinate (pt11) at (0.7498,0.0971);
+\coordinate (pt12) at (0.4943,0.5135);
+\coordinate (pt13) at (0.4622,0.4813);
+\coordinate (pt14) at (0.2502,0.0877);
+\coordinate (pt15) at (0.2275,0.1123);
+\coordinate (pt16) at (0.1083,0.6176);
+
+\draw (0,0) rectangle (1,1);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,3,5,...,15}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,16}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+
+\draw[blue, very thick] (0.65145,0)--++(0,1);
+\draw[red, very thick] (0,0.56555)--++(0.65145,0);
+\draw[red, very thick] (0.65145,0.39995)--(1,0.39995);
+\draw[blue, very thick, opacity = 0.5] (0.3562,0)--(0.3562,0.56555);
+\draw[blue, very thick, opacity = 0.5] (0.32305,0.56555)--(0.32305,1);
+\draw[blue, very thick, opacity = 0.5] (0.8539,0.39995)--(0.8539,0);
+\draw[blue, very thick, opacity = 0.5] (0.8284,0.39995)--(0.8284,1);
+
+% \coordinate (midpt1) at (0.1139,0.6356);
+% \coordinate (midpt2) at (0.5407,0.9251);
+% \coordinate (midpt3) at (0.8912,0.8223);
+% \coordinate (midpt4) at (0.7612,0.4917);
+% \coordinate (midpt5) at (0.9457,0.3148);
+% \coordinate (midpt6) at (0.7631,0.0848);
+% \coordinate (midpt7) at (0.4783,0.4974);
+% \coordinate (midpt8) at (0.2388,0.1000);
+
+% \draw[fill=orange, fill opacity = 0.5] 
+% 	(midpt1)--
+% 	(midpt2)--
+% 	(midpt3)--
+% 	(midpt4)--
+% 	(midpt5)--
+% 	(midpt6)--
+% 	(midpt7)--
+% 	(midpt8)--
+% 	cycle;
+
+% \foreach \num in {1,2,...,8}{
+% 	\draw[fill=orange] (midpt\num) circle (0.25pt);
+% }
+
+\end{tikzpicture}
+```
+
+---
+class: middle, center
+
+```{tikz, echo=FALSE}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+\coordinate (pt1)  at (0.1196,0.6535);
+\coordinate (pt2)  at (0.5265,0.9261);
+\coordinate (pt3)  at (0.5549,0.9242);
+\coordinate (pt4)  at (0.8823,0.8447);
+\coordinate (pt5)  at (0.9000,0.8000);
+\coordinate (pt6)  at (0.7480,0.4984);
+\coordinate (pt7)  at (0.7745,0.4851);
+\coordinate (pt8)  at (0.9599,0.3148);
+\coordinate (pt9)  at (0.9315,0.3148);
+\coordinate (pt10) at (0.7763,0.0725);
+\coordinate (pt11) at (0.7498,0.0971);
+\coordinate (pt12) at (0.4943,0.5135);
+\coordinate (pt13) at (0.4622,0.4813);
+\coordinate (pt14) at (0.2502,0.0877);
+\coordinate (pt15) at (0.2275,0.1123);
+\coordinate (pt16) at (0.1083,0.6176);
+
+\draw (0,0) rectangle (1,1);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,3,5,...,15}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,16}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+
+\draw[blue, very thick] (0.65145,0)--++(0,1);
+\draw[red, very thick] (0,0.56555)--++(0.65145,0);
+\draw[red, very thick] (0.65145,0.39995)--(1,0.39995);
+\draw[blue, very thick, opacity = 0.5] (0.3562,0)--(0.3562,0.56555);
+\draw[blue, very thick, opacity = 0.5] (0.32305,0.56555)--(0.32305,1);
+\draw[blue, very thick, opacity = 0.5] (0.8539,0.39995)--(0.8539,0);
+\draw[blue, very thick, opacity = 0.5] (0.8284,0.39995)--(0.8284,1);
+
+\coordinate (midpt1) at (0.1139,0.6356);
+\coordinate (midpt2) at (0.5407,0.9251);
+\coordinate (midpt3) at (0.8912,0.8223);
+\coordinate (midpt4) at (0.7612,0.4917);
+\coordinate (midpt5) at (0.9457,0.3148);
+\coordinate (midpt6) at (0.7631,0.0848);
+\coordinate (midpt7) at (0.4783,0.4974);
+\coordinate (midpt8) at (0.2388,0.1000);
+
+% \draw[fill=orange, fill opacity = 0.5] 
+% 	(midpt1)--
+% 	(midpt2)--
+% 	(midpt3)--
+% 	(midpt4)--
+% 	(midpt5)--
+% 	(midpt6)--
+% 	(midpt7)--
+% 	(midpt8)--
+% 	cycle;
+
+\foreach \num in {1,2,...,8}{
+	\draw[fill=orange] (midpt\num) circle (0.25pt);
+}
+
+\end{tikzpicture}
+```
+
+---
+class: middle, center
+
+```{tikz, echo=FALSE}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+\coordinate (pt1)  at (0.1196,0.6535);
+\coordinate (pt2)  at (0.5265,0.9261);
+\coordinate (pt3)  at (0.5549,0.9242);
+\coordinate (pt4)  at (0.8823,0.8447);
+\coordinate (pt5)  at (0.9000,0.8000);
+\coordinate (pt6)  at (0.7480,0.4984);
+\coordinate (pt7)  at (0.7745,0.4851);
+\coordinate (pt8)  at (0.9599,0.3148);
+\coordinate (pt9)  at (0.9315,0.3148);
+\coordinate (pt10) at (0.7763,0.0725);
+\coordinate (pt11) at (0.7498,0.0971);
+\coordinate (pt12) at (0.4943,0.5135);
+\coordinate (pt13) at (0.4622,0.4813);
+\coordinate (pt14) at (0.2502,0.0877);
+\coordinate (pt15) at (0.2275,0.1123);
+\coordinate (pt16) at (0.1083,0.6176);
+
+\draw (0,0) rectangle (1,1);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,3,5,...,15}{
+	\draw[opacity=0.5] (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,16}{
+	\draw[fill=green, fill opacity=0.5] (pt\num) circle (0.25pt);
+}
+
+%\draw[blue, very thick] (0.65145,0)--++(0,1);
+%\draw[red, very thick] (0,0.56555)--++(0.65145,0);
+%\draw[red, very thick] (0.65145,0.39995)--(1,0.39995);
+%\draw[blue, very thick, opacity = 0.5] (0.3562,0)--(0.3562,0.56555);
+%\draw[blue, very thick, opacity = 0.5] (0.32305,0.56555)--(0.32305,1);
+%\draw[blue, very thick, opacity = 0.5] (0.8539,0.39995)--(0.8539,0);
+%\draw[blue, very thick, opacity = 0.5] (0.8284,0.39995)--(0.8284,1);
+
+\coordinate (midpt1) at (0.1139,0.6356);
+\coordinate (midpt2) at (0.5407,0.9251);
+\coordinate (midpt3) at (0.8912,0.8223);
+\coordinate (midpt4) at (0.7612,0.4917);
+\coordinate (midpt5) at (0.9457,0.3148);
+\coordinate (midpt6) at (0.7631,0.0848);
+\coordinate (midpt7) at (0.4783,0.4974);
+\coordinate (midpt8) at (0.2388,0.1000);
+
+\draw[fill=orange, fill opacity = 0.5] 
+ 	(midpt1)--
+ 	(midpt2)--
+ 	(midpt3)--
+ 	(midpt4)--
+	(midpt5)--
+ 	(midpt6)--
+ 	(midpt7)--
+ 	(midpt8)--
+ 	cycle;
+
+\foreach \num in {1,2,...,8}{
+ 	\draw[fill=orange] (midpt\num) circle (0.25pt);
+}
+
+\end{tikzpicture}
+```
+
+---
+class: inverse, center, middle
+
+# Simplifier des droites
+
+---
+class:middle, center
+```{tikz}
+\usetikzlibrary{calc}\begin{tikzpicture}[scale=4]
+
+\def\delt{0.05}
+
+\coordinate (pt1)  	at (0.0000,0.0000);
+\coordinate (pt2)  	at (0.2810,0.1639);
+\coordinate (pt3)  	at (0.4009,0.1586);
+\coordinate (pt4)  	at (0.4969,0.2385);
+\coordinate (pt5)  	at (0.5929,0.1346);
+\coordinate (pt6)  	at (0.6489,0.0000);
+\coordinate (pt7)  	at (0.7448,-0.132);
+\coordinate (pt8)  	at (0.8861,-0.108);
+\coordinate (pt9)  	at (0.9714,0.0000);
+\coordinate (pt10)  at (1.118,0.0626);
+\coordinate (pt11)  at (1.2380,0.0000);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,2,3,...,10}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\foreach \num in {1,2,...,11}{
+	\draw[fill=orange] (pt\num) circle (0.25pt);
+}
+\foreach \num in {1,11}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+\useasboundingbox (-0.1,-0.25) rectangle (1.4,0.35);
+\end{tikzpicture}
+```
+---
+class:middle, center
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+
+\def\delt{0.05}
+
+\coordinate (pt1)  	at (0.0000,0.0000);
+\coordinate (pt2)  	at (0.2810,0.1639);
+\coordinate (pt3)  	at (0.4009,0.1586);
+\coordinate (pt4)  	at (0.4969,0.2385);
+\coordinate (pt5)  	at (0.5929,0.1346);
+\coordinate (pt6)  	at (0.6489,0.0000);
+\coordinate (pt7)  	at (0.7448,-0.132);
+\coordinate (pt8)  	at (0.8861,-0.108);
+\coordinate (pt9)  	at (0.9714,0.0000);
+\coordinate (pt10)  at (1.118,0.0626);
+\coordinate (pt11)  at (1.2380,0.0000);
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,2,3,...,10}{
+	\draw (pt\start)--(pt\finish);
+}
+
+
+\draw[blue, thick] (pt1)-|(pt4);
+\draw[red, thick] (pt1)--(pt11);
+\draw[red, fill opacity=0.25, fill = red] ($(pt1)-(0,\delt)$) rectangle ($(pt11)+(0,\delt)$);
+
+\foreach \num in {1,2,...,11}{
+	\draw[fill=orange] (pt\num) circle (0.25pt);
+}
+\foreach \num in {1,11,4}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+\useasboundingbox (-0.1,-0.25) rectangle (1.4,0.35);
+\end{tikzpicture}
+```
+---
+class:middle, center
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+
+\coordinate (pt1)  	at (0.0000,0.0000);
+\coordinate (pt2)  	at (0.2810,0.1639);
+\coordinate (pt3)  	at (0.4009,0.1586);
+\coordinate (pt4)  	at (0.4969,0.2385);
+\coordinate (pt5)  	at (0.5929,0.1346);
+\coordinate (pt6)  	at (0.6489,0.0000);
+\coordinate (pt7)  	at (0.7448,-0.132);
+\coordinate (pt8)  	at (0.8861,-0.108);
+\coordinate (pt9)  	at (0.9714,0.0000);
+\coordinate (pt10)  at (1.118,0.0626);
+\coordinate (pt11)  at (1.2380,0.0000);
+
+\def\delt{0.05cm}
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {1,2,3,...,10}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\draw[red, thick] (pt1)--(pt4);
+
+\draw[red, fill = red, fill opacity = 0.25] let \p{A}=(pt1), \p{B}=(pt4) in
+	({\x{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --cycle;
+
+\foreach \num in {1,2,...,11}{
+	\draw[fill=orange] (pt\num) circle (0.25pt);
+}
+\foreach \num in {1,11,4}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+\foreach \num in {2,3}{
+	\draw[fill=red] (pt\num) circle (0.25pt);
+}
+\useasboundingbox (-0.1,-0.25) rectangle (1.4,0.35);
+\end{tikzpicture}
+```
+---
+class:middle, center
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+
+\coordinate (pt1)  	at (0.0000,0.0000);
+\coordinate (pt2)  	at (0.2810,0.1639);
+\coordinate (pt3)  	at (0.4009,0.1586);
+\coordinate (pt4)  	at (0.4969,0.2385);
+\coordinate (pt5)  	at (0.5929,0.1346);
+\coordinate (pt6)  	at (0.6489,0.0000);
+\coordinate (pt7)  	at (0.7448,-0.132);
+\coordinate (pt8)  	at (0.8861,-0.108);
+\coordinate (pt9)  	at (0.9714,0.0000);
+\coordinate (pt10)  at (1.118,0.0626);
+\coordinate (pt11)  at (1.2380,0.0000);
+
+\def\delt{0.05cm}
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {4,5,6,...,10}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\draw[thick] (pt1)--(pt4);
+\draw[red, thick] (pt4)--(pt11);
+
+\draw[blue, thick] let \p{A}=(pt4), \p{B}=(pt11), \p{P}=(pt7) in
+	(pt7)--
+	({\x{A}+(\x{B}-\x{A})*((\x{P}-\x{A})*(\x{B}-\x{A})+(\y{P}-\y{A})*(\y{B}-\y{A}))/((\x{B}-\x{A})^2+(\y{B}-\y{A})^2)},
+	{\y{A}+(\y{B}-\y{A})*((\x{P}-\x{A})*(\x{B}-\x{A})+(\y{P}-\y{A})*(\y{B}-\y{A}))/((\x{B}-\x{A})^2+(\y{B}-\y{A})^2)});
+
+\draw[red, fill = red, fill opacity = 0.25] let \p{A}=(pt4), \p{B}=(pt11) in
+	({\x{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --cycle;
+
+\foreach \num in {5,6,...,11}{
+	\draw[fill=orange] (pt\num) circle (0.25pt);
+}
+\foreach \num in {1,11,4,7}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+\useasboundingbox (-0.1,-0.25) rectangle (1.4,0.35);
+\end{tikzpicture}
+```
+---
+class:middle, center
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+
+\coordinate (pt1)  	at (0.0000,0.0000);
+\coordinate (pt2)  	at (0.2810,0.1639);
+\coordinate (pt3)  	at (0.4009,0.1586);
+\coordinate (pt4)  	at (0.4969,0.2385);
+\coordinate (pt5)  	at (0.5929,0.1346);
+\coordinate (pt6)  	at (0.6489,0.0000);
+\coordinate (pt7)  	at (0.7448,-0.132);
+\coordinate (pt8)  	at (0.8861,-0.108);
+\coordinate (pt9)  	at (0.9714,0.0000);
+\coordinate (pt10)  at (1.118,0.0626);
+\coordinate (pt11)  at (1.2380,0.0000);
+
+\def\delt{0.05cm}
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {4,5,6,...,10}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\draw[thick] (pt1)--(pt4);
+\draw[red, thick] (pt4)--(pt7);
+
+\draw[red, fill = red, fill opacity = 0.25] let \p{A}=(pt4), \p{B}=(pt7) in
+	({\x{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --cycle;
+
+\foreach \num in {5,6,...,11}{
+	\draw[fill=orange] (pt\num) circle (0.25pt);
+}
+\foreach \num in {1,11,4,7}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+\foreach \num in {5,6}{
+	\draw[fill=red] (pt\num) circle (0.25pt);
+}
+\useasboundingbox (-0.1,-0.25) rectangle (1.4,0.35);
+\end{tikzpicture}
+```
+---
+class:middle, center
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+
+\coordinate (pt1)  	at (0.0000,0.0000);
+\coordinate (pt2)  	at (0.2810,0.1639);
+\coordinate (pt3)  	at (0.4009,0.1586);
+\coordinate (pt4)  	at (0.4969,0.2385);
+\coordinate (pt5)  	at (0.5929,0.1346);
+\coordinate (pt6)  	at (0.6489,0.0000);
+\coordinate (pt7)  	at (0.7448,-0.132);
+\coordinate (pt8)  	at (0.8861,-0.108);
+\coordinate (pt9)  	at (0.9714,0.0000);
+\coordinate (pt10)  at (1.118,0.0626);
+\coordinate (pt11)  at (1.2380,0.0000);
+
+\def\delt{0.05cm}
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {7,8,9,...,10}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\draw[thick] (pt1)--(pt4)--(pt7);
+\draw[red, thick] (pt7)--(pt11);
+
+\draw[blue, thick] let \p{A}=(pt7), \p{B}=(pt11), \p{P}=(pt10) in
+	(\x{P},\y{P})--
+	({\x{A}+(\x{B}-\x{A})*((\x{P}-\x{A})*(\x{B}-\x{A})+(\y{P}-\y{A})*(\y{B}-\y{A}))/((\x{B}-\x{A})^2+(\y{B}-\y{A})^2)},
+	{\y{A}+(\y{B}-\y{A})*((\x{P}-\x{A})*(\x{B}-\x{A})+(\y{P}-\y{A})*(\y{B}-\y{A}))/((\x{B}-\x{A})^2+(\y{B}-\y{A})^2)});
+
+\draw[red, fill = red, fill opacity = 0.25] let \p{A}=(pt7), \p{B}=(pt11) in
+	({\x{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --cycle;
+
+\foreach \num in {8,9,10,11}{
+	\draw[fill=orange] (pt\num) circle (0.25pt);
+}
+\foreach \num in {1,11,4,7, 10}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+\useasboundingbox (-0.1,-0.25) rectangle (1.4,0.35);
+\end{tikzpicture}
+```
+---
+class:middle, center
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+
+\coordinate (pt1)  	at (0.0000,0.0000);
+\coordinate (pt2)  	at (0.2810,0.1639);
+\coordinate (pt3)  	at (0.4009,0.1586);
+\coordinate (pt4)  	at (0.4969,0.2385);
+\coordinate (pt5)  	at (0.5929,0.1346);
+\coordinate (pt6)  	at (0.6489,0.0000);
+\coordinate (pt7)  	at (0.7448,-0.132);
+\coordinate (pt8)  	at (0.8861,-0.108);
+\coordinate (pt9)  	at (0.9714,0.0000);
+\coordinate (pt10)  at (1.118,0.0626);
+\coordinate (pt11)  at (1.2380,0.0000);
+
+\def\delt{0.05cm}
+
+\foreach[evaluate={\finish=int(\start+1)}] \start in {7,8,9,...,10}{
+	\draw (pt\start)--(pt\finish);
+}
+
+\draw[thick] (pt1)--(pt4)--(pt7);
+\draw[red, thick] (pt7)--(pt10);
+
+\draw[red, fill = red, fill opacity = 0.25] let \p{A}=(pt7), \p{B}=(pt10) in
+	({\x{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --cycle;
+
+\foreach \num in {8,9,10,11}{
+	\draw[fill=orange] (pt\num) circle (0.25pt);
+}
+\foreach \num in {1,11,4,7, 10}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+\foreach \num in {8,9}{
+	\draw[fill=red] (pt\num) circle (0.25pt);
+}
+\useasboundingbox (-0.1,-0.25) rectangle (1.4,0.35);
+\end{tikzpicture}
+```
+---
+class:middle, center
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+
+\coordinate (pt1)  	at (0.0000,0.0000);
+\coordinate (pt2)  	at (0.2810,0.1639);
+\coordinate (pt3)  	at (0.4009,0.1586);
+\coordinate (pt4)  	at (0.4969,0.2385);
+\coordinate (pt5)  	at (0.5929,0.1346);
+\coordinate (pt6)  	at (0.6489,0.0000);
+\coordinate (pt7)  	at (0.7448,-0.132);
+\coordinate (pt8)  	at (0.8861,-0.108);
+\coordinate (pt9)  	at (0.9714,0.0000);
+\coordinate (pt10)  at (1.118,0.0626);
+\coordinate (pt11)  at (1.2380,0.0000);
+
+\def\delt{0.05cm}
+
+\draw (pt10)--(pt11);
+\draw[thick] (pt1)--(pt4)--(pt7)--(pt10);
+
+\draw[red, fill = red, fill opacity = 0.25] let \p{A}=(pt10), \p{B}=(pt11) in
+	({\x{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{B}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{B}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --
+	 ({\x{A}-(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))},
+	 {\y{A}+(\delt/(1+((\x{B}-\x{A})/(\y{B}-\y{A}))^2)^(1/2))*((\x{B}-\x{A})/(\y{B}-\y{A}))})
+	 --cycle;
+
+\foreach \num in {10,11}{
+	\draw[fill=orange] (pt\num) circle (0.25pt);
+}
+\foreach \num in {1,11,4,7, 10}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+\useasboundingbox (-0.1,-0.25) rectangle (1.4,0.35);
+\end{tikzpicture}
+```
+---
+class:middle, center
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=4]
+
+
+\coordinate (pt1)  	at (0.0000,0.0000);
+\coordinate (pt2)  	at (0.2810,0.1639);
+\coordinate (pt3)  	at (0.4009,0.1586);
+\coordinate (pt4)  	at (0.4969,0.2385);
+\coordinate (pt5)  	at (0.5929,0.1346);
+\coordinate (pt6)  	at (0.6489,0.0000);
+\coordinate (pt7)  	at (0.7448,-0.132);
+\coordinate (pt8)  	at (0.8861,-0.108);
+\coordinate (pt9)  	at (0.9714,0.0000);
+\coordinate (pt10)  at (1.118,0.0626);
+\coordinate (pt11)  at (1.2380,0.0000);
+
+\def\delt{0.05cm}
+
+\draw[thick] (pt1)--(pt4)--(pt7)--(pt10)--(pt11);
+
+\foreach \num in {10,11}{
+	\draw[fill=orange] (pt\num) circle (0.25pt);
+}
+\foreach \num in {1,11,4,7, 10}{
+	\draw[fill=green] (pt\num) circle (0.25pt);
+}
+\useasboundingbox (-0.1,-0.25) rectangle (1.4,0.35);
+\end{tikzpicture}
+```
+
+---
+class:middle, center
+
+![Animation de l'algorithme pour simplifier une droite](/tikz/simplify_line.gif)
+
 
 
 
