@@ -28,6 +28,23 @@ class: center, middle
 &lt;iframe width="800" height="600" src="https://www.youtube.com/embed/m_QhY1aABsE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
 
 ---
+class:inverse, middle, center
+
+# Quelques rappels
+
+---
+
+# TODO...
+
+- Équation de droite `\(\overrightarrow{\textbf{r}}=\overrightarrow{\textbf{r}_0}+t\overrightarrow{\textbf{v}}\)`
+
+- Équation du plan
+
+- Intersection droite avec plan (seulement savoir si il y a intersection et ensuite trouver l'intersection)
+
+- Trouver distance point-droite
+
+---
 class: inverse, center, middle
 
 # Une modélisation 3D d'un objet
@@ -189,12 +206,61 @@ class:middle, center
 
 ![Animation de l'algorithme pour simplifier une droite](../tikz/simplify_line.gif)
 
+---
+class: inverse, center, middle
 
+# Géométrie de construction de solides (ou GCS)
 
+---
 
+# Géométrie de construction de solides (ou GCS)
 
+- La GCS permet de représenter simplement un ensemble de points et de travailler ensuite avec ceux-ci à l'intérieur d'un programme informatique;
 
+- La GCS considère que tous les ensembles sont construits à partir d'ensembles **plus simples**, qui font office de blocs de construction;
 
+- Certaines règles simples permettent ensuite d'échafauder des structures complexes.
+
+---
+
+# La représentation GCS d'un polygone
+
+- Nous utiliserons des demi-plans pour représenter un polygone;
+
+- Les règles de construction utilisées seront les mêmes que celles des ensembles:
+
+  - Le complément;
+  
+  - L'union;
+  
+  - L'intersection
+
+- Une droite orientée définit un demi-plan `\(H\)` se trouvant à gauche de la droite lorsqu'on se déplace dans la direction définit par l'orientation.
+
+---
+class: center, middle
+
+![](index_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+
+Nous pouvons voir `\(H\)` comme une fonction booléenne sur le plan: `\(H(p)=\textbf{VRAI}\)` si et seulement si `\(p\in H\)`.
+
+---
+
+# Le complément
+
+![](index_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+
+---
+
+# L'union
+
+![](index_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+
+---
+
+# L'intersection
+
+![](index_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
 
 
 

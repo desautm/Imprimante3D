@@ -26,6 +26,23 @@ class: center, middle
 <iframe width="800" height="600" src="https://www.youtube.com/embed/m_QhY1aABsE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ---
+class:inverse, middle, center
+
+# Quelques rappels
+
+---
+
+# TODO...
+
+- Équation de droite $\overrightarrow{\textbf{r}}=\overrightarrow{\textbf{r}_0}+t\overrightarrow{\textbf{v}}$
+
+- Équation du plan
+
+- Intersection droite avec plan (seulement savoir si il y a intersection et ensuite trouver l'intersection)
+
+- Trouver distance point-droite
+
+---
 class: inverse, center, middle
 
 # Une modélisation 3D d'un objet
@@ -1268,12 +1285,191 @@ class:middle, center
 
 ![Animation de l'algorithme pour simplifier une droite](../tikz/simplify_line.gif)
 
+---
+class: inverse, center, middle
 
+# Géométrie de construction de solides (ou GCS)
 
+---
 
+# Géométrie de construction de solides (ou GCS)
 
+- La GCS permet de représenter simplement un ensemble de points et de travailler ensuite avec ceux-ci à l'intérieur d'un programme informatique;
 
+- La GCS considère que tous les ensembles sont construits à partir d'ensembles **plus simples**, qui font office de blocs de construction;
 
+- Certaines règles simples permettent ensuite d'échafauder des structures complexes.
+
+---
+
+# La représentation GCS d'un polygone
+
+- Nous utiliserons des demi-plans pour représenter un polygone;
+
+- Les règles de construction utilisées seront les mêmes que celles des ensembles:
+
+  - Le complément;
+  
+  - L'union;
+  
+  - L'intersection
+
+- Une droite orientée définit un demi-plan $H$ se trouvant à gauche de la droite lorsqu'on se déplace dans la direction définit par l'orientation.
+
+---
+class: center, middle
+
+```{tikz}
+\usetikzlibrary{decorations.markings}
+\begin{tikzpicture}[
+  scale = 4,
+  decoration={
+      markings,
+      mark=at position 0.5 with {\arrow{>}}}
+  ]
+
+\coordinate (A) at (0,0.4);
+\coordinate (B) at (1,0.6);
+
+\fill[blue, fill opacity=0.5] (A)--(B)-|(1,1)--(0,1)--cycle;
+\draw[black, very thick, postaction={decorate}] (A)--(B);
+\draw[very thick] (0,0) rectangle (1,1);
+
+\node at (0.5,0.7) {\huge $H$};
+
+\end{tikzpicture}
+```
+
+Nous pouvons voir $H$ comme une fonction booléenne sur le plan: $H(p)=\textbf{VRAI}$ si et seulement si $p\in H$.
+
+---
+
+# Le complément
+
+```{tikz}
+\usetikzlibrary{decorations.markings}
+\begin{tikzpicture}[
+  scale = 3,
+  decoration={
+      markings,
+      mark=at position 0.5 with {\arrow{>}}}
+  ]
+
+\coordinate (A) at (0,0.4);
+\coordinate (B) at (1,0.6);
+
+\fill[blue, fill opacity=0.5] (A)--(B)-|(1,1)--(0,1)--cycle;
+\draw[black, very thick, postaction={decorate}] (A)--(B);
+\draw[very thick] (0,0) rectangle (1,1);
+
+\node at (0.5,0.8) {\Large $H(p)$};
+
+\begin{scope}[xshift = 1.1cm]
+\coordinate (A) at (0,0.4);
+\coordinate (B) at (1,0.6);
+\fill[blue, fill opacity=0.5] (A)--(B)-|(1,0)--(0,0)--cycle;
+\draw[black, very thick, postaction={decorate}] (A)--(B);
+\draw[very thick] (0,0) rectangle (1,1);
+
+\node at (0.5,0.2) {\Large $\overline{H}(p)$};
+\end{scope}
+
+\end{tikzpicture}
+```
+
+---
+
+# L'union
+
+```{tikz}
+\usetikzlibrary{decorations.markings}
+\begin{tikzpicture}[
+  scale = 4,
+  decoration={
+      markings,
+      mark=at position 0.5 with {\arrow{>}}}
+  ]
+
+\coordinate (A) at (0,0.4);
+\coordinate (B) at (1,0.6);
+\fill[blue, fill opacity=0.5] (A)--(B)-|(1,1)--(0,1)--cycle;
+\draw[black, very thick, postaction={decorate}] (A)--(B);
+\draw[very thick] (0,0) rectangle (1,1);
+\node at (0.5,0.7) {\Large $H_1(p)$};
+
+\begin{scope}[xshift=1.1cm]
+\coordinate (C) at (0,0.8);
+\coordinate (D) at (1,0.2);
+\fill[red, fill opacity=0.5] (C)--(D)-|(1,1)--(0,1)--cycle;
+\draw[black, very thick, postaction={decorate}] (C)--(D);
+\draw[very thick] (0,0) rectangle (1,1);
+\node at (0.5,0.7) {\Large $H_2(p)$};
+\end{scope}
+
+\begin{scope}[xshift=2.2cm]
+\coordinate (A) at (0,0.4);
+\coordinate (B) at (1,0.6);
+\coordinate (C) at (0,0.8);
+\coordinate (D) at (1,0.2);
+\coordinate (I) at (0.5,0.5);
+\fill[blue!50!red, fill opacity=0.75] (A)--(I)--(D)--(1,1)--(0,1)--cycle;
+\draw[black, very thick, dashed] (A)--(B);
+\draw[black, very thick, dashed] (C)--(D);
+\draw[black, very thick, postaction={decorate}] (A)--(I);
+\draw[black, very thick, postaction={decorate}] (I)--(D);
+\draw[very thick] (0,0) rectangle (1,1);
+\node at (0.5,0.8) {\Large $(H_1 \cup H_2)(p)$};
+\end{scope}
+
+\end{tikzpicture}
+```
+
+---
+
+# L'intersection
+
+```{tikz}
+\usetikzlibrary{decorations.markings}
+\begin{tikzpicture}[
+  scale = 4,
+  decoration={
+      markings,
+      mark=at position 0.5 with {\arrow{>}}}
+  ]
+
+\coordinate (A) at (0,0.4);
+\coordinate (B) at (1,0.6);
+\fill[blue, fill opacity=0.5] (A)--(B)-|(1,1)--(0,1)--cycle;
+\draw[black, very thick, postaction={decorate}] (A)--(B);
+\draw[very thick] (0,0) rectangle (1,1);
+\node at (0.5,0.7) {\Large $H_1(p)$};
+
+\begin{scope}[xshift=1.1cm]
+\coordinate (C) at (0,0.8);
+\coordinate (D) at (1,0.2);
+\fill[red, fill opacity=0.5] (C)--(D)-|(1,1)--(0,1)--cycle;
+\draw[black, very thick, postaction={decorate}] (C)--(D);
+\draw[very thick] (0,0) rectangle (1,1);
+\node at (0.5,0.7) {\Large $H_2(p)$};
+\end{scope}
+
+\begin{scope}[xshift=2.2cm]
+\coordinate (A) at (0,0.4);
+\coordinate (B) at (1,0.6);
+\coordinate (C) at (0,0.8);
+\coordinate (D) at (1,0.2);
+\coordinate (I) at (0.5,0.5);
+\fill[blue!50!red, fill opacity=0.75] (C)--(I)--(B)--(1,1)--(0,1)--cycle;
+\draw[black, very thick, dashed] (A)--(B);
+\draw[black, very thick, dashed] (C)--(D);
+\draw[black, very thick, postaction={decorate}] (C)--(I);
+\draw[black, very thick, postaction={decorate}] (I)--(B);
+\draw[very thick] (0,0) rectangle (1,1);
+\node at (0.5,0.8) {\Large $(H_1 \cap H_2)(p)$};
+\end{scope}
+
+\end{tikzpicture}
+```
 
 
 
