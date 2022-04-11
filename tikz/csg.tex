@@ -34,17 +34,14 @@
 \coordinate (C) at (0,0.8);
 \coordinate (D) at (1,0.2);
 \coordinate (I) at (0.5,0.5);
-
-% \fill[red!50!blue] (C)--(I)--(B)--(1,1)--(0,1)--cycle;
-
-\fill[blue!50!red, fill opacity=0.75] (A)--(I)--(D)--(1,1)--(0,1)--cycle;
+\fill[blue!50!red, fill opacity=0.75] (A)--(I)--(C)--cycle;
 \draw[black, very thick, dashed] (A)--(B);
 \draw[black, very thick, dashed] (C)--(D);
 \draw[black, very thick, postaction={decorate}] (A)--(I);
-\draw[black, very thick, postaction={decorate}] (I)--(D);
+\draw[black, very thick, postaction={decorate}] (I)--(C);
 \draw[very thick] (0,0) rectangle (1,1);
-
-\node at (0.5,0.8) {\Large $(H_1 \cup H_2)(p)$};
+\node at (0.5,0.8) {\Large $(H_1 \setminus H_2)(p)$};
+\node at (0.5,0.2) {\Large $(H_1 \cap \overline{H}_2)(p)$};
 \end{scope}
 
 \end{tikzpicture}
