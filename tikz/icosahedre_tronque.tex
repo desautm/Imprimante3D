@@ -1,0 +1,150 @@
+\documentclass[border=2 mm,12pt,tikz]{standalone}
+\usepackage{tikz,tikz-3dplot} 
+\usetikzlibrary{calc} %NEED TO CALCULATE NEW POINTS
+
+\begin{document}
+\tdplotsetmaincoords{100}{-45}
+\begin{tikzpicture}[tdplot_main_coords]
+
+\pgfmathsetmacro{\phi}{(1+sqrt(5))/2}
+\pgfmathsetmacro{\xa}{0}
+\pgfmathsetmacro{\ya}{1}
+\pgfmathsetmacro{\za}{3*\phi}
+
+\pgfmathsetmacro{\xb}{1}
+\pgfmathsetmacro{\yb}{2+\phi}
+\pgfmathsetmacro{\zb}{2*\phi}
+
+\pgfmathsetmacro{\xc}{\phi}
+\pgfmathsetmacro{\yc}{2}
+\pgfmathsetmacro{\zc}{2*\phi+1}
+
+\coordinate (pt1) at (\xa,\ya,\za);
+\coordinate (pt2) at (\xa,-\ya,\za);
+\coordinate (pt3) at (\xa,\ya,-\za);
+\coordinate (pt4) at (\xa,-\ya,-\za);
+
+\coordinate (pt53) at (\za,\xa,\ya);
+\coordinate (pt54) at (-\za,\xa,\ya);
+\coordinate (pt55) at (\za,\xa,-\ya);
+\coordinate (pt56) at (-\za,\xa,-\ya);
+
+\coordinate (pt57) at (\ya,\za,\xa);
+\coordinate (pt58) at (-\ya,\za,\xa);
+\coordinate (pt59) at (\ya,-\za,\xa);
+\coordinate (pt60) at (-\ya,-\za,\xa);
+
+\coordinate (pt5) at   (\xb,\yb,\zb);
+\coordinate (pt6) at   (-\xb,\yb,\zb);
+\coordinate (pt7) at   (\xb,-\yb,\zb);
+\coordinate (pt8) at   (\xb,\yb,-\zb);
+\coordinate (pt9) at   (-\xb,-\yb,\zb);
+\coordinate (pt10) at  (-\xb,\yb,-\zb);
+\coordinate (pt11) at  (\xb,-\yb,-\zb);
+\coordinate (pt12) at  (-\xb,-\yb,-\zb);
+
+\coordinate (pt13) at  (\xc,\yc,\zc);
+\coordinate (pt14) at  (-\xc,\yc,\zc);
+\coordinate (pt15) at  (\xc,-\yc,\zc);
+\coordinate (pt16) at  (\xc,\yc,-\zc);
+\coordinate (pt17) at  (-\xc,-\yc,\zc);
+\coordinate (pt18) at  (-\xc,\yc,-\zc);
+\coordinate (pt19) at  (\xc,-\yc,-\zc);
+\coordinate (pt20) at  (-\xc,-\yc,-\zc);
+
+\coordinate (pt21) at  (\zb,\xb,\yb);
+\coordinate (pt22) at  (-\zb,\xb,\yb);
+\coordinate (pt23) at  (\zb,-\xb,\yb);
+\coordinate (pt24) at  (\zb,\xb,-\yb);
+\coordinate (pt25) at  (-\zb,-\xb,\yb);
+\coordinate (pt26) at  (-\zb,\xb,-\yb);
+\coordinate (pt27) at  (\zb,-\xb,-\yb);
+\coordinate (pt28) at  (-\zb,-\xb,-\yb);
+
+\coordinate (pt29) at  (\zc,\xc,\yc);
+\coordinate (pt30) at  (-\zc,\xc,\yc);
+\coordinate (pt31) at  (\zc,-\xc,\yc);
+\coordinate (pt32) at  (\zc,\xc,-\yc);
+\coordinate (pt33) at  (-\zc,-\xc,\yc);
+\coordinate (pt34) at  (-\zc,\xc,-\yc);
+\coordinate (pt35) at  (\zc,-\xc,-\yc);
+\coordinate (pt36) at  (-\zc,-\xc,-\yc);
+
+\coordinate (pt37) at  (\yb,\zb,\xb);   
+\coordinate (pt38) at  (-\yb,\zb,\xb);  
+\coordinate (pt39) at  (\yb,-\zb,\xb);  
+\coordinate (pt40) at  (\yb,\zb,-\xb);  
+\coordinate (pt41) at  (-\yb,-\zb,\xb); 
+\coordinate (pt42) at  (-\yb,\zb,-\xb); 
+\coordinate (pt43) at  (\yb,-\zb,-\xb); 
+\coordinate (pt44) at  (-\yb,-\zb,-\xb);
+
+\coordinate (pt45) at  (\yc,\zc,\xc);
+\coordinate (pt46) at  (-\yc,\zc,\xc);
+\coordinate (pt47) at  (\yc,-\zc,\xc);
+\coordinate (pt48) at  (\yc,\zc,-\xc);
+\coordinate (pt49) at  (-\yc,-\zc,\xc);
+\coordinate (pt50) at  (-\yc,\zc,-\xc);
+\coordinate (pt51) at  (\yc,-\zc,-\xc);
+\coordinate (pt52) at  (-\yc,-\zc,-\xc);
+
+\newcommand{\pentagon}[6]{
+    \draw[black, fill=black, fill opacity={#6}] (#1)--(#2)--(#3)--(#4)--(#5)--cycle;
+}
+\newcommand{\hexagon}[7]{
+    \draw[black, fill=white, fill opacity={#7}] (#1)--(#2)--(#3)--(#4)--(#5)--(#6)--cycle;
+    % \draw[#7] (#1)--(#4);
+    % \draw[#7] (#2)--(#5);
+    % \draw[#7] (#3)--(#6);
+}
+
+% \foreach \i in {1,2,...,60}{
+%     \draw[fill=black] (pt\i) circle (2pt) node[right] {\i};
+% }
+
+% \draw[->, thick] (0,0,0)--++(10,0,0) node[above] {$x$};
+% \draw[->, thick] (0,0,0)--++(0,10,0) node[above] {$y$};
+% \draw[->, thick] (0,0,0)--++(0,0,6) node[above] {$z$};
+
+
+
+
+\hexagon{pt9}{pt17}{pt25}{pt33}{pt41}{pt49}{1}
+\hexagon{pt10}{pt18}{pt26}{pt34}{pt42}{pt50}{1}
+\hexagon{pt11}{pt19}{pt27}{pt35}{pt43}{pt51}{1}
+\hexagon{pt12}{pt20}{pt28}{pt36}{pt44}{pt52}{1}
+\hexagon{pt7}{pt9}{pt49}{pt60}{pt59}{pt47}{1}
+\hexagon{pt1}{pt2}{pt17}{pt25}{pt22}{pt14}{1}
+\hexagon{pt22}{pt14}{pt6}{pt46}{pt38}{pt30}{1}
+\hexagon{pt30}{pt38}{pt42}{pt34}{pt56}{pt54}{1}
+\hexagon{pt41}{pt44}{pt36}{pt56}{pt54}{pt33}{1}
+
+\pentagon{pt25}{pt22}{pt30}{pt54}{pt33}{1}
+\pentagon{pt2}{pt15}{pt7}{pt9}{pt17}{1}
+\pentagon{pt39}{pt47}{pt59}{pt51}{pt43}{1}
+\pentagon{pt49}{pt41}{pt44}{pt52}{pt60}{1}
+
+
+%%
+%% FACES LES PLUS PRÈS AVEC \tdplotsetmaincoords{100}{-45}
+%%
+\hexagon{pt5}{pt13}{pt21}{pt29}{pt37}{pt45}{0.7}
+\hexagon{pt37}{pt29}{pt53}{pt55}{pt32}{pt40}{0.7}
+\hexagon{pt8}{pt16}{pt24}{pt32}{pt40}{pt48}{0.7}
+\hexagon{pt58}{pt57}{pt48}{pt8}{pt10}{pt50}{0.7}
+\hexagon{pt6}{pt5}{pt45}{pt57}{pt58}{pt46}{0.7}
+\hexagon{pt6}{pt14}{pt22}{pt30}{pt38}{pt46}{0.7}
+\hexagon{pt21}{pt23}{pt15}{pt2}{pt1}{pt13}{0.7}
+\hexagon{pt3}{pt16}{pt24}{pt27}{pt19}{pt4}{0.7}
+\hexagon{pt53}{pt31}{pt39}{pt43}{pt35}{pt55}{0.7}
+\hexagon{pt7}{pt15}{pt23}{pt31}{pt39}{pt47}{0.7}
+
+\pentagon{pt45}{pt37}{pt40}{pt48}{pt57}{0.7}
+\pentagon{pt32}{pt55}{pt35}{pt27}{pt24}{0.7}
+\pentagon{pt21}{pt23}{pt31}{pt53}{pt29}{0.7}
+\pentagon{pt1}{pt13}{pt5}{pt6}{pt14}{0.7}
+\pentagon{pt38}{pt46}{pt58}{pt50}{pt42}{0.7}
+\pentagon{pt18}{pt3}{pt16}{pt8}{pt10}{0.7}
+
+\end{tikzpicture}
+\end{document} 

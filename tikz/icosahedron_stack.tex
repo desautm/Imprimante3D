@@ -1,0 +1,123 @@
+\documentclass[border=2 mm,12pt,tikz]{standalone}
+\usepackage{tikz,tikz-3dplot} 
+\usetikzlibrary{calc} %NEED TO CALCULATE NEW POINTS
+\usepackage{fouriernc}
+
+\pgfmathsetmacro{\b}{1/3}
+\pgfmathsetmacro{\c}{1-\b}
+
+\newcommand{\pentagon}[7]{
+\filldraw[#7,fill=gray,draw=black] 
+($\c*(#1)+\b*(#2)$)--
+($\c*(#1)+\b*(#3)$)--
+($\c*(#1)+\b*(#4)$)--
+($\c*(#1)+\b*(#5)$)--
+($\c*(#1)+\b*(#6)$)--cycle;
+}
+\newcommand{\hexagon}[4]{
+\draw[#4]
+($\c*(#1)+\b*(#2)$)--
+($\b*(#1)+\c*(#2)$)--
+($\c*(#2)+\b*(#3)$)--
+($\b*(#2)+\c*(#3)$)--
+($\c*(#3)+\b*(#1)$)--
+($\b*(#3)+\c*(#1)$)--cycle;
+}
+
+
+
+\begin{document}
+    \tdplotsetmaincoords{65}{100}
+    \begin{tikzpicture}[tdplot_main_coords,scale=1,line join=round]
+    \pgfmathsetmacro\a{2}
+    \pgfmathsetmacro{\phi}{\a*(1+sqrt(5))/2}
+    \path 
+    coordinate(A) at (0,\phi,\a)
+    coordinate(B) at (0,\phi,-\a)
+    coordinate(C) at (0,-\phi,\a)
+    coordinate(D) at (0,-\phi,-\a)
+    coordinate(E) at (\a,0,\phi)
+    coordinate(F) at (\a,0,-\phi)
+    coordinate(G) at (-\a,0,\phi)
+    coordinate(H) at (-\a,0,-\phi)
+    coordinate(I) at (\phi,\a,0)
+    coordinate(J) at (\phi,-\a,0)
+    coordinate(K) at (-\phi,\a,0)
+    coordinate(L) at (-\phi,-\a,0);
+    %MORE POINTS
+    %G-CEAKL "TOP" 
+    \hexagon{G}{C}{E}{}
+    \hexagon{G}{E}{A}{}
+    \hexagon{G}{A}{K}{dashed}
+    \hexagon{G}{K}{L}{dashed}
+    \hexagon{G}{L}{C}{dashed}
+    %F-IJDHB "BOTTOM"
+    \hexagon{F}{I}{J}{}
+    \hexagon{F}{J}{D}{}
+    \hexagon{F}{D}{H}{dashed}
+    \hexagon{F}{H}{B}{dashed}
+    \hexagon{F}{B}{I}{}
+    %CJEIABKHLD "STRIP"
+    \hexagon{C}{J}{E}{}
+    \hexagon{J}{E}{I}{}
+    \hexagon{E}{I}{A}{}
+    \hexagon{I}{A}{B}{}
+    \hexagon{A}{B}{K}{dashed}
+    \hexagon{B}{K}{H}{dashed}
+    \hexagon{K}{H}{L}{dashed}
+    \hexagon{H}{L}{D}{dashed}
+    \hexagon{L}{D}{C}{dashed}
+    \hexagon{D}{C}{J}{}
+    %A-BKGEI
+    %B-AIFKH
+    %K-ABHLG
+    %G-AKLCE
+    %E-AGCJK
+    %I-AEJFB
+    %D-CLHFJ
+    %C-DJEGL
+    %L-DHKGC
+    %H-DFBKL
+    %F-DHBIJ
+    %J-DFHLC
+    \pentagon{A}{B}{K}{G}{E}{I}{dashed}
+    \pentagon{B}{A}{I}{F}{K}{H}{dashed}
+    \pentagon{C}{D}{J}{E}{G}{L}{dashed}
+    \pentagon{D}{C}{L}{H}{F}{J}{dashed}
+    % \pentagon{E}{A}{G}{C}{J}{I}{dashed}
+    % \pentagon{F}{D}{H}{B}{I}{J}{dashed}
+    % \pentagon{G}{A}{K}{L}{C}{E}{dashed}
+    % \pentagon{H}{D}{F}{B}{K}{L}{dashed}
+    % \pentagon{I}{A}{E}{J}{F}{B}{dashed}
+    % \pentagon{J}{D}{F}{I}{E}{C}{dashed}
+    % \pentagon{K}{A}{B}{H}{L}{G}{dashed}
+    % \pentagon{L}{D}{H}{K}{G}{C}{dashed}
+    
+    
+    % \path[dashed, thick]    (B) -- (H) -- (F) 
+    % (D) -- (L) -- (H) --cycle 
+    % (K) -- (L) -- (H) --cycle
+    % (K) -- (L) -- (G) --cycle
+    % (C) -- (L) (B)--(K) (A)--(K)
+    % ;
+
+        % \path[ultra thick]
+        % (A) -- (I) -- (B) --cycle 
+        % (F) -- (I) -- (B) --cycle 
+        % (F) -- (I) -- (J) --cycle
+        % (F) -- (D) -- (J) --cycle
+        % (C) -- (D) -- (J) --cycle
+        % (C) -- (E) -- (J) --cycle
+        % (I) -- (E) -- (J) --cycle
+        % (I) -- (E) -- (A) --cycle
+        % (G) -- (E) -- (A) --cycle
+        % (G) -- (E) -- (C) --cycle
+        % ; 
+% \foreach \point/\position in {A/right,B/below,C/above,D/left,E/{above right},F/below,G/above,H/left,I/below,J/right,K/below,L/left}
+% {
+%    \fill (\point) circle (1.5pt);
+%    \node[\position=3pt] at (\point) {$\point$};
+% }
+
+\end{tikzpicture}
+\end{document} 

@@ -1,0 +1,29 @@
+\documentclass[tikz,border=3mm]{standalone}
+\usetikzlibrary{backgrounds,3dtools}
+\begin{document}
+    \pgfdeclarelayer{background} 
+    \pgfdeclarelayer{foreground}
+    \pgfsetlayers{background,main,foreground}
+    \edef\lstV{{0., 0., -0.951057}, {0., 0., 0.951057}, {-0.850651, 0., -0.425325}, {0.850651, 0., 0.425325}, {0.688191, -0.5, -0.425325}, {0.688191, 0.5, -0.425325}, {-0.688191, -0.5, 0.425325}, {-0.688191, 0.5, 0.425325}, {-0.262866, -0.809017, -0.425325}, {-0.262866, 0.809017, -0.425325}, {0.262866, -0.809017, 0.425325}, {0.262866, 0.809017, 0.425325}}
+    \edef\lstFaces{{2,12,8},{2,8,7},{2,7,11},{2,11,4},{2,4,12},{5,9,1},{6,5,1},{10,6,1},{3,10,1},{9,3,1},{12,10,8},{8,3,7},{7,9,11},{11,5,4},{4,6,12},{5,11,9},{6,4,5},{10,12,6},{3,8,10},{9,7,3}}
+    
+    \foreach \angle in {0,180,...,360}{
+    \begin{tikzpicture}[scale=2,line cap=round,line join=round]
+    
+    \tikzset{
+        3d/polyhedron/.cd,
+        fore layer=foreground,
+        back layer=background, 
+        fore/.append style={fill opacity=0.7},
+        back/.append style={fill opacity=0.7}
+    }
+
+    \begin{scope}[3d/install view={phi=\angle,psi=20,theta=70}]
+        \tikzset{
+            % name prefix=Va,%<- used for all vertices
+            3d/define vertices/.expanded={\lstV},
+            3d/polyhedron/create faces from vertex list/.expanded={\lstFaces}
+        }
+    \end{scope}
+    \end{tikzpicture}}
+\end{document}

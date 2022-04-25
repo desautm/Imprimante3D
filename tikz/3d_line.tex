@@ -1,0 +1,33 @@
+\documentclass{standalone}
+
+\usepackage{tikz,tikz-3dplot}
+\usetikzlibrary{calc}
+
+\begin{document}
+
+\tdplotsetmaincoords{65}{130}
+\begin{tikzpicture}[tdplot_main_coords,scale=1]
+
+\coordinate (O)  at (0,0,0);
+\coordinate (D1) at (2.5,-1,2.8);
+\coordinate (D2) at (-0.55,2.75,3.55);
+\coordinate (P0) at ($(D1)+0.55*(D2)-0.55*(D1)$);
+\coordinate (P) at ($(D1)+0.85*(D2)-0.85*(D1)$);
+\coordinate (U) at ($(O)+0.2*(D2)-0.2*(D1)$);
+
+\draw[-stealth] (O)--++(4,0,0) node[below] {$x$};
+\draw[-stealth] (O)--++(0,4,0) node[below] {$y$};
+\draw[-stealth] (O)--++(0,0,4) node[above] {$z$};
+
+\draw[thick, blue] (D1)--(D2) node[right] {$D$};
+\draw[-stealth, very thick, red] (P0)--(P) node[midway, above] {$\vec a$};
+\draw[-stealth, very thick, red] (O)--(U) node[midway, above] {$\vec u$};
+\draw[-stealth, thick] (O)--(P0) node[midway, left] {$\vec r_0$};
+\draw[-stealth, thick] (O)--(P) node[midway, right] {$\vec r$};
+
+\draw[fill=black] (P0) circle (1pt) node[above] {\small$P_0$};
+\draw[fill=black] (P) circle (1pt) node[above] {\small$P$};
+
+\end{tikzpicture}
+
+\end{document}

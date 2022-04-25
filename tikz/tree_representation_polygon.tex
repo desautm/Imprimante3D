@@ -1,0 +1,258 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{decorations.markings}
+
+\begin{document}
+
+\begin{tikzpicture}[scale = 4]
+
+\coordinate (A) at (0.1802,0.8712);
+\coordinate (B) at (0.2573,0.7795);
+\coordinate (C) at (0.0331,0.6281);
+\coordinate (D) at (0.2457,0.6223);
+\coordinate (E) at (0.2806,0.5088);
+\coordinate (F) at (0.3723,0.6136);
+\coordinate (G) at (0.3621,0.3996);
+\coordinate (H) at (0.4306,0.3297);
+\coordinate (I) at (0.5266,0.3195);
+\coordinate (J) at (0.5630,0.0677);
+\coordinate (K) at (0.8629,0.2103);
+\coordinate (L) at (0.9401,0.5189);
+\coordinate (M) at (0.7086,0.4942);
+\coordinate (N) at (0.5892,0.6529);
+\coordinate (O) at (0.6693,0.8014);
+\coordinate (P) at (0.3985,0.9382);
+
+\coordinate (Q) at (0.6,0.4);
+\coordinate (R) at (0.6,0.2);
+\coordinate (S) at (0.8,0.2);
+\coordinate (T) at (0.8,0.4);
+
+\fill[blue, fill opacity = 0.5] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+
+\fill[white] (Q)--(R)--(S)--(T)--cycle;
+\draw[thick] (Q)--(R)--(S)--(T)--cycle;
+
+\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
+	\draw[fill=black] (\pt) circle (0.25pt);
+}
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale = 4]
+
+\coordinate (A) at (0.1802,0.8712);
+\coordinate (B) at (0.2573,0.7795);
+\coordinate (C) at (0.0331,0.6281);
+\coordinate (D) at (0.2457,0.6223);
+\coordinate (E) at (0.2806,0.5088);
+\coordinate (F) at (0.3723,0.6136);
+\coordinate (G) at (0.3621,0.3996);
+\coordinate (H) at (0.4306,0.3297);
+\coordinate (I) at (0.5266,0.3195);
+\coordinate (J) at (0.5630,0.0677);
+\coordinate (K) at (0.8629,0.2103);
+\coordinate (L) at (0.9401,0.5189);
+\coordinate (M) at (0.7086,0.4942);
+\coordinate (N) at (0.5892,0.6529);
+\coordinate (O) at (0.6693,0.8014);
+\coordinate (P) at (0.3985,0.9382);
+
+\coordinate (Q) at (0.6,0.4);
+\coordinate (R) at (0.6,0.2);
+\coordinate (S) at (0.8,0.2);
+\coordinate (T) at (0.8,0.4);
+
+\fill[green, fill opacity = 0.25] (A)--(C)--(J)--(K)--(L)--(O)--(P)--cycle;
+\draw[thick] (A)--(C)--(J)--(K)--(L)--(O)--(P)--cycle;
+
+\node at (0.5,0.5) {$A$};
+
+\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
+	\draw[fill=black] (\pt) circle (0.25pt);
+}
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale = 4]
+
+\coordinate (A) at (0.1802,0.8712);
+\coordinate (B) at (0.2573,0.7795);
+\coordinate (C) at (0.0331,0.6281);
+\coordinate (D) at (0.2457,0.6223);
+\coordinate (E) at (0.2806,0.5088);
+\coordinate (F) at (0.3723,0.6136);
+\coordinate (G) at (0.3621,0.3996);
+\coordinate (H) at (0.4306,0.3297);
+\coordinate (I) at (0.5266,0.3195);
+\coordinate (J) at (0.5630,0.0677);
+\coordinate (K) at (0.8629,0.2103);
+\coordinate (L) at (0.9401,0.5189);
+\coordinate (M) at (0.7086,0.4942);
+\coordinate (N) at (0.5892,0.6529);
+\coordinate (O) at (0.6693,0.8014);
+\coordinate (P) at (0.3985,0.9382);
+
+\coordinate (Q) at (0.6,0.4);
+\coordinate (R) at (0.6,0.2);
+\coordinate (S) at (0.8,0.2);
+\coordinate (T) at (0.8,0.4);
+
+\fill[blue, fill opacity = 0.5] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+
+\fill[red, fill opacity = 0.25] (A)--(B)--(C)--cycle;
+\draw[thick] (A)--(B)--(C)--cycle;
+
+\fill[red, fill opacity = 0.25] (C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--cycle;
+\draw[thick] (C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--cycle;
+
+\fill[red, fill opacity = 0.25] (L)--(M)--(N)--(O)--cycle;
+\draw[thick] (L)--(M)--(N)--(O)--cycle;
+
+\fill[white] (Q)--(R)--(S)--(T)--cycle;
+\draw[thick] (Q)--(R)--(S)--(T)--cycle;
+
+\node at (0.1709,0.7677) {\tiny $B_1$};
+\node at (0.3009,0.4416) {\tiny $B_2$};
+\node at (0.7272,0.6228) {\tiny $B_3$};
+\node at (0.7,0.3) {\tiny $B_4$};
+
+\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
+	\draw[fill=black] (\pt) circle (0.25pt);
+}
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale = 4]
+
+\coordinate (A) at (0.1802,0.8712);
+\coordinate (B) at (0.2573,0.7795);
+\coordinate (C) at (0.0331,0.6281);
+\coordinate (D) at (0.2457,0.6223);
+\coordinate (E) at (0.2806,0.5088);
+\coordinate (F) at (0.3723,0.6136);
+\coordinate (G) at (0.3621,0.3996);
+\coordinate (H) at (0.4306,0.3297);
+\coordinate (I) at (0.5266,0.3195);
+\coordinate (J) at (0.5630,0.0677);
+\coordinate (K) at (0.8629,0.2103);
+\coordinate (L) at (0.9401,0.5189);
+\coordinate (M) at (0.7086,0.4942);
+\coordinate (N) at (0.5892,0.6529);
+\coordinate (O) at (0.6693,0.8014);
+\coordinate (P) at (0.3985,0.9382);
+
+\coordinate (Q) at (0.6,0.4);
+\coordinate (R) at (0.6,0.2);
+\coordinate (S) at (0.8,0.2);
+\coordinate (T) at (0.8,0.4);
+
+\fill[red, fill opacity = 0.25] (A)--(B)--(C)--cycle;
+\draw[thick] (A)--(B)--(C)--cycle;
+
+\fill[red, fill opacity = 0.25] (C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--cycle;
+\draw[thick] (C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--cycle;
+
+\fill[red, fill opacity = 0.25] (L)--(M)--(N)--(O)--cycle;
+\draw[thick] (L)--(M)--(N)--(O)--cycle;
+
+\node at (0.1709,0.7677) {\tiny $B_1$};
+\node at (0.3009,0.4416) {\tiny $B_2$};
+\node at (0.7272,0.6228) {\tiny $B_3$};
+
+\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
+	\draw[fill=black] (\pt) circle (0.25pt);
+}
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale = 4]
+
+\coordinate (A) at (0.1802,0.8712);
+\coordinate (B) at (0.2573,0.7795);
+\coordinate (C) at (0.0331,0.6281);
+\coordinate (D) at (0.2457,0.6223);
+\coordinate (E) at (0.2806,0.5088);
+\coordinate (F) at (0.3723,0.6136);
+\coordinate (G) at (0.3621,0.3996);
+\coordinate (H) at (0.4306,0.3297);
+\coordinate (I) at (0.5266,0.3195);
+\coordinate (J) at (0.5630,0.0677);
+\coordinate (K) at (0.8629,0.2103);
+\coordinate (L) at (0.9401,0.5189);
+\coordinate (M) at (0.7086,0.4942);
+\coordinate (N) at (0.5892,0.6529);
+\coordinate (O) at (0.6693,0.8014);
+\coordinate (P) at (0.3985,0.9382);
+
+\coordinate (Q) at (0.6,0.4);
+\coordinate (R) at (0.6,0.2);
+\coordinate (S) at (0.8,0.2);
+\coordinate (T) at (0.8,0.4);
+
+\fill[green, fill opacity = 0.25] (A)--(B)--(C)--cycle;
+\draw[thick] (A)--(B)--(C)--cycle;
+
+\fill[green, fill opacity = 0.25] (C)--(D)--(F)--(I)--(J)--cycle;
+\draw[thick] (C)--(D)--(F)--(I)--(J)--cycle;
+
+\fill[green, fill opacity = 0.25] (L)--(M)--(N)--(O)--cycle;
+\draw[thick] (L)--(M)--(N)--(O)--cycle;
+
+\node at (0.1709,0.7677) {\tiny $B_1$};
+\node at (0.3009,0.4416) {\tiny $B_2$};
+\node at (0.7272,0.6228) {\tiny $B_3$};
+
+\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
+	\draw[fill=black] (\pt) circle (0.25pt);
+}
+
+\end{tikzpicture}
+
+\begin{tikzpicture}[scale = 4]
+
+\coordinate (A) at (0.1802,0.8712);
+\coordinate (B) at (0.2573,0.7795);
+\coordinate (C) at (0.0331,0.6281);
+\coordinate (D) at (0.2457,0.6223);
+\coordinate (E) at (0.2806,0.5088);
+\coordinate (F) at (0.3723,0.6136);
+\coordinate (G) at (0.3621,0.3996);
+\coordinate (H) at (0.4306,0.3297);
+\coordinate (I) at (0.5266,0.3195);
+\coordinate (J) at (0.5630,0.0677);
+\coordinate (K) at (0.8629,0.2103);
+\coordinate (L) at (0.9401,0.5189);
+\coordinate (M) at (0.7086,0.4942);
+\coordinate (N) at (0.5892,0.6529);
+\coordinate (O) at (0.6693,0.8014);
+\coordinate (P) at (0.3985,0.9382);
+
+\coordinate (Q) at (0.6,0.4);
+\coordinate (R) at (0.6,0.2);
+\coordinate (S) at (0.8,0.2);
+\coordinate (T) at (0.8,0.4);
+
+% \fill[green, fill opacity = 0.25] (A)--(B)--(C)--cycle;
+% \draw[thick] (A)--(B)--(C)--cycle;
+
+\fill[red, fill opacity = 0.25] (D)--(E)--(F)--cycle;
+\draw[thick] (D)--(E)--(F)--cycle;
+
+\fill[red, fill opacity = 0.25] (F)--(G)--(H)--(I)--cycle;
+\draw[thick](F)--(G)--(H)--(I)--cycle;
+
+% \node at (0.1709,0.7677) {\tiny $B_1$};
+% \node at (0.3009,0.4416) {\tiny $B_2$};
+% \node at (0.7272,0.6228) {\tiny $B_3$};
+
+\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
+	\draw[fill=black] (\pt) circle (0.25pt);
+}
+
+\end{tikzpicture}
+
+\end{document}
