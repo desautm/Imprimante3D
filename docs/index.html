@@ -12,11 +12,21 @@
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
+.title[
 # Comment utiliser les mathématiques…
+]
+.subtitle[
 ## … pour imprimer en 3D
+]
+.author[
 ### <a href="https://madesautels.rbind.io">Marc-André Désautels</a>
+]
+.institute[
 ### Cégep Saint-Jean-sur-Richelieu
+]
+.date[
 ### Octobre 2022 <br><br> Présentation disponible à <a href="https://desautm.github.io/Imprimante3D" class="uri">https://desautm.github.io/Imprimante3D</a> <br> Code disponible à <a href="https://github.com/desautm/Imprimante3D" class="uri">https://github.com/desautm/Imprimante3D</a>
+]
 
 ---
 
@@ -47,13 +57,34 @@ class:inverse, middle, center
 - Est-ce qu'un point est au-dessus ou au-dessous d'une droite?
 
 ---
+class:inverse, center, middle
+
+# L'équation d'une droite dans le plan
+
+---
 class: center, middle
 
-&lt;img src="3d_line.png" width="75%" /&gt;
+![](index_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
 
-$$
-\vec r = \vec r_0 + t \vec u
-$$
+---
+class:inverse, center, middle
+
+# L'équation d'une droite dans l'espace
+
+---
+class: center, middle
+
+![](index_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+
+---
+class:inverse, center, middle
+
+# L'équation d'un plan dans l'espace
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
 
 ---
 class: inverse, center, middle
@@ -69,15 +100,15 @@ background-size: contain
 
 # STL pour STéréoLitographie
 
-- Ce format ne comporte notamment pas d'informations concernant la couleur, la texture ou les autres paramètres habituels d'un modèle de conception assistée par ordinateur.
+- Ce format ne comporte pas d'informations concernant la couleur, la texture.
 
 - Le **format de fichier STL** ne décrit que la géométrie de surface d'un objet en 3 dimensions.
 
 - Cette surface est nécessairement fermée et définie par une série de triangles (ou de facettes). 
 
-- Chaque triangle est défini par les coordonnées cartésiennes (x, y, z) dans un trièdre direct de son vecteur normal unitaire (n) orienté vers l'extérieur de l'objet et de ses trois sommets (vertex/vertices en anglais) ordonnés dans le sens trigonométrique. 
+- Chaque triangle est défini par les coordonnées cartésiennes (x, y, z) dans un trièdre direct de son vecteur normal unitaire (n) orienté vers l'extérieur de l'objet et de ses trois sommets ordonnés dans le sens trigonométrique. 
 
-- Chaque triangle doit partager 2 sommets avec chacun des triangles le juxtaposant. Dit autrement, le sommet d'un triangle ne doit pas être sur l'arête d'un autre triangle. Il n'y a pas d'information d'échelle. 
+- Chaque triangle doit partager 2 sommets avec chacun des triangles le juxtaposant. Dit autrement, le sommet d'un triangle ne doit pas être sur l'arête d'un autre triangle. 
 
 - L'unité de longueur est arbitraire.
 
@@ -107,7 +138,7 @@ end facet
 
 ---
 
-# Le format de fichier STL
+# Le format de fichier STL : Un exemple
 
 ```
 facet normal -6.123234e-17 0.000000e+00 1.000000e+00
@@ -138,9 +169,13 @@ class: inverse, center, middle
 
 - Le solide est composé de plusieurs triangles.
 
-- Chaque triangle est composé de trois segments de droites.
+- Chaque triangle est composé de trois points.
 
-- On veut donc savoir si un segment de droite croise le plan.
+    - Étape 1 : Est-ce que les trois points sont du même côté du plan?
+    
+    - Étape 2 : Si oui, alors on ne fait rien.
+    
+    - Étape 3 : Si non, on trouve l'intersection des deux segments de droites formés avec le plan.
 
 ---
 class:middle, center
@@ -150,55 +185,105 @@ class:middle, center
 ---
 class: inverse, center, middle
 
-# Malheureusement la vie n'est jamais aussi facile...
+# Étape 1 : Est-ce qu'un triangle croise le plan?
 
 ---
-class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+## Intersection Triangle - Plan
+
+- Avant de trouver l'intersection d'un triangle avec un plan, on va trouver *SI* le triangle intersecte le plan.
+
+- Il intersecte le plan si tous les points du triangle ne sont pas du même côté du plan.
+
+- Comment s'y prendre?
+
+- En pratique, c'est facile car le plan de coupe est toujours parfaitement horizontal et donné par une valeur de `\(z\)` constante.
 
 ---
-class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-3-1.png)&lt;!-- --&gt;
+## Intersection Triangle - Plan
 
----
-class: middle, center
+- On translate nos points selon la hauteur de la coupe;
+  
+- Il y a intersection si nous avons un ou deux points qui ont une coordonnée en `\(z\)` de signe différent de l'autre coordonnée.
 
 ![](index_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
 
+- Nous avons donc une collection de points que nous relions ensemble pour former un polygone.
+
+- Le tour est donc joué! 
+
+---
+class: inverse, center, middle
+
+# Malheureusement la vie n'est jamais aussi facile...
+
+--
+
+![](https://media.giphy.com/media/ccAuVsSPSLrDq/giphy.gif)
+
 ---
 class: middle, center
+
+## En théorie nous obtenons ceci
 
 ![](index_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center
 
+## En pratique nous obtenons plutôt cela
+
 ![](index_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
 ---
-class: middle, center
 
+## Comment passer de l'un à l'autre?
+
+.pull-left[
 ![](index_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+]
 
----
-class: middle, center
-
+.pull-right[
 ![](index_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+]
+
+---
+
+## Trouver le plus proche voisin?
+
+&lt;img src="index_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+--
+
+- La notion de *plus proche voisin* n'est pas réciproque!
+
+- Le plus proche voisin de `\(A\)` est `\(B\)`, mais le plus proche voisin de `\(B\)` est `\(C\)`.
+
+---
+class:inverse, middle, center
+
+# Les Quadtree ou Arbres Quaternaires
+
+---
+
+## Les arbres quaternaires
+
+- Un quadtree ou arbre quaternaire (arbre Q) est une structure de données de type arbre dans laquelle chaque noeud a quatre fils. 
+
+- Les quadtrees sont le plus souvent utilisés pour partitionner un espace bidimensionnel en le subdivisant récursivement en quatre noeuds.
+
+--
+
+&lt;img src="https://upload.wikimedia.org/wikipedia/commons/8/8b/Point_quadtree.svg" width="50%" style="display: block; margin: auto;" /&gt;
 
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+![](https://miro.medium.com/max/1400/0*h4X6RYkvgIEz65Pm)
 
 ---
-class: middle, center
-
-![](index_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
-
----
-class: middle, center
+class:middle, center
 
 ![](index_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
 
@@ -208,37 +293,99 @@ class: middle, center
 ![](index_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
 
 ---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
+
+---
 class: inverse, center, middle
 
 # Simplifier des droites
 
 ---
-class:middle, center
-![](index_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
----
-class:middle, center
-![](index_files/figure-html/unnamed-chunk-14-1.png)&lt;!-- --&gt;
----
-class:middle, center
-![](index_files/figure-html/unnamed-chunk-15-1.png)&lt;!-- --&gt;
----
-class:middle, center
-![](index_files/figure-html/unnamed-chunk-16-1.png)&lt;!-- --&gt;
----
-class:middle, center
-![](index_files/figure-html/unnamed-chunk-17-1.png)&lt;!-- --&gt;
----
-class:middle, center
-![](index_files/figure-html/unnamed-chunk-18-1.png)&lt;!-- --&gt;
----
-class:middle, center
-![](index_files/figure-html/unnamed-chunk-19-1.png)&lt;!-- --&gt;
----
-class:middle, center
-![](index_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
----
-class:middle, center
+
+## La distance entre un point et une droite
+
+.pull-left[
+`\begin{align*}
+d &amp;= \frac{\left|\overrightarrow{QP}\cdot \vec n \right|}{\left\lVert\vec n\right\rVert} \\
+&amp;= \frac{\left|(x_P-x_0;y_P-y_0)\cdot(a;b) \right|}{\sqrt{a^2+b^2}} \\
+&amp;= \frac{\left|a(x_P-x_0)+b(y_P-y_0) \right|}{\sqrt{a^2+b^2}} \\
+&amp;= \frac{\left|ax_P+by_P+(-ax_0-by_0) \right|}{\sqrt{a^2+b^2}} \\
+&amp;= \frac{\left|ax_P+by_P+c \right|}{\sqrt{a^2+b^2}} \\
+\end{align*}`
+]
+
+.pull-right[
 ![](index_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+]
+
+--
+
+- De plus, le signe du produit scalaire indique si le point est **au-dessus** ou **en-dessous** de la droite.
+
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
 
 ---
 class:middle, center
@@ -279,7 +426,7 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
 
 Nous pouvons voir `\(H\)` comme une fonction booléenne sur le plan: `\(H(p)=\textbf{VRAI}\)` si et seulement si `\(p\in H\)`.
 
@@ -287,32 +434,32 @@ Nous pouvons voir `\(H\)` comme une fonction booléenne sur le plan: `\(H(p)=\te
 
 # Le complément
 
-![](index_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'union
 
-![](index_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'intersection
 
-![](index_files/figure-html/unnamed-chunk-25-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
 
 ---
 
 # La différence
 
-![](index_files/figure-html/unnamed-chunk-26-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'expression d'une région convexe
 
 .center[
-![](index_files/figure-html/unnamed-chunk-27-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -331,17 +478,17 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-28-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-29-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-39-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center, inverse
@@ -351,12 +498,12 @@ class: middle, center, inverse
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-41-1.png)&lt;!-- --&gt;
 
 ---
 class:middle, center, inverse
@@ -365,47 +512,47 @@ class:middle, center, inverse
 
 ---
 class: center, middle
-![](index_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-39-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-41-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
 ![](index_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
 ![](index_files/figure-html/unnamed-chunk-43-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-44-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-45-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-46-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-47-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-48-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-49-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-50-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-51-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-52-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center
@@ -460,6 +607,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

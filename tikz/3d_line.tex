@@ -1,32 +1,37 @@
 \documentclass{standalone}
 
-\usepackage{tikz,tikz-3dplot}
+\usepackage{tikz}
 \usetikzlibrary{calc}
 
 \begin{document}
 
-\tdplotsetmaincoords{65}{130}
-\begin{tikzpicture}[tdplot_main_coords,scale=1]
+\begin{tikzpicture}[scale=0.8]
 
-\coordinate (O)  at (0,0,0);
-\coordinate (D1) at (2.5,-1,2.8);
-\coordinate (D2) at (-0.55,2.75,3.55);
-\coordinate (P0) at ($(D1)+0.55*(D2)-0.55*(D1)$);
-\coordinate (P) at ($(D1)+0.85*(D2)-0.85*(D1)$);
-\coordinate (U) at ($(O)+0.2*(D2)-0.2*(D1)$);
+\coordinate (O)  at (0,0);
+\coordinate (P1) at (-1,1);
+\coordinate (P2) at (0.25,3);
+\coordinate (P3) at (3.75,2.5);
+\coordinate (P4) at (2.5,0.5);
+\coordinate (N1) at (-0.5,1.25);
+\coordinate (N2) at ($(N1)+(0,1.5)$);
+\coordinate (Q1) at (1.25,1.75);
+\coordinate (Q2) at ($(Q1)+(1.5,0.25)$);
 
-\draw[-stealth] (O)--++(4,0,0) node[below] {$x$};
-\draw[-stealth] (O)--++(0,4,0) node[below] {$y$};
-\draw[-stealth] (O)--++(0,0,4) node[above] {$z$};
+\draw[-stealth] (O)--++(-1,-1) node[below] {$x$};
+\draw[-stealth] (O)--++(4,0) node[below] {$y$};
+\draw[-stealth] (O)--++(0,4) node[above] {$z$};
 
-\draw[thick, blue] (D1)--(D2) node[right] {$D$};
-\draw[-stealth, very thick, red] (P0)--(P) node[midway, above] {$\vec a$};
-\draw[-stealth, very thick, red] (O)--(U) node[midway, above] {$\vec u$};
-\draw[-stealth, thick] (O)--(P0) node[midway, left] {$\vec r_0$};
-\draw[-stealth, thick] (O)--(P) node[midway, right] {$\vec r$};
+\filldraw[black, fill=blue, fill opacity=0.5] (P1)--(P2)--(P3)--(P4)--cycle;
+\draw ($(N1)+(0.25,0)$)--++(0,0.25)--++(-0.25,0);
+\draw[-stealth, red, thick] (N1)--(N2) node[left] {$\vec n$};
+\draw[-stealth, thick] (O)--(Q1) node[midway, left] {$\vec r_0$};
+\draw[-stealth, thick] (O)--(Q2) node[midway, right] {$\vec r$};
+\draw[densely dashed, thick] (N1)--++(0.75,0);
+\draw[-stealth, thick] (Q1)--(Q2);
+\draw[fill=black] (Q1) circle (1pt) node[above] {\small$P_0$};
+\draw[fill=black] (Q2) circle (1pt) node[above] {\small$P$};
 
-\draw[fill=black] (P0) circle (1pt) node[above] {\small$P_0$};
-\draw[fill=black] (P) circle (1pt) node[above] {\small$P$};
+\node at (1.5,-1) {\large$\vec n \cdot \left(\vec r - \vec r_0\right)=0$};
 
 \end{tikzpicture}
 
