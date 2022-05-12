@@ -19,7 +19,74 @@ knitr::opts_chunk$set(
   cache=TRUE,
   echo=FALSE
 )
+library(flipbookr)
+library(tidyverse)
+library(latex2exp)
+
+poly <- tribble(
+  ~x, ~y, ~holes, ~id,
+  0.1802,0.8712, 1L, 1L,
+  0.2573,0.7795, 1L, 2L,
+  0.0331,0.6281, 1L, 3L,
+  0.2457,0.6223, 1L, 4L,
+  0.2806,0.5088, 1L, 5L,
+  0.3723,0.6136, 1L, 6L,
+  0.3621,0.3996, 1L, 7L,
+  0.4306,0.3297, 1L, 8L,
+  0.5266,0.3195, 1L, 9L,
+  0.5630,0.0677, 1L, 10L,
+  0.8629,0.2103, 1L, 11L,
+  0.9401,0.5189, 1L, 12L,
+  0.7086,0.4942, 1L, 13L,
+  0.5892,0.6529, 1L, 14L,
+  0.6693,0.8014, 1L, 15L,
+  0.3985,0.9382, 1L, 16L,
+  0.6000,0.4000, 2L, 17L,
+  0.6000,0.2000, 2L, 18L,
+  0.8000,0.2000, 2L, 19L,
+  0.8000,0.4000, 2L, 20L
+)
+
+poly_plein <- tribble(
+  ~x, ~y, ~holes, ~id,
+  0.1802,0.8712, 1L, 1L,
+  0.2573,0.7795, 1L, 2L,
+  0.0331,0.6281, 1L, 3L,
+  0.2457,0.6223, 1L, 4L,
+  0.2806,0.5088, 1L, 5L,
+  0.3723,0.6136, 1L, 6L,
+  0.3621,0.3996, 1L, 7L,
+  0.4306,0.3297, 1L, 8L,
+  0.5266,0.3195, 1L, 9L,
+  0.5630,0.0677, 1L, 10L,
+  0.8629,0.2103, 1L, 11L,
+  0.9401,0.5189, 1L, 12L,
+  0.7086,0.4942, 1L, 13L,
+  0.5892,0.6529, 1L, 14L,
+  0.6693,0.8014, 1L, 15L,
+  0.3985,0.9382, 1L, 16L
+)
+
+poly_trou <- tribble(
+  ~x, ~y, ~holes, ~id,
+  0.6000,0.4000, 2L, 17L,
+  0.6000,0.2000, 2L, 18L,
+  0.8000,0.2000, 2L, 19L,
+  0.8000,0.4000, 2L, 20L
+)
+
+c_poly_plein <- poly_plein %>% 
+  slice(chull(x,y))
+
+b1 <- poly[c(1:3),]
+b2 <- poly[c(3:10),]
+b3 <- poly[c(12,13,14,15),]
 ```
+
+```{r xaringanExtra}
+xaringanExtra::use_xaringan_extra(c("tile_view", "animate_css", "tachyons"))
+```
+
 
 class: center, middle
 
@@ -63,7 +130,7 @@ class: center, middle
 \draw (0.6,{-0.6*4/7+45/28})--++($0.015*(4,7)$)--++($0.015*(-7,4)$);
 \draw[-stealth, thick, red] (0.5,{-0.5*4/7+45/28}) --++($0.1*(4,7)$) node[right] {\small{$\vec n = (a;b)$}};
 \draw[fill=black] (0.5,{-0.5*4/7+45/28}) circle (1pt) node[below] {\small{$(x_0;y_0)$}};
-
+\draw[fill=black] (0,{45/28}) circle (1pt) node[below left] {\small{$-c$}};
 
 \draw[-stealth, thick, black] (0.5,{-0.5*4/7+45/28}) --++($-0.2*(-7,4)$) node[above right] {\small{$(x;y)$}};
 \draw[fill=black] (1.9,{-1.9*4/7+45/28}) circle (1pt);
@@ -355,7 +422,9 @@ class: inverse, center, middle
 
 --
 
-![](https://media.giphy.com/media/ccAuVsSPSLrDq/giphy.gif)
+```{r, out.width="50%"}
+knitr::include_graphics("https://media.giphy.com/media/ccAuVsSPSLrDq/giphy.gif")
+```
 
 ---
 class: middle, center
@@ -675,9 +744,9 @@ class:inverse, middle, center
 
 ## Les arbres quaternaires
 
-- Un quadtree ou arbre quaternaire (arbre Q) est une structure de données de type arbre dans laquelle chaque noeud a quatre fils. 
+- Un quadtree ou arbre quaternaire est une structure de données de type arbre dans laquelle chaque noeud a quatre fils. 
 
-- Les quadtrees sont le plus souvent utilisés pour partitionner un espace bidimensionnel en le subdivisant récursivement en quatre noeuds.
+- Les arbres quaternaires sont le plus souvent utilisés pour partitionner un espace bidimensionnel en le subdivisant récursivement en quatre noeuds.
 
 --
 
@@ -1939,6 +2008,37 @@ class: center, middle
 Nous pouvons voir $H$ comme une fonction booléenne sur le plan: $H(p)=\textbf{VRAI}$ si et seulement si $p\in H$.
 
 ---
+class: center, middle
+
+```{tikz}
+\usetikzlibrary{calc,decorations.markings}
+\begin{tikzpicture}[
+  scale = 4,
+  decoration={
+      markings,
+      mark=at position 0.5 with {\arrow{>}}}
+  ]
+
+\coordinate (A) at (0,0.4);
+\coordinate (B) at (1,0.6);
+\fill[blue, fill opacity=0.5] (A)--(B)-|(1,1)--(0,1)--cycle;
+\fill[red, fill opacity=0.5] (A)--(B)-|(1,0)--(0,0)--cycle;
+\draw[green, very thick, postaction={decorate}] (A)--(B);
+\draw[very thick, black] (0,0) rectangle (1,1);
+\node at (0.5,0.75) {POSITIF};
+\node at (0.5,0.25) {NÉGATIF};
+
+\node[rotate=11.3099, below] at ($(A)!0.5!(B)$) {$ax+by+c=0$};
+
+\end{tikzpicture}
+```
+
+---
+class:middle, center
+
+<iframe src="https://www.geogebra.org/classic/mfb2dpxf?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+
+---
 
 # Le complément
 
@@ -2179,7 +2279,9 @@ class: inverse, center, middle
 
 - L'enveloppe convexe d'un objet ou d'un regroupement d'objets géométriques est l'ensemble convexe le plus petit parmi ceux qui le contiennent.
 
-- Dans un plan, l'enveloppe convexe peut être comparée à la région limitée par un élastique qui englobe tous les points qu'on relâche jusqu'à ce qu'il se contracte au maximum. L'idée serait la même dans l'espace avec un ballon qui se dégonflerait jusqu'à être en contact avec tous les points qui sont à la surface de l'enveloppe convexe.
+- Dans un plan, l'enveloppe convexe peut être comparée à la région limitée par un élastique qui englobe tous les points qu'on relâche jusqu'à ce qu'il se contracte au maximum. 
+
+- L'idée serait la même dans l'espace avec un ballon qui se dégonflerait jusqu'à être en contact avec tous les points qui sont à la surface de l'enveloppe convexe.
 
 ---
 class: center, middle
@@ -2298,207 +2400,6 @@ class: center, middle
 \foreach \pt in {E,K,P,D,F,H,M,O,N,G,C}{
     \draw[fill=red] (\pt) circle (0.25pt);
 }
-
-\end{tikzpicture}
-```
-
----
-class: middle, center, inverse
-
-# La représentation d'un polygone sous forme d'arbre
-
----
-class: middle, center
-
-```{tikz}
-\newcommand{\PolygonInit}{
-\begin{tikzpicture}[scale=4]
-\coordinate (A) at (0.1802,0.8712);
-\coordinate (B) at (0.2573,0.7795);
-\coordinate (C) at (0.0331,0.6281);
-\coordinate (D) at (0.2457,0.6223);
-\coordinate (E) at (0.2806,0.5088);
-\coordinate (F) at (0.3723,0.6136);
-\coordinate (G) at (0.3621,0.3996);
-\coordinate (H) at (0.4306,0.3297);
-\coordinate (I) at (0.5266,0.3195);
-\coordinate (J) at (0.5630,0.0677);
-\coordinate (K) at (0.8629,0.2103);
-\coordinate (L) at (0.9401,0.5189);
-\coordinate (M) at (0.7086,0.4942);
-\coordinate (N) at (0.5892,0.6529);
-\coordinate (O) at (0.6693,0.8014);
-\coordinate (P) at (0.3985,0.9382);
-
-\coordinate (Q) at (0.6,0.4);
-\coordinate (R) at (0.6,0.2);
-\coordinate (S) at (0.8,0.2);
-\coordinate (T) at (0.8,0.4);
-
-\fill[blue, fill opacity = 0.5] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-
-\fill[white] (Q)--(R)--(S)--(T)--cycle;
-\draw[thick] (Q)--(R)--(S)--(T)--cycle;
-
-\node at (0.4,0.8) {$P_1$};
-\node at (0.7,0.3) {$P_2$};
-
-\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
-	\draw[fill=black] (\pt) circle (0.25pt);
-}
-\useasboundingbox (0,0) rectangle (1,1);
-\end{tikzpicture}
-}
-
-\begin{tikzpicture}
-\node (PolygonInit){\PolygonInit};
-\end{tikzpicture}
-```
-
----
-class: middle, center
-
-```{tikz}
-\newcommand{\PolygonInit}{
-\begin{tikzpicture}[scale=4]
-\coordinate (A) at (0.1802,0.8712);
-\coordinate (B) at (0.2573,0.7795);
-\coordinate (C) at (0.0331,0.6281);
-\coordinate (D) at (0.2457,0.6223);
-\coordinate (E) at (0.2806,0.5088);
-\coordinate (F) at (0.3723,0.6136);
-\coordinate (G) at (0.3621,0.3996);
-\coordinate (H) at (0.4306,0.3297);
-\coordinate (I) at (0.5266,0.3195);
-\coordinate (J) at (0.5630,0.0677);
-\coordinate (K) at (0.8629,0.2103);
-\coordinate (L) at (0.9401,0.5189);
-\coordinate (M) at (0.7086,0.4942);
-\coordinate (N) at (0.5892,0.6529);
-\coordinate (O) at (0.6693,0.8014);
-\coordinate (P) at (0.3985,0.9382);
-
-\coordinate (Q) at (0.6,0.4);
-\coordinate (R) at (0.6,0.2);
-\coordinate (S) at (0.8,0.2);
-\coordinate (T) at (0.8,0.4);
-
-\fill[blue, fill opacity = 0.5] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-
-\fill[white] (Q)--(R)--(S)--(T)--cycle;
-\draw[thick] (Q)--(R)--(S)--(T)--cycle;
-
-\node at (0.4,0.8) {$P_1$};
-\node at (0.7,0.3) {$P_2$};
-
-\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
-	\draw[fill=black] (\pt) circle (0.25pt);
-}
-\useasboundingbox (0,0) rectangle (1,1);
-\end{tikzpicture}
-}
-
-\newcommand{\ConvexHull}{
-\begin{tikzpicture}[scale=4]
-\coordinate (A) at (0.1802,0.8712);
-\coordinate (B) at (0.2573,0.7795);
-\coordinate (C) at (0.0331,0.6281);
-\coordinate (D) at (0.2457,0.6223);
-\coordinate (E) at (0.2806,0.5088);
-\coordinate (F) at (0.3723,0.6136);
-\coordinate (G) at (0.3621,0.3996);
-\coordinate (H) at (0.4306,0.3297);
-\coordinate (I) at (0.5266,0.3195);
-\coordinate (J) at (0.5630,0.0677);
-\coordinate (K) at (0.8629,0.2103);
-\coordinate (L) at (0.9401,0.5189);
-\coordinate (M) at (0.7086,0.4942);
-\coordinate (N) at (0.5892,0.6529);
-\coordinate (O) at (0.6693,0.8014);
-\coordinate (P) at (0.3985,0.9382);
-
-\coordinate (Q) at (0.6,0.4);
-\coordinate (R) at (0.6,0.2);
-\coordinate (S) at (0.8,0.2);
-\coordinate (T) at (0.8,0.4);
-
-\fill[green, fill opacity = 0.25] (A)--(C)--(J)--(K)--(L)--(O)--(P)--cycle;
-\draw[thick] (A)--(C)--(J)--(K)--(L)--(O)--(P)--cycle;
-
-\node at (0.5,0.5) {$A$};
-
-\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
-	\draw[fill=black] (\pt) circle (0.25pt);
-}
-\useasboundingbox (0,0) rectangle (1,1);
-\end{tikzpicture}
-}
-
-\newcommand{\Trous}{
-\begin{tikzpicture}[scale = 4]
-
-\coordinate (A) at (0.1802,0.8712);
-\coordinate (B) at (0.2573,0.7795);
-\coordinate (C) at (0.0331,0.6281);
-\coordinate (D) at (0.2457,0.6223);
-\coordinate (E) at (0.2806,0.5088);
-\coordinate (F) at (0.3723,0.6136);
-\coordinate (G) at (0.3621,0.3996);
-\coordinate (H) at (0.4306,0.3297);
-\coordinate (I) at (0.5266,0.3195);
-\coordinate (J) at (0.5630,0.0677);
-\coordinate (K) at (0.8629,0.2103);
-\coordinate (L) at (0.9401,0.5189);
-\coordinate (M) at (0.7086,0.4942);
-\coordinate (N) at (0.5892,0.6529);
-\coordinate (O) at (0.6693,0.8014);
-\coordinate (P) at (0.3985,0.9382);
-
-\coordinate (Q) at (0.6,0.4);
-\coordinate (R) at (0.6,0.2);
-\coordinate (S) at (0.8,0.2);
-\coordinate (T) at (0.8,0.4);
-
-\fill[blue, fill opacity = 0.25] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-
-\fill[red, fill opacity = 0.25] (A)--(B)--(C)--cycle;
-\draw[thick] (A)--(B)--(C)--cycle;
-
-\fill[red, fill opacity = 0.25] (C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--cycle;
-\draw[thick] (C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--cycle;
-
-\fill[red, fill opacity = 0.25] (L)--(M)--(N)--(O)--cycle;
-\draw[thick] (L)--(M)--(N)--(O)--cycle;
-
-\fill[white] (Q)--(R)--(S)--(T)--cycle;
-\draw[thick] (Q)--(R)--(S)--(T)--cycle;
-
-\node at (0.1709,0.7677) {\tiny $B_1$};
-\node at (0.3009,0.4416) {\tiny $B_2$};
-\node at (0.7272,0.6228) {\tiny $B_3$};
-\node at (0.7,0.3) {$P_2$};
-
-\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
-	\draw[fill=black] (\pt) circle (0.25pt);
-}
-\useasboundingbox (0,0) rectangle (1,1);
-\end{tikzpicture}
-}
-
-\begin{tikzpicture}
-
-\node (PolygonInit){\PolygonInit};
-
-\node[right of=PolygonInit, xshift = 1.5cm] (Egalite){$=$};
-
-\node[right of=Egalite, xshift = 1.5cm] (ConvexHull) {\ConvexHull};
-
-\node[right of=ConvexHull, xshift = 1.5cm] (Soustraction){$-$};
-
-\node[right of=Soustraction, xshift = 1.5cm] (Trous) {\Trous};
 
 \end{tikzpicture}
 ```
@@ -2954,5 +2855,386 @@ class: middle, center
 ```{r, out.width="75%"}
 knitr::include_graphics("quickhull.gif")
 ```
+
+---
+class: middle, center, inverse
+
+# La représentation d'un polygone sous forme d'arbre
+
+---
+class: middle, center
+
+```{r, warning=FALSE}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=poly,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#3b528b",
+    alpha = 0.5,
+    size=1.5
+  )+
+  annotate("text", x=0.4, y=0.8, label=TeX("$P_1$"), size=12)+
+  annotate("text", x=0.7, y=0.3, label=TeX("$P_2$"), size=12)+
+  geom_point(data=poly, size=5)+
+  theme_void()
+```
+
+---
+class: middle, center
+
+```{r, warning=FALSE}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=poly_plein,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#3b528b",
+    alpha = 0.5,
+    size=1.5
+  )+
+  annotate("text", x=0.4, y=0.8, label=TeX("$P_1$"), size=12)+
+  geom_point(data=poly_plein, size=5)+
+  theme_void()
+```
+
+---
+class: middle, center
+
+```{r, warning=FALSE}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=c_poly_plein,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#5ec962",
+    alpha = 0.5,
+    size=1.5
+  )+
+  annotate("text", x=0.4, y=0.8, label=TeX("$A$"), size=12)+
+  geom_point(data=poly_plein, size=5)+
+  theme_void()
+```
+
+---
+class: middle, center
+
+```{r, warning=FALSE}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=poly_plein,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#3b528b",
+    alpha = 0.5,
+    size=1.5
+  )+
+  geom_polygon(
+    data=b1,
+    color = "black", 
+    fill = "#fde725",
+    alpha = 0.5,
+    size=1.5
+  )+
+  geom_polygon(
+    data=b2,
+    color = "black", 
+    fill = "#fde725",
+    alpha = 0.5,
+    size=1.5
+  )+
+  geom_polygon(
+    data=b3,
+    color = "black", 
+    fill = "#fde725",
+    alpha = 0.5,
+    size=1.5
+  )+
+  annotate("text", x=0.4, y=0.8, label=TeX("$P_1$"), size=12)+
+  annotate("text", x=0.1709, y=0.7677, label=TeX("$B_1$"), size=6)+
+  annotate("text", x=0.3009, y=0.4416, label=TeX("$B_3$"), size=12)+
+  annotate("text", x=0.7272, y=0.6228, label=TeX("$B_2$"), size=12)+
+  geom_point(data=poly_plein, size=5)+
+  theme_void()
+```
+
+$$
+P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
+$$
+---
+class: middle, center
+
+.pull-left[
+```{tikz}
+\usetikzlibrary{trees}
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.75cm, fill = blue!20, font = \footnotesize},
+scale=0.65
+]
+\node[mystyle] {$\setminus$}
+	child {node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	   child {node[mystyle] {$B_1$}}
+    	   child {node[mystyle] {$\cup$}
+    	   	   child {node[mystyle] {$B_2$}}
+    	   	   child {node[mystyle] {$\setminus$}
+    	   	   	   child {node[mystyle] {$C$}}
+    	   	   	   child {node[mystyle] {$\cup$}
+    	   	   	   	   child {node[mystyle] {$D_1$}}
+    	   	   	   	   child {node[mystyle] {$D_2$}}
+    	   	   	   }
+    	   	   }
+    	   }
+        }
+	}
+    child {node[mystyle] {$P_2$}};
+\end{tikzpicture}
+```
+
+]
+
+.pull-right[
+```{r, warning=FALSE}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=poly_plein,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#3b528b",
+    alpha = 0.5,
+    size=1.5
+  )+
+  geom_polygon(
+    data=b1,
+    color = "black", 
+    fill = "#fde725",
+    alpha = 0.5,
+    size=1.5
+  )+
+  geom_polygon(
+    data=b2,
+    color = "black", 
+    fill = "#fde725",
+    alpha = 0.5,
+    size=1.5
+  )+
+  geom_polygon(
+    data=b3,
+    color = "black", 
+    fill = "#fde725",
+    alpha = 0.5,
+    size=1.5
+  )+
+  annotate("text", x=0.4, y=0.8, label=TeX("$P_1$"), size=12)+
+  annotate("text", x=0.1709, y=0.7677, label=TeX("$B_1$"), size=6)+
+  annotate("text", x=0.3009, y=0.4416, label=TeX("$B_3$"), size=12)+
+  annotate("text", x=0.7272, y=0.6228, label=TeX("$B_2$"), size=12)+
+  geom_point(data=poly_plein, size=5)+
+  theme_void()
+```
+]
+
+---
+class: middle, center
+
+```{tikz}
+\newcommand{\PolygonInit}{
+\begin{tikzpicture}[scale=4]
+\coordinate (A) at (0.1802,0.8712);
+\coordinate (B) at (0.2573,0.7795);
+\coordinate (C) at (0.0331,0.6281);
+\coordinate (D) at (0.2457,0.6223);
+\coordinate (E) at (0.2806,0.5088);
+\coordinate (F) at (0.3723,0.6136);
+\coordinate (G) at (0.3621,0.3996);
+\coordinate (H) at (0.4306,0.3297);
+\coordinate (I) at (0.5266,0.3195);
+\coordinate (J) at (0.5630,0.0677);
+\coordinate (K) at (0.8629,0.2103);
+\coordinate (L) at (0.9401,0.5189);
+\coordinate (M) at (0.7086,0.4942);
+\coordinate (N) at (0.5892,0.6529);
+\coordinate (O) at (0.6693,0.8014);
+\coordinate (P) at (0.3985,0.9382);
+
+\coordinate (Q) at (0.6,0.4);
+\coordinate (R) at (0.6,0.2);
+\coordinate (S) at (0.8,0.2);
+\coordinate (T) at (0.8,0.4);
+
+\fill[blue, fill opacity = 0.5] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+
+\fill[white] (Q)--(R)--(S)--(T)--cycle;
+\draw[thick] (Q)--(R)--(S)--(T)--cycle;
+
+\node at (0.4,0.8) {$P_1$};
+\node at (0.7,0.3) {$P_2$};
+
+\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
+	\draw[fill=black] (\pt) circle (0.25pt);
+}
+\useasboundingbox (0,0) rectangle (1,1);
+\end{tikzpicture}
+}
+
+\begin{tikzpicture}
+\node (PolygonInit){\PolygonInit};
+\end{tikzpicture}
+```
+
+---
+class: middle, center
+
+```{tikz}
+\newcommand{\PolygonInit}{
+\begin{tikzpicture}[scale=4]
+\coordinate (A) at (0.1802,0.8712);
+\coordinate (B) at (0.2573,0.7795);
+\coordinate (C) at (0.0331,0.6281);
+\coordinate (D) at (0.2457,0.6223);
+\coordinate (E) at (0.2806,0.5088);
+\coordinate (F) at (0.3723,0.6136);
+\coordinate (G) at (0.3621,0.3996);
+\coordinate (H) at (0.4306,0.3297);
+\coordinate (I) at (0.5266,0.3195);
+\coordinate (J) at (0.5630,0.0677);
+\coordinate (K) at (0.8629,0.2103);
+\coordinate (L) at (0.9401,0.5189);
+\coordinate (M) at (0.7086,0.4942);
+\coordinate (N) at (0.5892,0.6529);
+\coordinate (O) at (0.6693,0.8014);
+\coordinate (P) at (0.3985,0.9382);
+
+\coordinate (Q) at (0.6,0.4);
+\coordinate (R) at (0.6,0.2);
+\coordinate (S) at (0.8,0.2);
+\coordinate (T) at (0.8,0.4);
+
+\fill[blue, fill opacity = 0.5] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+
+\fill[white] (Q)--(R)--(S)--(T)--cycle;
+\draw[thick] (Q)--(R)--(S)--(T)--cycle;
+
+\node at (0.4,0.8) {$P_1$};
+\node at (0.7,0.3) {$P_2$};
+
+\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
+	\draw[fill=black] (\pt) circle (0.25pt);
+}
+\useasboundingbox (0,0) rectangle (1,1);
+\end{tikzpicture}
+}
+
+\newcommand{\ConvexHull}{
+\begin{tikzpicture}[scale=4]
+\coordinate (A) at (0.1802,0.8712);
+\coordinate (B) at (0.2573,0.7795);
+\coordinate (C) at (0.0331,0.6281);
+\coordinate (D) at (0.2457,0.6223);
+\coordinate (E) at (0.2806,0.5088);
+\coordinate (F) at (0.3723,0.6136);
+\coordinate (G) at (0.3621,0.3996);
+\coordinate (H) at (0.4306,0.3297);
+\coordinate (I) at (0.5266,0.3195);
+\coordinate (J) at (0.5630,0.0677);
+\coordinate (K) at (0.8629,0.2103);
+\coordinate (L) at (0.9401,0.5189);
+\coordinate (M) at (0.7086,0.4942);
+\coordinate (N) at (0.5892,0.6529);
+\coordinate (O) at (0.6693,0.8014);
+\coordinate (P) at (0.3985,0.9382);
+
+\coordinate (Q) at (0.6,0.4);
+\coordinate (R) at (0.6,0.2);
+\coordinate (S) at (0.8,0.2);
+\coordinate (T) at (0.8,0.4);
+
+\fill[green, fill opacity = 0.25] (A)--(C)--(J)--(K)--(L)--(O)--(P)--cycle;
+\draw[thick] (A)--(C)--(J)--(K)--(L)--(O)--(P)--cycle;
+
+\node at (0.5,0.5) {$A$};
+
+\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
+	\draw[fill=black] (\pt) circle (0.25pt);
+}
+\useasboundingbox (0,0) rectangle (1,1);
+\end{tikzpicture}
+}
+
+\newcommand{\Trous}{
+\begin{tikzpicture}[scale = 4]
+
+\coordinate (A) at (0.1802,0.8712);
+\coordinate (B) at (0.2573,0.7795);
+\coordinate (C) at (0.0331,0.6281);
+\coordinate (D) at (0.2457,0.6223);
+\coordinate (E) at (0.2806,0.5088);
+\coordinate (F) at (0.3723,0.6136);
+\coordinate (G) at (0.3621,0.3996);
+\coordinate (H) at (0.4306,0.3297);
+\coordinate (I) at (0.5266,0.3195);
+\coordinate (J) at (0.5630,0.0677);
+\coordinate (K) at (0.8629,0.2103);
+\coordinate (L) at (0.9401,0.5189);
+\coordinate (M) at (0.7086,0.4942);
+\coordinate (N) at (0.5892,0.6529);
+\coordinate (O) at (0.6693,0.8014);
+\coordinate (P) at (0.3985,0.9382);
+
+\coordinate (Q) at (0.6,0.4);
+\coordinate (R) at (0.6,0.2);
+\coordinate (S) at (0.8,0.2);
+\coordinate (T) at (0.8,0.4);
+
+\fill[blue, fill opacity = 0.25] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+
+\fill[red, fill opacity = 0.25] (A)--(B)--(C)--cycle;
+\draw[thick] (A)--(B)--(C)--cycle;
+
+\fill[red, fill opacity = 0.25] (C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--cycle;
+\draw[thick] (C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--cycle;
+
+\fill[red, fill opacity = 0.25] (L)--(M)--(N)--(O)--cycle;
+\draw[thick] (L)--(M)--(N)--(O)--cycle;
+
+\fill[white] (Q)--(R)--(S)--(T)--cycle;
+\draw[thick] (Q)--(R)--(S)--(T)--cycle;
+
+\node at (0.1709,0.7677) {\tiny $B_1$};
+\node at (0.3009,0.4416) {\tiny $B_2$};
+\node at (0.7272,0.6228) {\tiny $B_3$};
+\node at (0.7,0.3) {$P_2$};
+
+\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
+	\draw[fill=black] (\pt) circle (0.25pt);
+}
+\useasboundingbox (0,0) rectangle (1,1);
+\end{tikzpicture}
+}
+
+\begin{tikzpicture}
+
+\node (PolygonInit){\PolygonInit};
+
+\node[right of=PolygonInit, xshift = 1.5cm] (Egalite){$=$};
+
+\node[right of=Egalite, xshift = 1.5cm] (ConvexHull) {\ConvexHull};
+
+\node[right of=ConvexHull, xshift = 1.5cm] (Soustraction){$-$};
+
+\node[right of=Soustraction, xshift = 1.5cm] (Trous) {\Trous};
+
+\end{tikzpicture}
+```
+
 
 

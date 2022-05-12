@@ -41,11 +41,13 @@
 	\draw[fill=black] (\pt) circle (0.25pt);
 }
 \useasboundingbox (0,0) rectangle (1,1);
+\draw (0,0) rectangle (1,1);
 \end{tikzpicture}
 }
 
 \newcommand{\ConvexHull}{
 \begin{tikzpicture}[scale=4]
+\useasboundingbox (0,0) rectangle (1,1);
 \coordinate (A) at (0.1802,0.8712);
 \coordinate (B) at (0.2573,0.7795);
 \coordinate (C) at (0.0331,0.6281);
@@ -76,12 +78,14 @@
 \foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
 	\draw[fill=black] (\pt) circle (0.25pt);
 }
-\useasboundingbox (0,0) rectangle (1,1);
+
+\draw (0,0) rectangle (1,1);
 \end{tikzpicture}
 }
 
 \newcommand{\Trous}{
 \begin{tikzpicture}[scale = 4]
+\useasboundingbox (0,0) rectangle (1,1);
 
 \coordinate (A) at (0.1802,0.8712);
 \coordinate (B) at (0.2573,0.7795);
@@ -105,8 +109,8 @@
 \coordinate (S) at (0.8,0.2);
 \coordinate (T) at (0.8,0.4);
 
-\fill[blue, fill opacity = 0.5] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+% \fill[blue, fill opacity = 0.5] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
+% \draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
 
 \fill[red, fill opacity = 0.25] (A)--(B)--(C)--cycle;
 \draw[thick] (A)--(B)--(C)--cycle;
@@ -117,18 +121,18 @@
 \fill[red, fill opacity = 0.25] (L)--(M)--(N)--(O)--cycle;
 \draw[thick] (L)--(M)--(N)--(O)--cycle;
 
-\fill[white] (Q)--(R)--(S)--(T)--cycle;
-\draw[thick] (Q)--(R)--(S)--(T)--cycle;
+% \fill[white] (Q)--(R)--(S)--(T)--cycle;
+% \draw[thick] (Q)--(R)--(S)--(T)--cycle;
 
 \node at (0.1709,0.7677) {\tiny $B_1$};
 \node at (0.3009,0.4416) {\tiny $B_2$};
 \node at (0.7272,0.6228) {\tiny $B_3$};
-\node at (0.7,0.3) {$P_2$};
+% \node at (0.7,0.3) {$P_2$};
 
 \foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
 	\draw[fill=black] (\pt) circle (0.25pt);
 }
-\useasboundingbox (0,0) rectangle (1,1);
+\draw (0,0) rectangle (1,1);
 \end{tikzpicture}
 }
 
@@ -147,9 +151,38 @@
 \end{tikzpicture}
 
 
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 1cm, fill = blue!20}
+]
+\node[mystyle] {$\setminus$}
+	child {node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    	child {node[mystyle] {$\cup$}
+    		child {node[mystyle] {$B_2$}}
+    		child {node[mystyle] {$\setminus$}
+    			child {node[mystyle] {$C$}}
+    			child {node[mystyle] {$\cup$}
+    				child {node[mystyle] {$D_1$}}
+    				child {node[mystyle] {$D_2$}}
+    			}
+    		}
+    	}
+    }
+	}
+    child {node[mystyle] {$P_2$}};
+\end{tikzpicture}
 
 
-
-
+\begin{tikzpicture}[
+oper/.style={draw, circle, minimum size = 1cm},
+drawing/.style={rectangle}
+]
+\node[oper] {$\setminus$}
+child {node[drawing,yshift=-2cm,xshift=-1.5cm] {\ConvexHull}}
+child {node[drawing,yshift=-2cm,xshift=1.5cm] {\Trous}}
+;
+\end{tikzpicture}
 
 \end{document}

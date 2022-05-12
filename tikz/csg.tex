@@ -1,7 +1,7 @@
 \documentclass{standalone}
 
 \usepackage{tikz}
-\usetikzlibrary{decorations.markings}
+\usetikzlibrary{calc,decorations.markings}
 
 \begin{document}
 
@@ -12,40 +12,60 @@
       mark=at position 0.5 with {\arrow{>}}}
   ]
 
-\coordinate (A) at (0.0596,0.7658);
-\coordinate (B) at (0.0050,0.3504);
-\coordinate (C) at (0.7742,0.2425);
-\coordinate (D) at (0.7384,0.8882);
-\coordinate (E) at (0.5832,0.6812);
-\coordinate (F) at (0.7530,0.2649);
-\coordinate (G) at (0.1272,0.2193);
-\coordinate (H) at (0.6590,0.3571);
-\coordinate (I) at (0.6575,0.9572);
-\coordinate (J) at (0.9776,0.4108);
-\coordinate (K) at (0.7784,0.6394);
-\coordinate (L) at (0.7474,0.9293);
-\coordinate (M) at (0.8673,0.3549);
-\coordinate (N) at (0.3368,0.0580);
-\coordinate (O) at (0.1714,0.3147);
-\coordinate (P) at (0.1176,0.5265);
-\coordinate (Q) at (0.7435,0.1821);
-\coordinate (R) at (0.1434,0.0814);
-\coordinate (S) at (0.4455,0.0079);
-\coordinate (T) at (0.8742,0.8670);
+\coordinate (A) at (0,0.4);
+\coordinate (B) at (1,0.6);
+\fill[blue, fill opacity=0.5] (A)--(B)-|(1,1)--(0,1)--cycle;
+\fill[red, fill opacity=0.5] (A)--(B)-|(1,0)--(0,0)--cycle;
+\draw[green, very thick, postaction={decorate}] (A)--(B);
+\draw[very thick, black] (0,0) rectangle (1,1);
+\node at (0.5,0.75) {POSITIF};
+\node at (0.5,0.25) {NÉGATIF};
 
-\draw[very thick] (B)--(R)--(S)--(Q)--(J)--(T)--(L)--(I)--(A)--cycle;
-\fill[blue, fill opacity = 0.5] (B)--(R)--(S)--(Q)--(J)--(T)--(L)--(I)--(A)--cycle;
-\draw[black, very thick, postaction={decorate}] (B)--(R);
-\draw[black, very thick, postaction={decorate}] (R)--(S);
-\draw[black, very thick, postaction={decorate}] (S)--(Q);
-\draw[black, very thick, postaction={decorate}] (Q)--(J);
-\draw[black, very thick, postaction={decorate}] (J)--(T);
-\draw[black, very thick, postaction={decorate}] (T)--(L);
-\draw[black, very thick, postaction={decorate}] (L)--(I);
-\draw[black, very thick, postaction={decorate}] (I)--(A);
-\draw[black, very thick, postaction={decorate}] (A)--(B);
+\node[rotate=11.3099, below] at ($(A)!0.5!(B)$) {$ax+by+c=0$};
 
 \end{tikzpicture}
+
+% \begin{tikzpicture}[
+%   scale = 4,
+%   decoration={
+%       markings,
+%       mark=at position 0.5 with {\arrow{>}}}
+%   ]
+
+% \coordinate (A) at (0.0596,0.7658);
+% \coordinate (B) at (0.0050,0.3504);
+% \coordinate (C) at (0.7742,0.2425);
+% \coordinate (D) at (0.7384,0.8882);
+% \coordinate (E) at (0.5832,0.6812);
+% \coordinate (F) at (0.7530,0.2649);
+% \coordinate (G) at (0.1272,0.2193);
+% \coordinate (H) at (0.6590,0.3571);
+% \coordinate (I) at (0.6575,0.9572);
+% \coordinate (J) at (0.9776,0.4108);
+% \coordinate (K) at (0.7784,0.6394);
+% \coordinate (L) at (0.7474,0.9293);
+% \coordinate (M) at (0.8673,0.3549);
+% \coordinate (N) at (0.3368,0.0580);
+% \coordinate (O) at (0.1714,0.3147);
+% \coordinate (P) at (0.1176,0.5265);
+% \coordinate (Q) at (0.7435,0.1821);
+% \coordinate (R) at (0.1434,0.0814);
+% \coordinate (S) at (0.4455,0.0079);
+% \coordinate (T) at (0.8742,0.8670);
+
+% \draw[very thick] (B)--(R)--(S)--(Q)--(J)--(T)--(L)--(I)--(A)--cycle;
+% \fill[blue, fill opacity = 0.5] (B)--(R)--(S)--(Q)--(J)--(T)--(L)--(I)--(A)--cycle;
+% \draw[black, very thick, postaction={decorate}] (B)--(R);
+% \draw[black, very thick, postaction={decorate}] (R)--(S);
+% \draw[black, very thick, postaction={decorate}] (S)--(Q);
+% \draw[black, very thick, postaction={decorate}] (Q)--(J);
+% \draw[black, very thick, postaction={decorate}] (J)--(T);
+% \draw[black, very thick, postaction={decorate}] (T)--(L);
+% \draw[black, very thick, postaction={decorate}] (L)--(I);
+% \draw[black, very thick, postaction={decorate}] (I)--(A);
+% \draw[black, very thick, postaction={decorate}] (A)--(B);
+
+% \end{tikzpicture}
 
 % \begin{tikzpicture}[
 %   scale = 4,

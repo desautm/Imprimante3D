@@ -7,6 +7,10 @@
     <script src="libs/header-attrs/header-attrs.js"></script>
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <link href="libs/animate.css/animate.xaringan.css" rel="stylesheet" />
+    <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -29,6 +33,9 @@ class: center, middle, inverse, title-slide
 ]
 
 ---
+
+
+
 
 
 
@@ -220,39 +227,39 @@ class: inverse, center, middle
 
 --
 
-![](https://media.giphy.com/media/ccAuVsSPSLrDq/giphy.gif)
+&lt;img src="https://media.giphy.com/media/ccAuVsSPSLrDq/giphy.gif" width="50%" /&gt;
 
 ---
 class: middle, center
 
 ## En théorie nous obtenons ceci
 
-![](index_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center
 
 ## En pratique nous obtenons plutôt cela
 
-![](index_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 
 ---
 
 ## Comment passer de l'un à l'autre?
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
-![](index_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
 ]
 
 ---
 
 ## Trouver le plus proche voisin?
 
-&lt;img src="index_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
 
 --
 
@@ -269,9 +276,9 @@ class:inverse, middle, center
 
 ## Les arbres quaternaires
 
-- Un quadtree ou arbre quaternaire (arbre Q) est une structure de données de type arbre dans laquelle chaque noeud a quatre fils. 
+- Un quadtree ou arbre quaternaire est une structure de données de type arbre dans laquelle chaque noeud a quatre fils. 
 
-- Les quadtrees sont le plus souvent utilisés pour partitionner un espace bidimensionnel en le subdivisant récursivement en quatre noeuds.
+- Les arbres quaternaires sont le plus souvent utilisés pour partitionner un espace bidimensionnel en le subdivisant récursivement en quatre noeuds.
 
 --
 
@@ -284,11 +291,6 @@ class: middle, center
 
 ---
 class:middle, center
-
-![](index_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
-
----
-class: middle, center
 
 ![](index_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
 
@@ -333,6 +335,11 @@ class: middle, center
 ![](index_files/figure-html/unnamed-chunk-20-1.png)&lt;!-- --&gt;
 
 ---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+
+---
 class: inverse, center, middle
 
 # Simplifier des droites
@@ -352,16 +359,13 @@ d &amp;= \frac{\left|\overrightarrow{QP}\cdot \vec n \right|}{\left\lVert\vec n\
 ]
 
 .pull-right[
-![](index_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
 ]
 
 --
 
 - De plus, le signe du produit scalaire indique si le point est **au-dessus** ou **en-dessous** de la droite.
 
----
-class:middle, center
-![](index_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
 ---
 class:middle, center
 ![](index_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
@@ -386,6 +390,9 @@ class:middle, center
 ---
 class:middle, center
 ![](index_files/figure-html/unnamed-chunk-30-1.png)&lt;!-- --&gt;
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
 
 ---
 class:middle, center
@@ -426,40 +433,50 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
 
 Nous pouvons voir `\(H\)` comme une fonction booléenne sur le plan: `\(H(p)=\textbf{VRAI}\)` si et seulement si `\(p\in H\)`.
+
+---
+class: center, middle
+
+![](index_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+
+---
+class:middle, center
+
+&lt;iframe src="https://www.geogebra.org/classic/mfb2dpxf?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"&gt;&lt;/iframe&gt;
 
 ---
 
 # Le complément
 
-![](index_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'union
 
-![](index_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'intersection
 
-![](index_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
 
 ---
 
 # La différence
 
-![](index_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'expression d'une région convexe
 
 .center[
-![](index_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -473,17 +490,9 @@ class: inverse, center, middle
 
 - L'enveloppe convexe d'un objet ou d'un regroupement d'objets géométriques est l'ensemble convexe le plus petit parmi ceux qui le contiennent.
 
-- Dans un plan, l'enveloppe convexe peut être comparée à la région limitée par un élastique qui englobe tous les points qu'on relâche jusqu'à ce qu'il se contracte au maximum. L'idée serait la même dans l'espace avec un ballon qui se dégonflerait jusqu'à être en contact avec tous les points qui sont à la surface de l'enveloppe convexe.
+- Dans un plan, l'enveloppe convexe peut être comparée à la région limitée par un élastique qui englobe tous les points qu'on relâche jusqu'à ce qu'il se contracte au maximum. 
 
----
-class: center, middle
-
-![](index_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-
-![](index_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
+- L'idée serait la même dans l'espace avec un ballon qui se dégonflerait jusqu'à être en contact avec tous les points qui sont à la surface de l'enveloppe convexe.
 
 ---
 class: center, middle
@@ -491,17 +500,12 @@ class: center, middle
 ![](index_files/figure-html/unnamed-chunk-39-1.png)&lt;!-- --&gt;
 
 ---
-class: middle, center, inverse
-
-# La représentation d'un polygone sous forme d'arbre
-
----
-class: middle, center
+class: center, middle
 
 ![](index_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
 
 ---
-class: middle, center
+class: center, middle
 
 ![](index_files/figure-html/unnamed-chunk-41-1.png)&lt;!-- --&gt;
 
@@ -558,6 +562,57 @@ class: center, middle
 class: middle, center
 
 &lt;img src="quickhull.gif" width="75%" /&gt;
+
+---
+class: middle, center, inverse
+
+# La représentation d'un polygone sous forme d'arbre
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-54-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-55-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-56-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-57-1.png)&lt;!-- --&gt;
+
+$$
+P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
+$$
+---
+class: middle, center
+
+.pull-left[
+![](index_files/figure-html/unnamed-chunk-58-1.png)&lt;!-- --&gt;
+
+]
+
+.pull-right[
+![](index_files/figure-html/unnamed-chunk-59-1.png)&lt;!-- --&gt;
+]
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-60-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-61-1.png)&lt;!-- --&gt;
+
 
 
     </textarea>

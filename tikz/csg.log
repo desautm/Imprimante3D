@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.4.12)  13 APR 2022 09:52
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.5.6)  6 MAY 2022 13:40
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -8,7 +8,7 @@ entations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/csg.tex"
 (C:/Users/mdesautels/OneDrive - CEGEP SAINT-JEAN-SUR-RICHELIEU/Documents/Presen
 tations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/csg.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-02-24>
+L3 programming layer <2022-04-29>
 (C:\Miktex\texmfs\install\tex/latex/standalone\standalone.cls
 Document Class: standalone 2018/03/26 v1.3a Class to compile TeX sub-files stan
 dalone
@@ -350,6 +350,10 @@ arytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )))
 (C:\Miktex\texmfs\install\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibr
+arycalc.code.tex
+File: tikzlibrarycalc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)
+(C:\Miktex\texmfs\install\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibr
 arydecorations.markings.code.tex
 (C:\Miktex\texmfs\install\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibr
 arydecorations.code.tex
@@ -368,7 +372,7 @@ arydecorations.code.tex
 (C:\Miktex\texmfs\install\tex/generic/pgf/libraries/decorations\pgflibrarydecor
 ations.markings.code.tex))
 (C:\Miktex\texmfs\install\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-02-07 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count284
 \l__pdf_internal_box=\box63
 ) (csg.aux)
@@ -409,21 +413,28 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 
 (C:\Miktex\texmfs\install\tex/latex/00miktex\epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
-)) [1
+))
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 24.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 24.
+ [1
 
-] (csg.aux) ) 
+{C:/Miktex/texmfs/data/fonts/map/pdftex/pdftex.map}] (csg.aux) ) 
 Here is how much of TeX's memory you used:
- 12984 strings out of 478582
- 275674 string characters out of 2853766
- 527637 words of memory out of 3000000
- 30963 multiletter control sequences out of 15000+600000
+ 12923 strings out of 478619
+ 275709 string characters out of 2852668
+ 526945 words of memory out of 3000000
+ 30861 multiletter control sequences out of 15000+600000
  469259 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 100i,5n,104p,548b,967s stack positions out of 10000i,1000n,20000p,200000b,80000s
-
-Output written on csg.pdf (1 page, 1690 bytes).
+ 100i,7n,104p,553b,964s stack positions out of 10000i,1000n,20000p,200000b,80000s
+<C:/Miktex/texm
+fs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Miktex/texmfs/install/
+fonts/type1/public/amsfonts/cm/cmr10.pfb>
+Output written on csg.pdf (1 page, 23914 bytes).
 PDF statistics:
- 9 PDF objects out of 1000 (max. 8388607)
+ 19 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

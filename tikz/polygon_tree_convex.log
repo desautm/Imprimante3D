@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.4.21)  24 APR 2022 09:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.5.11)  12 MAY 2022 13:07
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -8,7 +8,7 @@ entations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/polygon_tree_convex.tex"
 (C:/Users/mdesautels/OneDrive - CEGEP SAINT-JEAN-SUR-RICHELIEU/Documents/Presen
 tations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/polygon_tree_convex.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-04-10>
+L3 programming layer <2022-04-29>
 (C:\Miktex\texmfs\install\tex/latex/standalone\standalone.cls
 Document Class: standalone 2018/03/26 v1.3a Class to compile TeX sub-files stan
 dalone
@@ -350,7 +350,7 @@ File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \sa@box=\box61
 )
 (C:\Miktex\texmfs\install\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-04-14 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count283
 \l__pdf_internal_box=\box62
 )
@@ -403,10 +403,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 ]
 (polygon_tree_convex.aux) ) 
 Here is how much of TeX's memory you used:
- 12518 strings out of 478552
- 260301 string characters out of 2851360
- 547138 words of memory out of 3000000
- 30539 multiletter control sequences out of 15000+600000
+ 12517 strings out of 478619
+ 260244 string characters out of 2852667
+ 546808 words of memory out of 3000000
+ 30471 multiletter control sequences out of 15000+600000
  469259 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  115i,7n,118p,531b,550s stack positions out of 10000i,1000n,20000p,200000b,80000s

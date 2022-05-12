@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.4.19)  21 APR 2022 09:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.5.11)  12 MAY 2022 13:50
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -8,7 +8,7 @@ entations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/essai_tree.tex"
 (C:/Users/mdesautels/OneDrive - CEGEP SAINT-JEAN-SUR-RICHELIEU/Documents/Presen
 tations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/essai_tree.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-04-10>
+L3 programming layer <2022-04-29>
 (C:\Miktex\texmfs\install\tex/latex/standalone\standalone.cls
 Document Class: standalone 2018/03/26 v1.3a Class to compile TeX sub-files stan
 dalone
@@ -354,7 +354,7 @@ arytrees.code.tex
 File: tikzlibrarytrees.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
 (C:\Miktex\texmfs\install\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-04-14 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count283
 \l__pdf_internal_box=\box62
 )
@@ -402,22 +402,29 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 12.
  [1
 
-{C:/Miktex/texmfs/data/fonts/map/pdftex/pdftex.map}] [2] (essai_tree.aux) ) 
+{C:/Miktex/texmfs/data/fonts/map/pdftex/pdftex.map}]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 33.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 33.
+ [2] [3] (essai_tree.aux) ) 
 Here is how much of TeX's memory you used:
- 12578 strings out of 478552
- 264365 string characters out of 2851360
- 528820 words of memory out of 3000000
- 30596 multiletter control sequences out of 15000+600000
- 469259 words of font info for 28 fonts, out of 8000000 for 9000
+ 12637 strings out of 478619
+ 265456 string characters out of 2852667
+ 528489 words of memory out of 3000000
+ 30582 multiletter control sequences out of 15000+600000
+ 471082 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 115i,19n,118p,522b,1798s stack positions out of 10000i,1000n,20000p,200000b,80000s
-<C:/
-Miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Miktex/texm
-fs/install/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Miktex/texmfs/install/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on essai_tree.pdf (2 pages, 31640 bytes).
+ 115i,19n,118p,522b,1814s stack positions out of 10000i,1000n,20000p,200000b,80000s
+<C:/Miktex/texmfs/install/fonts/type1/public/amsfont
+s/cm/cmmi10.pfb><C:/Miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi8.
+pfb><C:/Miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Mikte
+x/texmfs/install/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Miktex/texmfs/inst
+all/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Miktex/texmfs/install/fonts/t
+ype1/public/amsfonts/cm/cmsy8.pfb>
+Output written on essai_tree.pdf (3 pages, 59890 bytes).
 PDF statistics:
- 27 PDF objects out of 1000 (max. 8388607)
+ 45 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.4.21)  21 APR 2022 18:16
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.5.11)  11 MAY 2022 13:08
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -9,7 +9,7 @@ x"
 (C:/Users/mdesautels/OneDrive - CEGEP SAINT-JEAN-SUR-RICHELIEU/Documents/Presen
 tations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/tree_representation_polygon.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-04-10>
+L3 programming layer <2022-04-29>
 (C:\Miktex\texmfs\install\tex/latex/standalone\standalone.cls
 Document Class: standalone 2018/03/26 v1.3a Class to compile TeX sub-files stan
 dalone
@@ -369,7 +369,7 @@ arydecorations.code.tex
 (C:\Miktex\texmfs\install\tex/generic/pgf/libraries/decorations\pgflibrarydecor
 ations.markings.code.tex))
 (C:\Miktex\texmfs\install\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-04-14 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count284
 \l__pdf_internal_box=\box63
 )
@@ -421,10 +421,10 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 {C:/Miktex/texmfs/data/fonts/map/pdftex/pdftex.map}] (tree_representation_polyg
 on.aux) ) 
 Here is how much of TeX's memory you used:
- 12939 strings out of 478552
- 274542 string characters out of 2851360
- 591700 words of memory out of 3000000
- 30947 multiletter control sequences out of 15000+600000
+ 12938 strings out of 478619
+ 274485 string characters out of 2852667
+ 591370 words of memory out of 3000000
+ 30879 multiletter control sequences out of 15000+600000
  469259 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  100i,7n,104p,572b,545s stack positions out of 10000i,1000n,20000p,200000b,80000s
