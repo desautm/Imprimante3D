@@ -1,3 +1,4 @@
+flipbookr
 tidyverse
 ggplot2
 tibble
@@ -7,6 +8,5 @@ purrr
 dplyr
 stringr
 forcats
-flipbookr
 latex2exp
 DiagrammeR
