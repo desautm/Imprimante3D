@@ -25,6 +25,7 @@ library(tidyverse)
 library(latex2exp)
 library(ggpattern)
 library(ggpubr)
+library(sp)
 
 poly <- tribble(
   ~x, ~y, ~holes, ~id,
