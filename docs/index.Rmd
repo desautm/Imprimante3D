@@ -23,6 +23,8 @@ knitr::opts_chunk$set(
 library(flipbookr)
 library(tidyverse)
 library(latex2exp)
+library(ggpattern)
+library(ggpubr)
 
 poly <- tribble(
   ~x, ~y, ~holes, ~id,
@@ -82,6 +84,12 @@ c_poly_plein <- poly_plein %>%
 b1 <- poly[c(1:3),]
 b3 <- poly[c(3:10),]
 b2 <- poly[c(12,13,14,15),]
+
+c1 <- poly[c(4,5,6),]
+c2 <- poly[c(6,7,8,9),]
+
+c_b3 <- b3 %>% 
+  slice(chull(x,y))
 ```
 
 ```{r xaringanExtra}
@@ -3145,36 +3153,6 @@ $$
 class: middle
 
 .pull-left[
-```{tikz}
-\usetikzlibrary{trees}
-\begin{tikzpicture}[
-mystyle/.style={draw, circle, minimum size = 0.75cm, fill = blue!20, font = \footnotesize},
-scale=0.65
-]
-\node[mystyle] {$\setminus$}
-	child {node[mystyle] {$\setminus$}
-		child {node[mystyle] {$A$}}
-		child {node[mystyle] {$\cup$}
-    	   child {node[mystyle] {$B_1$}}
-    	   child {node[mystyle] {$\cup$}
-    	   	   child {node[mystyle] {$B_2$}}
-    	   	   child {node[mystyle] {$\setminus$}
-    	   	   	   child {node[mystyle] {$C$}}
-    	   	   	   child {node[mystyle] {$\cup$}
-    	   	   	   	   child {node[mystyle] {$D_1$}}
-    	   	   	   	   child {node[mystyle] {$D_2$}}
-    	   	   	   }
-    	   	   }
-    	   }
-        }
-	}
-    child {node[mystyle] {$P_2$}};
-\end{tikzpicture}
-```
-
-]
-
-.pull-right[
 ```{r, warning=FALSE}
 ggplot() +
   aes(x=x,y=y)+
@@ -3186,35 +3164,202 @@ ggplot() +
     alpha = 0.5,
     size=1.5
   )+
+  annotate("text", x=0.4, y=0.8, label=TeX("$P_1$"), size=12)+
+  geom_point(data=poly_plein, size=5)+
+  theme_void()
+```
+
+]
+
+.pull-right[
+```{tikz, out.width="90%"}
+\usetikzlibrary{trees}
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.8cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm
+]
+\node[mystyle] {$\setminus$}
+    child {node[mystyle] {$A$}}
+        child {node[mystyle] {$\cup$}
+        child {node[mystyle] {$B_1$}}
+            child {node[mystyle] {$\cup$}
+            child {node[mystyle] {$B_2$}}
+                child {node[mystyle] {$\setminus$}
+                child {node[mystyle] {$C$}}
+                    child {node[mystyle] {$\cup$}
+                    child {node[mystyle] {$D_1$}}
+                    child {node[mystyle] {$D_2$}}
+                }
+            }
+        }
+    };
+\end{tikzpicture}
+```
+
+]
+
+$$
+P_1 = A \setminus \left( B_1 \cup B_2 \cup (C \setminus (D_1 \cup D_2)) \right)
+$$
+
+---
+class: middle
+
+.pull-left[
+```{r, warning=FALSE}
+ggplot() +
+  aes(x=x,y=y)+
   geom_polygon(
-    data=b1,
+    data=poly,
+    aes(subgroup=holes),
     color = "black", 
-    fill = "#fde725",
-    alpha = 0.5,
-    size=1.5
-  )+
-  geom_polygon(
-    data=b2,
-    color = "black", 
-    fill = "#fde725",
-    alpha = 0.5,
-    size=1.5
-  )+
-  geom_polygon(
-    data=b3,
-    color = "black", 
-    fill = "#fde725",
+    fill = "#3b528b",
     alpha = 0.5,
     size=1.5
   )+
   annotate("text", x=0.4, y=0.8, label=TeX("$P_1$"), size=12)+
-  annotate("text", x=0.1709, y=0.7677, label=TeX("$B_1$"), size=6)+
-  annotate("text", x=0.3009, y=0.4416, label=TeX("$B_3$"), size=12)+
-  annotate("text", x=0.7272, y=0.6228, label=TeX("$B_2$"), size=12)+
-  geom_point(data=poly_plein, size=5)+
+  annotate("text", x=0.7, y=0.3, label=TeX("$P_2$"), size=12)+
+  geom_point(data=poly, size=5)+
   theme_void()
 ```
+
 ]
+
+.pull-right[
+```{tikz, out.width="80%"}
+\usetikzlibrary{trees}
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+	child {node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    	child {node[mystyle] {$\cup$}
+    		child {node[mystyle] {$B_2$}}
+    		child {node[mystyle] {$\setminus$}
+    			child {node[mystyle] {$C$}}
+    			child {node[mystyle] {$\cup$}
+    				child {node[mystyle] {$D_1$}}
+    				child {node[mystyle] {$D_2$}}
+    			}
+    		}
+    	}
+    }
+	}
+    child {node[mystyle] {$P_2$}};
+\end{tikzpicture}
+```
+
+]
+
+$$
+P_1 = (A \setminus \left( B_1 \cup B_2 \cup (C \setminus (D_1 \cup D_2)) \right) \setminus P_2 )
+$$
+
+---
+class: inverse, center, middle
+
+# La grille booléenne
+
+---
+class: center, middle
+
+```{r}
+delta <- 0.02
+xmin <- min(poly$x)-2*delta
+xmax <- max(poly$x)+2*delta
+ymin <- min(poly$y)-2*delta
+ymax <- max(poly$y)+2*delta
+mygrid <- as_tibble(expand.grid(x = seq(xmin,xmax,delta), y = seq(ymin,ymax,delta)))
+mygrid <- mygrid %>% 
+        mutate(
+                xbl = x - delta/2,
+                ybl = y - delta/2,
+                xbr = x + delta/2,
+                ybr = y - delta/2,
+                xtl = x - delta/2,
+                ytl = y + delta/2,
+                xtr = x + delta/2,
+                ytr = y + delta/2,
+        )
+
+mygrid <- mygrid %>% 
+        mutate(
+                inblp1 = point.in.polygon(mygrid$xbl,mygrid$ybl,poly_plein$x,poly_plein$y),
+                inbrp1 = point.in.polygon(mygrid$xbr,mygrid$ybr,poly_plein$x,poly_plein$y),
+                intlp1 = point.in.polygon(mygrid$xtl,mygrid$ytl,poly_plein$x,poly_plein$y),
+                intrp1 = point.in.polygon(mygrid$xtr,mygrid$ytr,poly_plein$x,poly_plein$y),
+                inblp2 = point.in.polygon(mygrid$xbl,mygrid$ybl,poly_trou$x,poly_trou$y),
+                inbrp2 = point.in.polygon(mygrid$xbr,mygrid$ybr,poly_trou$x,poly_trou$y),
+                intlp2 = point.in.polygon(mygrid$xtl,mygrid$ytl,poly_trou$x,poly_trou$y),
+                intrp2 = point.in.polygon(mygrid$xtr,mygrid$ytr,poly_trou$x,poly_trou$y),
+                in_out = (inblp1 & !inblp2) & (inbrp1 & !inbrp2) & (intlp1 & !intlp2) & (intrp1 & !intrp2)
+        )
+
+ggplot() +
+  aes(x=x,y=y)+
+  geom_tile(aes(fill=in_out),data = mygrid, colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "white"))+
+  geom_polygon(
+    data=poly,
+    fill = "#3b528b",
+    aes(subgroup=holes),
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly, size=3)+
+  theme_void()+
+  theme(legend.position="none")
+```
+
+---
+class: center, middle
+
+```{r}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_tile(aes(fill=in_out),data = mygrid, colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "#5ec962"))+
+  geom_polygon(
+    data=poly,
+    fill = "#3b528b",
+    aes(subgroup=holes),
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly, size=3)+
+  theme_void()+
+  theme(legend.position="none")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ---
 class: middle, center

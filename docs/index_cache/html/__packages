@@ -9,4 +9,7 @@ dplyr
 stringr
 forcats
 latex2exp
+ggpattern
+ggpubr
+sp
 DiagrammeR

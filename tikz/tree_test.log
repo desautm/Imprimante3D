@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.5.11)  11 MAY 2022 13:29
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.5.16)  17 MAY 2022 12:50
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -8,7 +8,7 @@ entations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/tree_test.tex"
 (C:/Users/mdesautels/OneDrive - CEGEP SAINT-JEAN-SUR-RICHELIEU/Documents/Presen
 tations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/tree_test.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-04-29>
+L3 programming layer <2022-05-04>
 (C:\Miktex\texmfs\install\tex/latex/standalone\standalone.cls
 Document Class: standalone 2018/03/26 v1.3a Class to compile TeX sub-files stan
 dalone
@@ -349,7 +349,13 @@ File: pgfmodulematrix.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 arytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )))
-(C:\Miktex\texmfs\install\tex/latex/l3backend\l3backend-pdftex.def
+(C:\Miktex\texmfs\install\tex/generic/pgf/frontendlayer/tikz/libraries\tikzlibr
+arypatterns.code.tex
+File: tikzlibrarypatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+
+(C:\Miktex\texmfs\install\tex/generic/pgf/libraries\pgflibrarypatterns.code.tex
+File: pgflibrarypatterns.code.tex 2021/05/15 v3.1.9a (3.1.9a)
+)) (C:\Miktex\texmfs\install\tex/latex/l3backend\l3backend-pdftex.def
 File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count283
 \l__pdf_internal_box=\box62
@@ -357,20 +363,20 @@ File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
 (tree_test.aux)
 \openout1 = `tree_test.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 5.
-LaTeX Font Info:    ... okay on input line 5.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 6.
+LaTeX Font Info:    ... okay on input line 6.
  (C:\Miktex\texmfs\install\tex/context/base/mkii\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count284
@@ -393,29 +399,26 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 141.
+(Font)              <7> on input line 51.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 141.
+(Font)              <5> on input line 51.
  [1
 
 {C:/Miktex/texmfs/data/fonts/map/pdftex/pdftex.map}] (tree_test.aux) ) 
 Here is how much of TeX's memory you used:
- 12685 strings out of 478619
- 264365 string characters out of 2852667
- 596729 words of memory out of 3000000
- 30639 multiletter control sequences out of 15000+600000
+ 12615 strings out of 478614
+ 263578 string characters out of 2852544
+ 528437 words of memory out of 3000000
+ 30567 multiletter control sequences out of 15000+600000
  469259 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 100i,19n,104p,517b,1809s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 100i,9n,104p,542b,757s stack positions out of 10000i,1000n,20000p,200000b,80000s
 <C:/Mikte
 x/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Miktex/texmfs/in
-stall/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Miktex/texmfs/install/fonts/
-type1/public/amsfonts/cm/cmr10.pfb><C:/Miktex/texmfs/install/fonts/type1/public
-/amsfonts/cm/cmr5.pfb><C:/Miktex/texmfs/install/fonts/type1/public/amsfonts/cm/
-cmr7.pfb><C:/Miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on tree_test.pdf (1 page, 58625 bytes).
+stall/fonts/type1/public/amsfonts/cm/cmr7.pfb>
+Output written on tree_test.pdf (1 page, 20369 bytes).
 PDF statistics:
- 39 PDF objects out of 1000 (max. 8388607)
+ 20 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 13 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 17 words of extra memory for PDF output out of 10000 (max. 10000000)
 
