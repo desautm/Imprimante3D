@@ -402,6 +402,40 @@ class:middle, center
 ---
 class: inverse, center, middle
 
+# La coupe de notre solide
+
+---
+
+## La largeur du filament
+
+.pull-left[
+![](index_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+- On pourrait croire qu'il suffit de "dire" à la buse d'extrusion de tracer ces courbes polygonales et de les remplir;
+
+- Par contre, la largeur du filament causerait le plastique à déborder de la région à remplir;
+
+- Nous ne construirions pas la coupe de notre solide convenablement;
+
+- Il faut plutôt déplacer le chemin de la buse dans la région par la moitié de la largeur du filament.
+
+]
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+
+---
+class: inverse, center, middle
+
 # Géométrie de construction de solides (ou GCS)
 
 ---
@@ -433,14 +467,14 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
 
 Nous pouvons voir `\(H\)` comme une fonction booléenne sur le plan: `\(H(p)=\textbf{VRAI}\)` si et seulement si `\(p\in H\)`.
 
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
 
 ---
 class:middle, center
@@ -451,32 +485,32 @@ class:middle, center
 
 # Le complément
 
-![](index_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'union
 
-![](index_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'intersection
 
-![](index_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-39-1.png)&lt;!-- --&gt;
 
 ---
 
 # La différence
 
-![](index_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'expression d'une région convexe
 
 .center[
-![](index_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-41-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -497,34 +531,22 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-39-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-43-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-41-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-44-1.png)&lt;!-- --&gt;
 
 ---
 class:middle, center, inverse
 
 # L'algorithme QuickHull
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-43-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-44-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
@@ -559,6 +581,18 @@ class: center, middle
 ![](index_files/figure-html/unnamed-chunk-52-1.png)&lt;!-- --&gt;
 
 ---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-53-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-54-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-55-1.png)&lt;!-- --&gt;
+
+---
 class: middle, center
 
 &lt;img src="quickhull.gif" width="75%" /&gt;
@@ -571,21 +605,6 @@ class: middle, center, inverse
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-54-1.png)&lt;!-- --&gt;
-
----
-class: middle, center
-
-![](index_files/figure-html/unnamed-chunk-55-1.png)&lt;!-- --&gt;
-
----
-class: middle, center
-
-![](index_files/figure-html/unnamed-chunk-56-1.png)&lt;!-- --&gt;
-
----
-class: middle, center
-
 ![](index_files/figure-html/unnamed-chunk-57-1.png)&lt;!-- --&gt;
 
 ---
@@ -593,14 +612,29 @@ class: middle, center
 
 ![](index_files/figure-html/unnamed-chunk-58-1.png)&lt;!-- --&gt;
 
-$$
-P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
-$$
 ---
 class: middle, center
 
 ![](index_files/figure-html/unnamed-chunk-59-1.png)&lt;!-- --&gt;
 
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-60-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-61-1.png)&lt;!-- --&gt;
+
+$$
+P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
+$$
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
+
 $$
 P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
 $$
@@ -608,36 +642,36 @@ $$
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-60-1.png)&lt;!-- --&gt;
-$$
-P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
-$$
-
----
-class:middle, center
-
-![](index_files/figure-html/unnamed-chunk-61-1.png)&lt;!-- --&gt;
-$$
-P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
-$$
-
----
-class:middle, center
-
-![](index_files/figure-html/unnamed-chunk-62-1.png)&lt;!-- --&gt;
-$$
-P_1 = A \setminus \left( B_1 \cup B_2 \cup (C \setminus (D_1 \cup D_2)) \right)
-$$
----
-class: middle
-
-.pull-left[
 ![](index_files/figure-html/unnamed-chunk-63-1.png)&lt;!-- --&gt;
+$$
+P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
+$$
+
+---
+class:middle, center
+
+![](index_files/figure-html/unnamed-chunk-64-1.png)&lt;!-- --&gt;
+$$
+P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
+$$
+
+---
+class:middle, center
+
+![](index_files/figure-html/unnamed-chunk-65-1.png)&lt;!-- --&gt;
+$$
+P_1 = A \setminus \left( B_1 \cup B_2 \cup (C \setminus (D_1 \cup D_2)) \right)
+$$
+---
+class: middle
+
+.pull-left[
+![](index_files/figure-html/unnamed-chunk-66-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-64-1.png" width="90%" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-67-1.png" width="90%" /&gt;
 
 ]
 
@@ -649,12 +683,12 @@ $$
 class: middle
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-65-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-68-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-66-1.png" width="80%" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-69-1.png" width="80%" /&gt;
 
 ]
 
@@ -670,19 +704,17 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-67-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-70-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-68-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-71-1.png)&lt;!-- --&gt;
 
+---
+class: center, middle
 
-
-
-
-
-
+![](index_files/figure-html/unnamed-chunk-72-1.png)&lt;!-- --&gt;
 
 
 
@@ -699,12 +731,12 @@ class: center, middle
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-69-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-73-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-70-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-74-1.png)&lt;!-- --&gt;
 
 
 

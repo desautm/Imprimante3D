@@ -79,6 +79,32 @@ poly_trou <- tribble(
   0.8000,0.4000, 2L, 20L
 )
 
+poly_small <- tribble(
+  ~x, ~y,
+  0.84578829, 0.22430933,
+  0.91374870, 0.49597492,
+  0.69943962, 0.47310911,
+  0.56551379, 0.65111605,
+  0.64194392, 0.79281236,
+  0.39666975, 0.91671748,
+  0.21495193, 0.86094518,
+  0.28690924, 0.77536172,
+  0.09592715, 0.64639344,
+  0.26059704, 0.64190103,
+  0.28917259, 0.54896909,
+  0.36660303, 0.63746102,
+  0.39295365, 0.62683747,
+  0.38249282, 0.40736516,
+  0.43985652, 0.34882907,
+  0.54417031, 0.33774573,
+  0.57891272, 0.09741218,
+  0.75260197, 0.18000000,
+  0.58000000, 0.18000000,
+  0.58000000, 0.42000000,
+  0.82000000, 0.42000000,
+  0.82000000, 0.21204721,
+)
+
 c_poly_plein <- poly_plein %>% 
   slice(chull(x,y))
 
@@ -1963,6 +1989,105 @@ class:middle, center
 ---
 class: inverse, center, middle
 
+# La coupe de notre solide
+
+---
+
+## La largeur du filament
+
+.pull-left[
+```{r}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=poly,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#3b528b",
+    alpha = 0.5,
+    size=1.5
+  )+
+  geom_point(data=poly, size=5)+
+  theme_void()
+```
+]
+
+.pull-right[
+- On pourrait croire qu'il suffit de "dire" à la buse d'extrusion de tracer ces courbes polygonales et de les remplir;
+
+- Par contre, la largeur du filament causerait le plastique à déborder de la région à remplir;
+
+- Nous ne construirions pas la coupe de notre solide convenablement;
+
+- Il faut plutôt déplacer le chemin de la buse dans la région par la moitié de la largeur du filament.
+
+]
+
+---
+class: middle, center
+
+```{r}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=poly,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_polygon(
+    data=poly_small,
+    color = "green", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_point(data=poly, size=5)+
+  theme_void()
+```
+
+---
+class: middle, center
+
+```{r}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=poly,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_polygon_pattern(
+    data = poly_small,
+    pattern = "crosshatch",
+    pattern_angle = 45,
+    pattern_spacing = 0.04,
+    pattern_color = "green",
+    pattern_fill = "green",
+    pattern_size = 0.05,
+    pattern_density = 0.05,
+    fill = "white",
+    color = "black"
+  )+
+  geom_polygon(
+    data=poly_small,
+    color = "green", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_point(data=poly, size=5)+
+  theme_void()
+```
+
+---
+class: inverse, center, middle
+
 # Géométrie de construction de solides (ou GCS)
 
 ---
@@ -3343,12 +3468,49 @@ ggplot() +
   theme(legend.position="none")
 ```
 
+---
+class: center, middle
 
+```{r}
+mygrid <- as_tibble(expand.grid(x = seq(xmin,xmax,delta), y = seq(ymin,ymax,delta)))
+mygrid <- mygrid %>% 
+        mutate(
+                xbl = x - delta/2,
+                ybl = y - delta/2,
+                xbr = x + delta/2,
+                ybr = y - delta/2,
+                xtl = x - delta/2,
+                ytl = y + delta/2,
+                xtr = x + delta/2,
+                ytr = y + delta/2,
+        )
 
+mygrid <- mygrid %>% 
+        mutate(
+                inblp = point.in.polygon(mygrid$xbl,mygrid$ybl,poly_small$x,poly_small$y),
+                inbrp = point.in.polygon(mygrid$xbr,mygrid$ybr,poly_small$x,poly_small$y),
+                intlp = point.in.polygon(mygrid$xtl,mygrid$ytl,poly_small$x,poly_small$y),
+                intrp = point.in.polygon(mygrid$xtr,mygrid$ytr,poly_small$x,poly_small$y),
+                in_out = (inblp) & (inbrp) & (intlp) & (intrp)
+        )
 
-
-
-
+ggplot() +
+  aes(x=x,y=y)+
+  geom_tile(aes(fill=in_out),data = mygrid, colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "#5ec962"))+
+  geom_polygon(
+    data=poly,
+    aes(subgroup = holes),
+    fill = "#3b528b",
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly, size=3)+
+  theme_void()+
+  theme(legend.position="none")
+```
 
 
 
