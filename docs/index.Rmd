@@ -372,7 +372,7 @@ class:middle, center
 ---
 class: inverse, center, middle
 
-# Étape 1 : Est-ce qu'un triangle croise le plan?
+# Est-ce qu'un triangle croise le plan?
 
 ---
 
@@ -2066,7 +2066,7 @@ ggplot() +
     data = poly_small,
     pattern = "crosshatch",
     pattern_angle = 45,
-    pattern_spacing = 0.04,
+    pattern_spacing = 0.035,
     pattern_color = "green",
     pattern_fill = "green",
     pattern_size = 0.05,
@@ -3394,14 +3394,15 @@ class: inverse, center, middle
 # La grille booléenne
 
 ---
-class: center, middle
 
+Puisque la buse de l'imprimate est positionnée à l'aide de moteurs pas à pas (*stepper motors*), ceux-ci ne peuvent se trouver qu'à un nombre discret de positions. Nous représenterons ces positions par une grille de points ou de pixels dans le plan.
+.center[
 ```{r}
 delta <- 0.02
-xmin <- min(poly$x)-2*delta
-xmax <- max(poly$x)+2*delta
-ymin <- min(poly$y)-2*delta
-ymax <- max(poly$y)+2*delta
+xmin <- 0
+xmax <- 1
+ymin <- 0
+ymax <- 1
 mygrid <- as_tibble(expand.grid(x = seq(xmin,xmax,delta), y = seq(ymin,ymax,delta)))
 mygrid <- mygrid %>% 
         mutate(
@@ -3445,9 +3446,422 @@ ggplot() +
   theme_void()+
   theme(legend.position="none")
 ```
+]
 
 ---
-class: center, middle
+
+En considérant notre représentation GSC de la région à remplir comme une fonction booléenne $F$ du plan, nous pouvons déterminer si les pixels sont à l'intérieur de notre région; c'est-à-dire $p$ est dans la région si $F(p)$ est `Vrai`.
+
+.center[
+```{r}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_tile(aes(fill=in_out),data = mygrid, colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "#5ec962"))+
+  geom_polygon(
+    data=poly,
+    fill = "#3b528b",
+    aes(subgroup=holes),
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly, size=3)+
+  theme_void()+
+  theme(legend.position="none")
+```
+]
+---
+
+Pour déterminer quels pixels doivent être remplis, nous pourrions évaluer la valeur de notre expression GCS pour chaque pixel. Par contre, une alternative plus efficace utilise un autre arbre quaternaire et l'obervation suivante:
+
+> Soit un rectangle $R$ et un demi-plan $H$, tous les points de $R$ sont dans $H$ si et seulement si les quatre sommets de $R$ sont dans $H$.
+
+.center[
+```{tikz}
+\usetikzlibrary{calc,decorations.markings}
+\begin{tikzpicture}[
+  scale = 3,
+  decoration={
+      markings,
+      mark=at position 0.75 with {\arrow{>}}}
+  ]
+
+\coordinate (A) at (0,0.8);
+\coordinate (B) at (1,0.2);
+\coordinate (C1) at (0.25,0.5);
+\coordinate (C2) at ($(C1)+(0.45,0)$);
+\coordinate (C3) at ($(C2)+(0,0.25)$);
+\coordinate (C4) at ($(C3)+(-0.45,0)$);
+\fill[blue, fill opacity=0.5] (A)--(B)-|(1,1)--(0,1)--cycle;
+\draw[fill=red!50!white] (C1)--(C2)--(C3)--(C4)--cycle;
+\draw[black, very thick, postaction={decorate}] (A)--(B);
+\draw[very thick] (0,0) rectangle (1,1);
+\foreach \pt in {C1,C2,C3,C4}{
+	\draw[fill=red] (\pt) circle (0.3pt);
+}
+
+\end{tikzpicture}
+```
+]
+
+---
+Pour déterminer quels pixels doivent être remplis, nous pourrions évaluer la valeur de notre expression GCS pour chaque pixel. Par contre, une alternative plus efficace utilise un autre arbre quaternaire et l'obervation suivante:
+
+> Soit un rectangle $R$ et un demi-plan $H$, tous les points de $R$ sont dans $H$ si et seulement si les quatre sommets de $R$ sont dans $H$
+
+.center[
+```{tikz}
+\usetikzlibrary{calc,decorations.markings}
+\begin{tikzpicture}[
+  scale = 3,
+  decoration={
+      markings,
+      mark=at position 0.5 with {\arrow{>}}}
+  ]
+
+\coordinate (A) at (0,0.2);
+\coordinate (AA) at (0.4,0.6);
+\coordinate (B) at (1,0.2);
+\coordinate (C1) at (0.25,0.5);
+\coordinate (C2) at ($(C1)+(0.45,0)$);
+\coordinate (C3) at ($(C2)+(0,0.25)$);
+\coordinate (C4) at ($(C3)+(-0.45,0)$);
+\fill[blue, fill opacity=0.5] (A)--(AA)--(B)--(1,1)--(0,1)--cycle;
+\draw[fill=red!50!white] (C1)--(C2)--(C3)--(C4)--cycle;
+\draw[black, very thick] (A)--(AA)--(B);
+\draw[black, very thick, postaction={decorate}] (A)--(AA);
+\draw[black, very thick, postaction={decorate}] (AA)--(B);
+\draw[very thick] (0,0) rectangle (1,1);
+\foreach \pt in {C1,C2,C3,C4}{
+	\draw[fill=red] (\pt) circle (0.3pt);
+}
+
+\end{tikzpicture}
+```
+]
+
+Ça ne fonctionne que si nous avons un polygone convexe!
+
+---
+
+.pull-left[
+Chaque noeud $A$, $B_1$, $B_2$, $C$, $D_1$, $D_2$, $D_3$ et $P_2$ de notre arbre est lui-même un sous-arbre binaire qui représente l'intersection de tous les demi-plans formant l'ensemble convexe.
+]
+
+.pull-right[
+```{tikz, out.width="90%"}
+\usetikzlibrary{trees}
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+	child {node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    	child {node[mystyle] {$\cup$}
+    		child {node[mystyle] {$B_2$}}
+    		child {node[mystyle] {$\setminus$}
+    			child {node[mystyle] {$C$}}
+    			child {node[mystyle] {$\cup$}
+    				child {node[mystyle] {$D_1$}}
+    				child {node[mystyle] {$D_2$}}
+    			}
+    		}
+    	}
+    }
+	}
+    child {node[mystyle] {$P_2$}};
+\end{tikzpicture}
+```
+]
+
+---
+
+.pull-left[
+```{r}
+ggplot() +
+  geom_tile(data = mygrid,aes(x=x,y=y,fill=in_out), colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "green"))+
+  geom_polygon(
+    data=poly,
+    aes(x=x,y=y,subgroup=holes),
+    fill = "#3b528b",
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly,aes(x=x,y=y,), size=3)+
+  theme_void()+
+  theme(legend.position="none")+ 
+  geom_segment(aes(x=0,y=0,xend=1,yend=0), colour="black")+
+  geom_segment(aes(x=0,y=1,xend=1,yend=1), colour="black")+ 
+  geom_segment(aes(x=0,y=0,xend=0,yend=1), colour="black")+ 
+  geom_segment(aes(x=1,y=0,xend=1,yend=1), colour="black")
+```
+]
+
+.pull-right[
+```{tikz, out.width="90%"}
+\usetikzlibrary{trees}
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+	child {node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    	child {node[mystyle] {$\cup$}
+    		child {node[mystyle] {$B_2$}}
+    		child {node[mystyle] {$\setminus$}
+    			child {node[mystyle] {$C$}}
+    			child {node[mystyle] {$\cup$}
+    				child {node[mystyle] {$D_1$}}
+    				child {node[mystyle] {$D_2$}}
+    			}
+    		}
+    	}
+    }
+	}
+    child {node[mystyle] {$P_2$}};
+\end{tikzpicture}
+```
+]
+
+
+---
+
+.pull-left[
+```{r}
+ggplot() +
+  geom_tile(data = mygrid,aes(x=x,y=y,fill=in_out), colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "green"))+
+  geom_polygon(
+    data=poly,
+    aes(x=x,y=y,subgroup=holes),
+    fill = "#3b528b",
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly,aes(x=x,y=y,), size=3)+
+  theme_void()+
+  theme(legend.position="none")+ 
+  geom_segment(aes(x=0,y=0,xend=1,yend=0), colour="black")+
+  geom_segment(aes(x=0,y=1,xend=1,yend=1), colour="black")+ 
+  geom_segment(aes(x=0,y=0,xend=0,yend=1), colour="black")+ 
+  geom_segment(aes(x=1,y=0,xend=1,yend=1), colour="black")+
+  geom_segment(aes(x=0,y=0.5,xend=1,yend=0.5), colour="blue", size=2)+
+  geom_segment(aes(x=0.5,y=0,xend=0.5,yend=1), colour="blue", size=2)
+```
+]
+
+.pull-right[
+```{tikz, out.width="90%"}
+\usetikzlibrary{trees}
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+	child {node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    	child {node[mystyle] {$\cup$}
+    		child {node[mystyle] {$B_2$}}
+    		child {node[mystyle] {$\setminus$}
+    			child {node[mystyle] {$C$}}
+    			child {node[mystyle] {$\cup$}
+    				child {node[mystyle] {$D_1$}}
+    				child {node[mystyle] {$D_2$}}
+    			}
+    		}
+    	}
+    }
+	}
+    child {node[mystyle] {$P_2$}};
+\end{tikzpicture}
+```
+]
+
+---
+
+.pull-left[
+```{r}
+ggplot() +
+  geom_tile(data = mygrid,aes(x=x,y=y,fill=in_out), colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "green"))+
+  geom_polygon(
+    data=poly,
+    aes(x=x,y=y,subgroup=holes),
+    fill = "#3b528b",
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly,aes(x=x,y=y,), size=3)+
+  theme_void()+
+  theme(legend.position="none")+ 
+  geom_segment(aes(x=0,y=0,xend=1,yend=0), colour="black")+
+  geom_segment(aes(x=0,y=1,xend=1,yend=1), colour="black")+ 
+  geom_segment(aes(x=0,y=0,xend=0,yend=1), colour="black")+ 
+  geom_segment(aes(x=1,y=0,xend=1,yend=1), colour="black")+
+  geom_segment(aes(x=0,y=0.5,xend=1,yend=0.5), colour="blue", size=2)+
+  geom_segment(aes(x=0.5,y=0,xend=0.5,yend=1), colour="blue", size=2)
+```
+]
+
+.pull-right[
+```{tikz, out.width="90%"}
+\usetikzlibrary{trees}
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    	child {node[mystyle] {$\cup$}
+    		child {node[mystyle] {$B_2$}}
+    		child {node[mystyle] {$\setminus$}
+    			child {node[mystyle] {$C$}}
+    			child {node[mystyle] {$\cup$}
+    				child {node[mystyle] {$D_1$}}
+    				child {node[mystyle] {$D_2$}}
+    			}
+    		}
+    	}
+    };
+\end{tikzpicture}
+```
+]
+
+---
+
+.pull-left[
+```{r}
+ggplot() +
+  geom_tile(data = mygrid,aes(x=x,y=y,fill=in_out), colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "green"))+
+  geom_polygon(
+    data=poly,
+    aes(x=x,y=y,subgroup=holes),
+    fill = "#3b528b",
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly,aes(x=x,y=y,), size=3)+
+  theme_void()+
+  theme(legend.position="none")+ 
+  geom_segment(aes(x=0,y=0,xend=1,yend=0), colour="black")+
+  geom_segment(aes(x=0,y=1,xend=1,yend=1), colour="black")+ 
+  geom_segment(aes(x=0,y=0,xend=0,yend=1), colour="black")+ 
+  geom_segment(aes(x=1,y=0,xend=1,yend=1), colour="black")+
+  geom_segment(aes(x=0,y=0.5,xend=1,yend=0.5), colour="blue", size=2)+
+  geom_segment(aes(x=0.5,y=0,xend=0.5,yend=1), colour="blue", size=2)+
+  geom_segment(aes(x=0,y=0.75,xend=0.5,yend=0.75), colour="red", size=1.5)+
+  geom_segment(aes(x=0.25,y=0.5,xend=0.25,yend=1), colour="red", size=1.5)
+```
+]
+
+.pull-right[
+```{tikz, out.width="90%"}
+\usetikzlibrary{trees}
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    	child {node[mystyle] {$\cup$}
+    		child {node[mystyle] {$B_2$}}
+    		child {node[mystyle] {$\setminus$}
+    			child {node[mystyle] {$C$}}
+    			child {node[mystyle] {$\cup$}
+    				child {node[mystyle] {$D_1$}}
+    				child {node[mystyle] {$D_2$}}
+    			}
+    		}
+    	}
+    };
+\end{tikzpicture}
+```
+]
+
+---
+
+.pull-left[
+```{r}
+ggplot() +
+  geom_tile(data = mygrid,aes(x=x,y=y,fill=in_out), colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "green"))+
+  geom_polygon(
+    data=poly,
+    aes(x=x,y=y,subgroup=holes),
+    fill = "#3b528b",
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly,aes(x=x,y=y,), size=3)+
+  theme_void()+
+  theme(legend.position="none")+ 
+  geom_segment(aes(x=0,y=0,xend=1,yend=0), colour="black")+
+  geom_segment(aes(x=0,y=1,xend=1,yend=1), colour="black")+ 
+  geom_segment(aes(x=0,y=0,xend=0,yend=1), colour="black")+ 
+  geom_segment(aes(x=1,y=0,xend=1,yend=1), colour="black")+
+  geom_segment(aes(x=0,y=0.5,xend=1,yend=0.5), colour="blue", size=2)+
+  geom_segment(aes(x=0.5,y=0,xend=0.5,yend=1), colour="blue", size=2)+
+  geom_segment(aes(x=0,y=0.75,xend=0.5,yend=0.75), colour="red", size=1.5)+
+  geom_segment(aes(x=0.25,y=0.5,xend=0.25,yend=1), colour="red", size=1.5)
+```
+]
+
+.pull-right[
+```{tikz, out.width="60%", fig.align="center"}
+\usetikzlibrary{trees}
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$B_1$}
+    };
+\end{tikzpicture}
+```
+]
+
+
+---
+class:center, middle
 
 ```{r}
 ggplot() +

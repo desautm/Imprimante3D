@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.5.6)  6 MAY 2022 13:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.5.19)  19 MAY 2022 16:01
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -8,7 +8,7 @@ entations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/csg.tex"
 (C:/Users/mdesautels/OneDrive - CEGEP SAINT-JEAN-SUR-RICHELIEU/Documents/Presen
 tations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/csg.tex
 LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-04-29>
+L3 programming layer <2022-05-04>
 (C:\Miktex\texmfs\install\tex/latex/standalone\standalone.cls
 Document Class: standalone 2018/03/26 v1.3a Class to compile TeX sub-files stan
 dalone
@@ -415,26 +415,27 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 24.
+(Font)              <7> on input line 14.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 24.
+(Font)              <5> on input line 14.
  [1
 
 {C:/Miktex/texmfs/data/fonts/map/pdftex/pdftex.map}] (csg.aux) ) 
 Here is how much of TeX's memory you used:
- 12923 strings out of 478619
- 275709 string characters out of 2852668
- 526945 words of memory out of 3000000
- 30861 multiletter control sequences out of 15000+600000
+ 13072 strings out of 478614
+ 279385 string characters out of 2852544
+ 552340 words of memory out of 3000000
+ 31015 multiletter control sequences out of 15000+600000
  469259 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 100i,7n,104p,553b,964s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 100i,19n,104p,553b,1823s stack positions out of 10000i,1000n,20000p,200000b,80000s
 <C:/Miktex/texm
-fs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Miktex/texmfs/install/
-fonts/type1/public/amsfonts/cm/cmr10.pfb>
-Output written on csg.pdf (1 page, 23914 bytes).
+fs/install/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Miktex/texmfs/install/f
+onts/type1/public/amsfonts/cm/cmr5.pfb><C:/Miktex/texmfs/install/fonts/type1/pu
+blic/amsfonts/cm/cmsy7.pfb>
+Output written on csg.pdf (1 page, 31008 bytes).
 PDF statistics:
- 19 PDF objects out of 1000 (max. 8388607)
+ 24 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

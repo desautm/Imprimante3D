@@ -6,24 +6,88 @@
 \begin{document}
 
 \begin{tikzpicture}[
-  scale = 4,
-  decoration={
-      markings,
-      mark=at position 0.5 with {\arrow{>}}}
-  ]
-
-\coordinate (A) at (0,0.4);
-\coordinate (B) at (1,0.6);
-\fill[blue, fill opacity=0.5] (A)--(B)-|(1,1)--(0,1)--cycle;
-\fill[red, fill opacity=0.5] (A)--(B)-|(1,0)--(0,0)--cycle;
-\draw[green, very thick, postaction={decorate}] (A)--(B);
-\draw[very thick, black] (0,0) rectangle (1,1);
-\node at (0.5,0.75) {POSITIF};
-\node at (0.5,0.25) {NÉGATIF};
-
-\node[rotate=11.3099, below] at ($(A)!0.5!(B)$) {$ax+by+c=0$};
-
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+	child {node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    	child {node[mystyle] {$\cup$}
+    		child {node[mystyle] {$B_2$}}
+    		child {node[mystyle] {$\setminus$}
+    			child {node[mystyle] {$C$}}
+    			child {node[mystyle] {$\cup$}
+    				child {node[mystyle] {$D_1$}}
+    				child {node[mystyle] {$D_2$}}
+    			}
+    		}
+    	}
+    }
+	}
+    child {node[mystyle] {$P_2$}};
 \end{tikzpicture}
+
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    	child {node[mystyle] {$\cup$}
+    		child {node[mystyle] {$B_2$}}
+    		child {node[mystyle] {$\setminus$}
+    			child {node[mystyle] {$C$}}
+    			child {node[mystyle] {$\cup$}
+    				child {node[mystyle] {$D_1$}}
+    				child {node[mystyle] {$D_2$}}
+    			}
+    		}
+    	}
+    };
+\end{tikzpicture}
+
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    	child {node[mystyle] {$B_2$}
+    	}
+    };
+\end{tikzpicture}
+
+% \begin{tikzpicture}[
+%   scale = 4,
+%   decoration={
+%       markings,
+%       mark=at position 0.5 with {\arrow{>}}}
+%   ]
+
+% \coordinate (A) at (0,0.4);
+% \coordinate (B) at (1,0.6);
+% \fill[blue, fill opacity=0.5] (A)--(B)-|(1,1)--(0,1)--cycle;
+% \fill[red, fill opacity=0.5] (A)--(B)-|(1,0)--(0,0)--cycle;
+% \draw[green, very thick, postaction={decorate}] (A)--(B);
+% \draw[very thick, black] (0,0) rectangle (1,1);
+% \node at (0.5,0.75) {POSITIF};
+% \node at (0.5,0.25) {NÉGATIF};
+
+% \node[rotate=11.3099, below] at ($(A)!0.5!(B)$) {$ax+by+c=0$};
+
+% \end{tikzpicture}
 
 % \begin{tikzpicture}[
 %   scale = 4,
@@ -68,43 +132,27 @@
 % \end{tikzpicture}
 
 % \begin{tikzpicture}[
-%   scale = 4,
+%   scale = 3,
 %   decoration={
 %       markings,
 %       mark=at position 0.5 with {\arrow{>}}}
 %   ]
 
-% \coordinate (A) at (0,0.4);
-% \coordinate (B) at (1,0.6);
-% \fill[blue, fill opacity=0.5] (A)--(B)-|(1,1)--(0,1)--cycle;
-% \draw[black, very thick, postaction={decorate}] (A)--(B);
+% \coordinate (A) at (0,0.2);
+% \coordinate (AA) at (0.4,0.6);
+% \coordinate (B) at (1,0.2);
+% \coordinate (C1) at (0.25,0.5);
+% \coordinate (C2) at ($(C1)+(0.45,0)$);
+% \coordinate (C3) at ($(C2)+(0,0.25)$);
+% \coordinate (C4) at ($(C3)+(-0.45,0)$);
+% \fill[blue, fill opacity=0.5] (A)--(AA)--(B)--(1,1)--(0,1)--cycle;
+% \draw[fill=red!50!white] (C1)--(C2)--(C3)--(C4)--cycle;
+% \draw[black, very thick, postaction={decorate}] (A)--(AA);
+% \draw[black, very thick, postaction={decorate}] (AA)--(B);
 % \draw[very thick] (0,0) rectangle (1,1);
-% \node at (0.5,0.7) {\Large $H_1(p)$};
-
-% \begin{scope}[xshift=1.1cm]
-% \coordinate (C) at (0,0.8);
-% \coordinate (D) at (1,0.2);
-% \fill[red, fill opacity=0.5] (C)--(D)-|(1,1)--(0,1)--cycle;
-% \draw[black, very thick, postaction={decorate}] (C)--(D);
-% \draw[very thick] (0,0) rectangle (1,1);
-% \node at (0.5,0.7) {\Large $H_2(p)$};
-% \end{scope}
-
-% \begin{scope}[xshift=2.2cm]
-% \coordinate (A) at (0,0.4);
-% \coordinate (B) at (1,0.6);
-% \coordinate (C) at (0,0.8);
-% \coordinate (D) at (1,0.2);
-% \coordinate (I) at (0.5,0.5);
-% \fill[blue!50!red, fill opacity=0.75] (A)--(I)--(C)--cycle;
-% \draw[black, very thick, dashed] (A)--(B);
-% \draw[black, very thick, dashed] (C)--(D);
-% \draw[black, very thick, postaction={decorate}] (A)--(I);
-% \draw[black, very thick, postaction={decorate}] (I)--(C);
-% \draw[very thick] (0,0) rectangle (1,1);
-% \node at (0.5,0.8) {\Large $(H_1 \setminus H_2)(p)$};
-% \node at (0.5,0.2) {\Large $(H_1 \cap \overline{H}_2)(p)$};
-% \end{scope}
+% \foreach \pt in {C1,C2,C3,C4}{
+% 	\draw[fill=red] (\pt) circle (0.3pt);
+% }
 
 % \end{tikzpicture}
 

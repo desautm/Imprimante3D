@@ -192,7 +192,7 @@ class:middle, center
 ---
 class: inverse, center, middle
 
-# Étape 1 : Est-ce qu'un triangle croise le plan?
+# Est-ce qu'un triangle croise le plan?
 
 ---
 
@@ -702,19 +702,111 @@ class: inverse, center, middle
 # La grille booléenne
 
 ---
-class: center, middle
 
+Puisque la buse de l'imprimate est positionnée à l'aide de moteurs pas à pas (*stepper motors*), ceux-ci ne peuvent se trouver qu'à un nombre discret de positions. Nous représenterons ces positions par une grille de points ou de pixels dans le plan.
+.center[
 ![](index_files/figure-html/unnamed-chunk-70-1.png)&lt;!-- --&gt;
+]
 
 ---
-class: center, middle
 
+En considérant notre représentation GSC de la région à remplir comme une fonction booléenne `\(F\)` du plan, nous pouvons déterminer si les pixels sont à l'intérieur de notre région; c'est-à-dire `\(p\)` est dans la région si `\(F(p)\)` est `Vrai`.
+
+.center[
 ![](index_files/figure-html/unnamed-chunk-71-1.png)&lt;!-- --&gt;
+]
+---
+
+Pour déterminer quels pixels doivent être remplis, nous pourrions évaluer la valeur de notre expression GCS pour chaque pixel. Par contre, une alternative plus efficace utilise un autre arbre quaternaire et l'obervation suivante:
+
+&gt; Soit un rectangle `\(R\)` et un demi-plan `\(H\)`, tous les points de `\(R\)` sont dans `\(H\)` si et seulement si les quatre sommets de `\(R\)` sont dans `\(H\)`.
+
+.center[
+![](index_files/figure-html/unnamed-chunk-72-1.png)&lt;!-- --&gt;
+]
+
+---
+Pour déterminer quels pixels doivent être remplis, nous pourrions évaluer la valeur de notre expression GCS pour chaque pixel. Par contre, une alternative plus efficace utilise un autre arbre quaternaire et l'obervation suivante:
+
+&gt; Soit un rectangle `\(R\)` et un demi-plan `\(H\)`, tous les points de `\(R\)` sont dans `\(H\)` si et seulement si les quatre sommets de `\(R\)` sont dans `\(H\)`
+
+.center[
+![](index_files/figure-html/unnamed-chunk-73-1.png)&lt;!-- --&gt;
+]
+
+Ça ne fonctionne que si nous avons un polygone convexe!
+
+---
+
+.pull-left[
+Chaque noeud `\(A\)`, `\(B_1\)`, `\(B_2\)`, `\(C\)`, `\(D_1\)`, `\(D_2\)`, `\(D_3\)` et `\(P_2\)` de notre arbre est lui-même un sous-arbre binaire qui représente l'intersection de tous les demi-plans formant l'ensemble convexe.
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/unnamed-chunk-74-1.png" width="90%" /&gt;
+]
+
+---
+
+.pull-left[
+![](index_files/figure-html/unnamed-chunk-75-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/unnamed-chunk-76-1.png" width="90%" /&gt;
+]
+
+
+---
+
+.pull-left[
+![](index_files/figure-html/unnamed-chunk-77-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/unnamed-chunk-78-1.png" width="90%" /&gt;
+]
+
+---
+
+.pull-left[
+![](index_files/figure-html/unnamed-chunk-79-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/unnamed-chunk-80-1.png" width="90%" /&gt;
+]
+
+---
+
+.pull-left[
+![](index_files/figure-html/unnamed-chunk-81-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/unnamed-chunk-82-1.png" width="90%" /&gt;
+]
+
+---
+
+.pull-left[
+![](index_files/figure-html/unnamed-chunk-83-1.png)&lt;!-- --&gt;
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/unnamed-chunk-84-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+class:center, middle
+
+![](index_files/figure-html/unnamed-chunk-85-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-72-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-86-1.png)&lt;!-- --&gt;
 
 
 
@@ -731,12 +823,12 @@ class: center, middle
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-73-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-87-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-74-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-88-1.png)&lt;!-- --&gt;
 
 
 
