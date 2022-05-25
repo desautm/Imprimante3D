@@ -2114,7 +2114,7 @@ class: inverse, center, middle
   
   - L'intersection
 
-- Une droite orientée définit un demi-plan $H$ se trouvant à gauche de la droite lorsqu'on se déplace dans la direction définit par l'orientation.
+- Une droite orientée définit un demi-plan $H$ se trouvant à gauche de la droite lorsqu'on se déplace dans la direction définie par l'orientation.
 
 ---
 class: center, middle
@@ -3665,6 +3665,7 @@ ggplot() +
   geom_segment(aes(x=0,y=0.5,xend=1,yend=0.5), colour="blue", size=2)+
   geom_segment(aes(x=0.5,y=0,xend=0.5,yend=1), colour="blue", size=2)
 ```
+On débute en divisant notre région en 4 rectangles et nous étudions chacun d'eux séparément.
 ]
 
 .pull-right[
@@ -3724,6 +3725,7 @@ ggplot() +
   geom_segment(aes(x=0,y=0.5,xend=1,yend=0.5), colour="blue", size=2)+
   geom_segment(aes(x=0.5,y=0,xend=0.5,yend=1), colour="blue", size=2)
 ```
+Pour chacun des quatre rectangles, nous pouvons "simplifier" l'arbre en évaluant chacune des arêtes du rectangle avec les feuilles de l'arbre. Considérons les deux rectangles du haut et l'arête supérieure du trou $P_2$. En évaluant les quatre arêtes des rectangles par le demi-plan défini par l'arête supérieure du trou, nous obtenons `FAUX`.
 ]
 
 .pull-right[
@@ -3778,10 +3780,9 @@ ggplot() +
   geom_segment(aes(x=0,y=0,xend=0,yend=1), colour="black")+ 
   geom_segment(aes(x=1,y=0,xend=1,yend=1), colour="black")+
   geom_segment(aes(x=0,y=0.5,xend=1,yend=0.5), colour="blue", size=2)+
-  geom_segment(aes(x=0.5,y=0,xend=0.5,yend=1), colour="blue", size=2)+
-  geom_segment(aes(x=0,y=0.75,xend=0.5,yend=0.75), colour="red", size=1.5)+
-  geom_segment(aes(x=0.25,y=0.5,xend=0.25,yend=1), colour="red", size=1.5)
+  geom_segment(aes(x=0.5,y=0,xend=0.5,yend=1), colour="blue", size=2)
 ```
+En étudiant uniquement le rectangle en haut à gauche et en utilisant le même argument, aucun point de ce rectangle n'intersecte $B_2$.
 ]
 
 .pull-right[
@@ -3797,8 +3798,6 @@ scale = 0.8
 		child {node[mystyle] {$A$}}
 		child {node[mystyle] {$\cup$}
     	child {node[mystyle] {$B_1$}}
-    	child {node[mystyle] {$\cup$}
-    		child {node[mystyle] {$B_2$}}
     		child {node[mystyle] {$\setminus$}
     			child {node[mystyle] {$C$}}
     			child {node[mystyle] {$\cup$}
@@ -3806,7 +3805,6 @@ scale = 0.8
     				child {node[mystyle] {$D_2$}}
     			}
     		}
-    	}
     };
 \end{tikzpicture}
 ```
@@ -3840,6 +3838,63 @@ ggplot() +
   geom_segment(aes(x=0,y=0.75,xend=0.5,yend=0.75), colour="red", size=1.5)+
   geom_segment(aes(x=0.25,y=0.5,xend=0.25,yend=1), colour="red", size=1.5)
 ```
+Nous subdivisons ensuite le rectangle en haut à gauche en quatres rectangles.
+]
+
+.pull-right[
+```{tikz, out.width="90%"}
+\usetikzlibrary{trees}
+\begin{tikzpicture}[
+mystyle/.style={draw, circle, minimum size = 0.7cm, fill = blue!20, font = \scriptsize},
+sibling distance = 10mm,
+level distance = 10mm,
+scale = 0.8
+]
+\node[mystyle] {$\setminus$}
+		child {node[mystyle] {$A$}}
+		child {node[mystyle] {$\cup$}
+    	child {node[mystyle] {$B_1$}}
+    		child {node[mystyle] {$\setminus$}
+    			child {node[mystyle] {$C$}}
+    			child {node[mystyle] {$\cup$}
+    				child {node[mystyle] {$D_1$}}
+    				child {node[mystyle] {$D_2$}}
+    			}
+    		}
+    };
+\end{tikzpicture}
+```
+]
+
+---
+
+.pull-left[
+```{r}
+ggplot() +
+  geom_tile(data = mygrid,aes(x=x,y=y,fill=in_out), colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "green"))+
+  geom_polygon(
+    data=poly,
+    aes(x=x,y=y,subgroup=holes),
+    fill = "#3b528b",
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly,aes(x=x,y=y,), size=3)+
+  theme_void()+
+  theme(legend.position="none")+ 
+  geom_segment(aes(x=0,y=0,xend=1,yend=0), colour="black")+
+  geom_segment(aes(x=0,y=1,xend=1,yend=1), colour="black")+ 
+  geom_segment(aes(x=0,y=0,xend=0,yend=1), colour="black")+ 
+  geom_segment(aes(x=1,y=0,xend=1,yend=1), colour="black")+
+  geom_segment(aes(x=0,y=0.5,xend=1,yend=0.5), colour="blue", size=2)+
+  geom_segment(aes(x=0.5,y=0,xend=0.5,yend=1), colour="blue", size=2)+
+  geom_segment(aes(x=0,y=0.75,xend=0.5,yend=0.75), colour="red", size=1.5)+
+  geom_segment(aes(x=0.25,y=0.5,xend=0.25,yend=1), colour="red", size=1.5)
+```
+En étudiant uniquement le sous-rectangle en haut à droite, nous remarquons qu'il n'intersecte pas les polygones $C$, $D_1$ et $D_2$.
 ]
 
 .pull-right[
@@ -3859,7 +3914,6 @@ scale = 0.8
 ```
 ]
 
-
 ---
 class:center, middle
 
@@ -3874,6 +3928,70 @@ ggplot() +
     fill = "#3b528b",
     aes(subgroup=holes),
     color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly, size=3)+
+  theme_void()+
+  theme(legend.position="none")
+```
+
+---
+class:inverse, center, middle
+
+# Rapetisser la grille pour tenir compte de la largeur du filament
+
+---
+
+## Rapetisser la grille
+
+- Maintenant que nous savons quels sont les pixels se trouvant à l'intérieur de la région, nous pouvons déterminer les pixels à ne pas inclure pour produire le chemin que doit emprunter la buse. 
+
+- Nous allons poser $r$ la demie-largeur de la buse. Nous voulons donc déplacer chaque arête vers l'intérieur de la région d'une distance $r$.
+
+- Pour chaque arête de notre région, nous créons un rectangle de largeur $r$ et nous posons tous les pixels à l'intérieur de cette région comme `FAUX`.
+
+---
+class:center,middle
+
+```{r}
+xp <- 0.7086
+yp <- 0.4942
+xq <- 0.5892
+yq <- 0.6529
+A <- (yq-yp)/(xq-xp)
+C <- yp-A*xp
+
+xpp <- xp+delta*A/sqrt(1+A^2)
+ypp <- yp-delta/sqrt(1+A^2)
+xqq <- xq+delta*A/sqrt(1+A^2)
+yqq <- yq-delta/sqrt(1+A^2)
+
+shave <- tribble(
+  ~x, ~y,
+  xp, yp,
+  xq, yq,
+  xqq, yqq,
+  xpp, ypp
+)
+
+ggplot() +
+  aes(x=x,y=y)+
+  geom_tile(aes(fill=in_out),data = mygrid, colour = 'gray90')+
+  scale_fill_manual(breaks = c(FALSE, TRUE), 
+                  values=c("white", "#5ec962"))+
+  geom_polygon(
+    data=poly,
+    fill = "#3b528b",
+    aes(subgroup=holes),
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_polygon(
+    data=shave,
+    fill = "red",
+    color = "red", 
     alpha = 0,
     size=1
     )+
@@ -3905,14 +4023,71 @@ mygrid <- mygrid %>%
                 inbrp = point.in.polygon(mygrid$xbr,mygrid$ybr,poly_small$x,poly_small$y),
                 intlp = point.in.polygon(mygrid$xtl,mygrid$ytl,poly_small$x,poly_small$y),
                 intrp = point.in.polygon(mygrid$xtr,mygrid$ytr,poly_small$x,poly_small$y),
-                in_out = (inblp) & (inbrp) & (intlp) & (intrp)
-        )
+                in_out = (inblp) & (inbrp) & (intlp) & (intrp),
+                in_out = case_when(
+                        in_out == FALSE ~ "0",
+                        in_out == TRUE ~ "1"
+                )
+        )%>% 
+        rowid_to_column("id") %>% 
+        select(id, x, y, in_out)
 
 ggplot() +
   aes(x=x,y=y)+
   geom_tile(aes(fill=in_out),data = mygrid, colour = 'gray90')+
-  scale_fill_manual(breaks = c(FALSE, TRUE), 
+  scale_fill_manual(breaks = c("0", "1"), 
                   values=c("white", "#5ec962"))+
+  geom_polygon(
+    data=poly,
+    aes(subgroup = holes),
+    fill = "#3b528b",
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_polygon(
+    data=shave,
+    fill = "red",
+    color = "red", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly, size=3)+
+  theme_void()+
+  theme(legend.position="none")
+```
+
+---
+class:middle, center
+
+<iframe src="https://www.geogebra.org/classic/fuebudnz?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
+
+---
+class: center, middle
+
+```{r}
+for (i in seq(1,nrow(mygrid))){
+  if (mygrid[i,]$in_out == "1"){
+    w  <- mygrid[i-1,]$in_out
+    e  <- mygrid[i+1,]$in_out
+    sw <- mygrid[i-1-51,]$in_out
+    s  <- mygrid[i-51,]$in_out
+    se <- mygrid[i+1-51,]$in_out
+    nw <- mygrid[i-1+51,]$in_out
+    n  <- mygrid[i+51,]$in_out
+    ne <- mygrid[i+1+51,]$in_out
+    test <- (w=="0")|(e=="0")|(s=="0")|(n=="0")|(sw=="0")|(se=="0")|(nw=="0")|(ne=="0")
+    if (test==TRUE){
+            mygrid[i,]$in_out <- "2"
+    }
+  }
+}
+
+ggplot() +
+  aes(x=x,y=y)+
+  geom_tile(aes(fill=in_out),data = mygrid, colour = 'gray90')+
+  scale_fill_manual(breaks = c("0", "1", "2"), 
+                  values=c("white", "#5ec962", "red"))+
   geom_polygon(
     data=poly,
     aes(subgroup = holes),
@@ -3926,213 +4101,149 @@ ggplot() +
   theme(legend.position="none")
 ```
 
+---
+class: center, middle
+
+```{r}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_tile(aes(fill=in_out),data = mygrid, colour = 'white')+
+  scale_fill_manual(breaks = c("0", "1", "2"), 
+                  values=c("white", "white", "red"))+
+  geom_polygon(
+    data=poly,
+    aes(subgroup = holes),
+    fill = "#3b528b",
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly, size=3)+
+  theme_void()+
+  theme(legend.position="none")
+```
+
+---
+class: center, middle
+
+```{r}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=poly,
+    aes(subgroup = holes),
+    fill = "#3b528b",
+    color = "black", 
+    alpha = 0,
+    size=1
+    )+
+  geom_polygon(
+    data=poly_small,
+    fill = "#3b528b",
+    color = "green", 
+    alpha = 0,
+    size=1
+    )+
+  geom_point(data=poly, size=3)+
+  theme_void()+
+  theme(legend.position="none")
+```
 
 
+---
+class:center, middle, inverse
 
-
-
-
-
-
-
-
-
+# Les hachures
 
 ---
 class: middle, center
 
-```{tikz}
-\newcommand{\PolygonInit}{
-\begin{tikzpicture}[scale=4]
-\coordinate (A) at (0.1802,0.8712);
-\coordinate (B) at (0.2573,0.7795);
-\coordinate (C) at (0.0331,0.6281);
-\coordinate (D) at (0.2457,0.6223);
-\coordinate (E) at (0.2806,0.5088);
-\coordinate (F) at (0.3723,0.6136);
-\coordinate (G) at (0.3621,0.3996);
-\coordinate (H) at (0.4306,0.3297);
-\coordinate (I) at (0.5266,0.3195);
-\coordinate (J) at (0.5630,0.0677);
-\coordinate (K) at (0.8629,0.2103);
-\coordinate (L) at (0.9401,0.5189);
-\coordinate (M) at (0.7086,0.4942);
-\coordinate (N) at (0.5892,0.6529);
-\coordinate (O) at (0.6693,0.8014);
-\coordinate (P) at (0.3985,0.9382);
-
-\coordinate (Q) at (0.6,0.4);
-\coordinate (R) at (0.6,0.2);
-\coordinate (S) at (0.8,0.2);
-\coordinate (T) at (0.8,0.4);
-
-\fill[blue, fill opacity = 0.5] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-
-\fill[white] (Q)--(R)--(S)--(T)--cycle;
-\draw[thick] (Q)--(R)--(S)--(T)--cycle;
-
-\node at (0.4,0.8) {$P_1$};
-\node at (0.7,0.3) {$P_2$};
-
-\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
-	\draw[fill=black] (\pt) circle (0.25pt);
-}
-\useasboundingbox (0,0) rectangle (1,1);
-\end{tikzpicture}
-}
-
-\begin{tikzpicture}
-\node (PolygonInit){\PolygonInit};
-\end{tikzpicture}
+```{r}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=poly,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_polygon_pattern(
+    data = poly_small,
+    pattern = "crosshatch",
+    pattern_angle = 45,
+    pattern_spacing = 0.035,
+    pattern_color = "green",
+    pattern_fill = "green",
+    pattern_size = 0.05,
+    pattern_density = 0.05,
+    fill = "white",
+    color = "black"
+  )+
+  geom_polygon(
+    data=poly_small,
+    color = "green", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_point(data=poly, size=5)+
+  theme_void()
 ```
+
+---
+
+## Les hachures
+
+- Pour créer des hachures, on génère de nombreuses équations de droites.
+
+- Pour chacune de ces droites, on trouve les intersections de celles-ci avec les frontières de notre arbre GCS.
+
+- Pour chacun des segments trouvés, on vérifie si le point milieu du segment est à *l'intérieur* ou à *l'extérieur* de notre solide.
 
 ---
 class: middle, center
 
-```{tikz}
-\newcommand{\PolygonInit}{
-\begin{tikzpicture}[scale=4]
-\coordinate (A) at (0.1802,0.8712);
-\coordinate (B) at (0.2573,0.7795);
-\coordinate (C) at (0.0331,0.6281);
-\coordinate (D) at (0.2457,0.6223);
-\coordinate (E) at (0.2806,0.5088);
-\coordinate (F) at (0.3723,0.6136);
-\coordinate (G) at (0.3621,0.3996);
-\coordinate (H) at (0.4306,0.3297);
-\coordinate (I) at (0.5266,0.3195);
-\coordinate (J) at (0.5630,0.0677);
-\coordinate (K) at (0.8629,0.2103);
-\coordinate (L) at (0.9401,0.5189);
-\coordinate (M) at (0.7086,0.4942);
-\coordinate (N) at (0.5892,0.6529);
-\coordinate (O) at (0.6693,0.8014);
-\coordinate (P) at (0.3985,0.9382);
+```{r}
+square <- tribble(
+  ~x, ~y,
+  0, 0,
+  1, 0,
+  1, 1,
+  0, 1
+)
 
-\coordinate (Q) at (0.6,0.4);
-\coordinate (R) at (0.6,0.2);
-\coordinate (S) at (0.8,0.2);
-\coordinate (T) at (0.8,0.4);
-
-\fill[blue, fill opacity = 0.5] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-
-\fill[white] (Q)--(R)--(S)--(T)--cycle;
-\draw[thick] (Q)--(R)--(S)--(T)--cycle;
-
-\node at (0.4,0.8) {$P_1$};
-\node at (0.7,0.3) {$P_2$};
-
-\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
-	\draw[fill=black] (\pt) circle (0.25pt);
-}
-\useasboundingbox (0,0) rectangle (1,1);
-\end{tikzpicture}
-}
-
-\newcommand{\ConvexHull}{
-\begin{tikzpicture}[scale=4]
-\coordinate (A) at (0.1802,0.8712);
-\coordinate (B) at (0.2573,0.7795);
-\coordinate (C) at (0.0331,0.6281);
-\coordinate (D) at (0.2457,0.6223);
-\coordinate (E) at (0.2806,0.5088);
-\coordinate (F) at (0.3723,0.6136);
-\coordinate (G) at (0.3621,0.3996);
-\coordinate (H) at (0.4306,0.3297);
-\coordinate (I) at (0.5266,0.3195);
-\coordinate (J) at (0.5630,0.0677);
-\coordinate (K) at (0.8629,0.2103);
-\coordinate (L) at (0.9401,0.5189);
-\coordinate (M) at (0.7086,0.4942);
-\coordinate (N) at (0.5892,0.6529);
-\coordinate (O) at (0.6693,0.8014);
-\coordinate (P) at (0.3985,0.9382);
-
-\coordinate (Q) at (0.6,0.4);
-\coordinate (R) at (0.6,0.2);
-\coordinate (S) at (0.8,0.2);
-\coordinate (T) at (0.8,0.4);
-
-\fill[green, fill opacity = 0.25] (A)--(C)--(J)--(K)--(L)--(O)--(P)--cycle;
-\draw[thick] (A)--(C)--(J)--(K)--(L)--(O)--(P)--cycle;
-
-\node at (0.5,0.5) {$A$};
-
-\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
-	\draw[fill=black] (\pt) circle (0.25pt);
-}
-\useasboundingbox (0,0) rectangle (1,1);
-\end{tikzpicture}
-}
-
-\newcommand{\Trous}{
-\begin{tikzpicture}[scale = 4]
-
-\coordinate (A) at (0.1802,0.8712);
-\coordinate (B) at (0.2573,0.7795);
-\coordinate (C) at (0.0331,0.6281);
-\coordinate (D) at (0.2457,0.6223);
-\coordinate (E) at (0.2806,0.5088);
-\coordinate (F) at (0.3723,0.6136);
-\coordinate (G) at (0.3621,0.3996);
-\coordinate (H) at (0.4306,0.3297);
-\coordinate (I) at (0.5266,0.3195);
-\coordinate (J) at (0.5630,0.0677);
-\coordinate (K) at (0.8629,0.2103);
-\coordinate (L) at (0.9401,0.5189);
-\coordinate (M) at (0.7086,0.4942);
-\coordinate (N) at (0.5892,0.6529);
-\coordinate (O) at (0.6693,0.8014);
-\coordinate (P) at (0.3985,0.9382);
-
-\coordinate (Q) at (0.6,0.4);
-\coordinate (R) at (0.6,0.2);
-\coordinate (S) at (0.8,0.2);
-\coordinate (T) at (0.8,0.4);
-
-\fill[blue, fill opacity = 0.25] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-\draw[thick] (A)--(B)--(C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--(K)--(L)--(M)--(N)--(O)--(P)--cycle;
-
-\fill[red, fill opacity = 0.25] (A)--(B)--(C)--cycle;
-\draw[thick] (A)--(B)--(C)--cycle;
-
-\fill[red, fill opacity = 0.25] (C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--cycle;
-\draw[thick] (C)--(D)--(E)--(F)--(G)--(H)--(I)--(J)--cycle;
-
-\fill[red, fill opacity = 0.25] (L)--(M)--(N)--(O)--cycle;
-\draw[thick] (L)--(M)--(N)--(O)--cycle;
-
-\fill[white] (Q)--(R)--(S)--(T)--cycle;
-\draw[thick] (Q)--(R)--(S)--(T)--cycle;
-
-\node at (0.1709,0.7677) {\tiny $B_1$};
-\node at (0.3009,0.4416) {\tiny $B_2$};
-\node at (0.7272,0.6228) {\tiny $B_3$};
-\node at (0.7,0.3) {$P_2$};
-
-\foreach \pt in {A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T}{
-	\draw[fill=black] (\pt) circle (0.25pt);
-}
-\useasboundingbox (0,0) rectangle (1,1);
-\end{tikzpicture}
-}
-
-\begin{tikzpicture}
-
-\node (PolygonInit){\PolygonInit};
-
-\node[right of=PolygonInit, xshift = 1.5cm] (Egalite){$=$};
-
-\node[right of=Egalite, xshift = 1.5cm] (ConvexHull) {\ConvexHull};
-
-\node[right of=ConvexHull, xshift = 1.5cm] (Soustraction){$-$};
-
-\node[right of=Soustraction, xshift = 1.5cm] (Trous) {\Trous};
-
-\end{tikzpicture}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon_pattern(
+    data = square,
+    pattern = "crosshatch",
+    pattern_angle = 45,
+    pattern_spacing = 0.035,
+    pattern_color = "gray",
+    pattern_fill = "gray",
+    pattern_size = 0.05,
+    pattern_density = 0.05,
+    fill = "white",
+    color = "black"
+  )+
+  geom_polygon(
+    data=poly,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_polygon(
+    data=poly_small,
+    color = "green", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_point(data=poly, size=5)+
+  theme_void()
 ```
-
-
 

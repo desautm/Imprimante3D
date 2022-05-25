@@ -462,7 +462,7 @@ class: inverse, center, middle
   
   - L'intersection
 
-- Une droite orientée définit un demi-plan `\(H\)` se trouvant à gauche de la droite lorsqu'on se déplace dans la direction définit par l'orientation.
+- Une droite orientée définit un demi-plan `\(H\)` se trouvant à gauche de la droite lorsqu'on se déplace dans la direction définie par l'orientation.
 
 ---
 class: center, middle
@@ -761,6 +761,7 @@ Chaque noeud `\(A\)`, `\(B_1\)`, `\(B_2\)`, `\(C\)`, `\(D_1\)`, `\(D_2\)`, `\(D_
 
 .pull-left[
 ![](index_files/figure-html/unnamed-chunk-77-1.png)&lt;!-- --&gt;
+On débute en divisant notre région en 4 rectangles et nous étudions chacun d'eux séparément.
 ]
 
 .pull-right[
@@ -771,6 +772,7 @@ Chaque noeud `\(A\)`, `\(B_1\)`, `\(B_2\)`, `\(C\)`, `\(D_1\)`, `\(D_2\)`, `\(D_
 
 .pull-left[
 ![](index_files/figure-html/unnamed-chunk-79-1.png)&lt;!-- --&gt;
+Pour chacun des quatre rectangles, nous pouvons "simplifier" l'arbre en évaluant chacune des arêtes du rectangle avec les feuilles de l'arbre. Considérons les deux rectangles du haut et l'arête supérieure du trou `\(P_2\)`. En évaluant les quatre arêtes des rectangles par le demi-plan défini par l'arête supérieure du trou, nous obtenons `FAUX`.
 ]
 
 .pull-right[
@@ -781,6 +783,7 @@ Chaque noeud `\(A\)`, `\(B_1\)`, `\(B_2\)`, `\(C\)`, `\(D_1\)`, `\(D_2\)`, `\(D_
 
 .pull-left[
 ![](index_files/figure-html/unnamed-chunk-81-1.png)&lt;!-- --&gt;
+En étudiant uniquement le rectangle en haut à gauche et en utilisant le même argument, aucun point de ce rectangle n'intersecte `\(B_2\)`.
 ]
 
 .pull-right[
@@ -791,46 +794,100 @@ Chaque noeud `\(A\)`, `\(B_1\)`, `\(B_2\)`, `\(C\)`, `\(D_1\)`, `\(D_2\)`, `\(D_
 
 .pull-left[
 ![](index_files/figure-html/unnamed-chunk-83-1.png)&lt;!-- --&gt;
+Nous subdivisons ensuite le rectangle en haut à gauche en quatres rectangles.
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-84-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-84-1.png" width="90%" /&gt;
 ]
 
+---
+
+.pull-left[
+![](index_files/figure-html/unnamed-chunk-85-1.png)&lt;!-- --&gt;
+En étudiant uniquement le sous-rectangle en haut à droite, nous remarquons qu'il n'intersecte pas les polygones `\(C\)`, `\(D_1\)` et `\(D_2\)`.
+]
+
+.pull-right[
+&lt;img src="index_files/figure-html/unnamed-chunk-86-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+]
 
 ---
 class:center, middle
 
-![](index_files/figure-html/unnamed-chunk-85-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-87-1.png)&lt;!-- --&gt;
+
+---
+class:inverse, center, middle
+
+# Rapetisser la grille pour tenir compte de la largeur du filament
+
+---
+
+## Rapetisser la grille
+
+- Maintenant que nous savons quels sont les pixels se trouvant à l'intérieur de la région, nous pouvons déterminer les pixels à ne pas inclure pour produire le chemin que doit emprunter la buse. 
+
+- Nous allons poser `\(r\)` la demie-largeur de la buse. Nous voulons donc déplacer chaque arête vers l'intérieur de la région d'une distance `\(r\)`.
+
+- Pour chaque arête de notre région, nous créons un rectangle de largeur `\(r\)` et nous posons tous les pixels à l'intérieur de cette région comme `FAUX`.
+
+---
+class:center,middle
+
+![](index_files/figure-html/unnamed-chunk-88-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-86-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-89-1.png)&lt;!-- --&gt;
+
+---
+class:middle, center
+
+&lt;iframe src="https://www.geogebra.org/classic/fuebudnz?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"&gt;&lt;/iframe&gt;
+
+---
+class: center, middle
+
+![](index_files/figure-html/unnamed-chunk-90-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+
+![](index_files/figure-html/unnamed-chunk-91-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle
+
+![](index_files/figure-html/unnamed-chunk-92-1.png)&lt;!-- --&gt;
 
 
+---
+class:center, middle, inverse
 
+# Les hachures
 
+---
+class: middle, center
 
+![](index_files/figure-html/unnamed-chunk-93-1.png)&lt;!-- --&gt;
 
+---
 
+## Les hachures
 
+- Pour créer des hachures, on génère de nombreuses équations de droites.
 
+- Pour chacune de ces droites, on trouve les intersections de celles-ci avec les frontières de notre arbre GCS.
 
-
+- Pour chacun des segments trouvés, on vérifie si le point milieu du segment est à *l'intérieur* ou à *l'extérieur* de notre solide.
 
 
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-87-1.png)&lt;!-- --&gt;
-
----
-class: middle, center
-
-![](index_files/figure-html/unnamed-chunk-88-1.png)&lt;!-- --&gt;
-
-
+![](index_files/figure-html/unnamed-chunk-94-1.png)&lt;!-- --&gt;
 
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
