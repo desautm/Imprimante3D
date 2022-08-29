@@ -4200,7 +4200,9 @@ ggplot() +
 
 - Pour chacune de ces droites, on trouve les intersections de celles-ci avec les frontières de notre arbre GCS.
 
-- Pour chacun des segments trouvés, on vérifie si le point milieu du segment est à *l'intérieur* ou à *l'extérieur* de notre solide.
+- On place ensuite ces points en ordre sur la droite.
+
+- Pour chacun des segments reliant deux points d'intersection adjacents, on vérifie si le point milieu du segment est à *l'intérieur* ou à *l'extérieur* de notre solide.
 
 ---
 class: middle, center
@@ -4247,3 +4249,57 @@ ggplot() +
   theme_void()
 ```
 
+---
+class: middle, center
+
+```{r}
+square <- tribble(
+  ~x, ~y,
+  0, 0,
+  1, 0,
+  1, 1,
+  0, 1
+)
+
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon_pattern(
+    data = square,
+    pattern = "crosshatch",
+    pattern_angle = 45,
+    pattern_spacing = 0.035,
+    pattern_color = "gray",
+    pattern_fill = "gray",
+    pattern_size = 0.05,
+    pattern_density = 0.05,
+    fill = "white",
+    color = "black"
+  )+
+  geom_polygon(
+    data=poly,
+    aes(subgroup=holes),
+    color = "bisque", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_polygon(
+    data=poly_small,
+    color = "green", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_abline(aes(intercept=0.89,slope=-1),color ="red",size=1.5)+
+  geom_point(data=poly, size=5, color = "burlywood")+
+  geom_point(aes(x=0.185,y=0.705),color="blue",size=3)+
+  geom_point(aes(x=0.25,y=0.64),color="blue",size=3)+
+  geom_point(aes(x=0.265,y=0.625),color="blue",size=3)+
+  geom_point(aes(x=0.315,y=0.575),color="blue",size=3)+
+  geom_point(aes(x=0.387,y=0.505),color="blue",size=3)+
+  geom_point(aes(x=0.58,y=0.31),color="blue",size=3)+
+  geom_point(aes(x=0.71,y=0.18),color="blue",size=3)+
+  geom_point(aes(x=0.725,y=0.165),color="blue",size=3)+
+  theme_void()+
+  coord_fixed(ratio = 1)
+```
