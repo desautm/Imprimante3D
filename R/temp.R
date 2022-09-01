@@ -316,7 +316,7 @@ ggplot() +
   geom_polygon(
     data=poly,
     aes(subgroup=holes),
-    color = "black", 
+    color = "bisque", 
     fill = "#3b528b",
     alpha = 0,
     size=1.5
@@ -329,12 +329,28 @@ ggplot() +
     size=1.5
   )+
   geom_abline(aes(intercept=0.89,slope=-1),color ="red",size=1.5)+
-  geom_point(data=poly, size=5)+
+  geom_point(data=poly, size=5, color = "burlywood")+
   geom_point(aes(x=0.185,y=0.705),color="blue",size=3)+
+  geom_label(aes(x=0.22,y=0.705), label="1")+
   geom_point(aes(x=0.25,y=0.64),color="blue",size=3)+
+  geom_label(aes(x=0.22,y=0.64), label="2")+
   geom_point(aes(x=0.265,y=0.625),color="blue",size=3)+
+  geom_label(aes(x=0.29,y=0.625), label="3")+
   geom_point(aes(x=0.315,y=0.575),color="blue",size=3)+
+  geom_label(aes(x=0.29,y=0.575), label="4")+
+  geom_point(aes(x=0.387,y=0.505),color="blue",size=3)+
+  geom_label(aes(x=0.42,y=0.505), label="5")+
+  geom_point(aes(x=0.58,y=0.31),color="blue",size=3)+
+  geom_label(aes(x=0.55,y=0.31), label="6")+
+  geom_point(aes(x=0.71,y=0.18),color="blue",size=3)+
+  geom_label(aes(x=0.71,y=0.21), label="7")+
+  geom_point(aes(x=0.725,y=0.165),color="blue",size=3)+
+  geom_label(aes(x=0.7,y=0.14), label="8")+
   theme_void()+
   coord_fixed(ratio = 1)
 
 
+t <- 0.5
+R <- tibble(R = seq(from=1, to = 10, by = 0.5))
+R %>% 
+  mutate(r = (t+sqrt(t^2+4*R^2))/2)

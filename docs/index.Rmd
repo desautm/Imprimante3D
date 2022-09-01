@@ -26,6 +26,7 @@ library(latex2exp)
 library(ggpattern)
 library(ggpubr)
 library(sp)
+library(kableExtra)
 
 poly <- tribble(
   ~x, ~y, ~holes, ~id,
@@ -134,20 +135,6 @@ class:inverse, middle, center
 # Quelques rappels
 
 ---
-
-# TODO...
-
-- Équation de droite $\overrightarrow{\textbf{r}}=\overrightarrow{\textbf{r}_0}+t\overrightarrow{\textbf{v}}$
-
-- Équation du plan
-
-- Intersection droite avec plan (seulement savoir si il y a intersection et ensuite trouver l'intersection)
-
-- Trouver distance point-droite
-
-- Est-ce qu'un point est au-dessus ou au-dessous d'une droite?
-
----
 class:inverse, center, middle
 
 # L'équation d'une droite dans le plan
@@ -166,7 +153,7 @@ class: center, middle
 \draw (0.6,{-0.6*4/7+45/28})--++($0.015*(4,7)$)--++($0.015*(-7,4)$);
 \draw[-stealth, thick, red] (0.5,{-0.5*4/7+45/28}) --++($0.1*(4,7)$) node[right] {\small{$\vec n = (a;b)$}};
 \draw[fill=black] (0.5,{-0.5*4/7+45/28}) circle (1pt) node[below] {\small{$(x_0;y_0)$}};
-\draw[fill=black] (0,{45/28}) circle (1pt) node[below left] {\small{$-c$}};
+\draw[fill=black] (0,{45/28}) circle (1pt) node[below left] {\small{$-\frac{c}{b}$}};
 
 \draw[-stealth, thick, black] (0.5,{-0.5*4/7+45/28}) --++($-0.2*(-7,4)$) node[above right] {\small{$(x;y)$}};
 \draw[fill=black] (1.9,{-1.9*4/7+45/28}) circle (1pt);
@@ -176,6 +163,11 @@ class: center, middle
 
 \end{tikzpicture}
 ```
+
+---
+class:middle, center
+
+<iframe src="https://www.geogebra.org/classic/fuebudnz?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>
 
 ---
 class:inverse, center, middle
@@ -446,6 +438,39 @@ class: inverse, center, middle
 
 \end{tikzpicture}
 ```
+
+---
+
+## Intersection Triangle - Plan
+
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=0.5]
+
+\coordinate (O)  at (0,0);
+\coordinate (P1) at (-3,-0.5);
+\coordinate (P2) at ($(P1)+(2,1)$);
+\coordinate (P3) at ($(P2)+(4,0)$);
+\coordinate (P4) at ($(P3)+(-2,-1)$);
+\coordinate[label=left:{$(v_{1_x},v_{1_y},v_{1_z})$}] (V1) at (-1,-2);
+\coordinate[label=left:{$(v_{2_x},v_{2_y},v_{2_z})$}] (V2) at ($(V1)+(3,3.5)$);
+\coordinate (I) at ($(V2)!0.4!(V1)$);
+
+\draw[dashed] (I)--($(I)!0.29!(V1)$);
+\filldraw[black, fill=blue!75!white, fill opacity=0.75] (P1)--(P2)--(P3)--(P4)--cycle;
+\draw (V2)--(I);
+\draw ($(I)!0.29!(V1)$)--(V1);
+
+\foreach \pt in {V1,V2,I}{
+	\draw[fill=black] (\pt) circle (1pt);
+}
+
+\end{tikzpicture}
+```
+
+- L'équation du segment de droite est donnée par $(x,y,z)=(v_{1_x},v_{1_y},v_{1_z})+t(v_{2_x}-v_{1_x},v_{2_y}-v_{1_y},v_{2_z}-v_{1_z})$.
+
+- On résoud pour $z=0$
 
 - Nous avons donc une collection de points que nous relions ensemble pour former un polygone.
 
@@ -4303,3 +4328,209 @@ ggplot() +
   theme_void()+
   coord_fixed(ratio = 1)
 ```
+
+---
+class: middle, center
+
+```{r}
+square <- tribble(
+  ~x, ~y,
+  0, 0,
+  1, 0,
+  1, 1,
+  0, 1
+)
+
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon_pattern(
+    data = square,
+    pattern = "crosshatch",
+    pattern_angle = 45,
+    pattern_spacing = 0.035,
+    pattern_color = "gray",
+    pattern_fill = "gray",
+    pattern_size = 0.05,
+    pattern_density = 0.05,
+    fill = "white",
+    color = "black"
+  )+
+  geom_polygon(
+    data=poly,
+    aes(subgroup=holes),
+    color = "bisque", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_polygon(
+    data=poly_small,
+    color = "green", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_abline(aes(intercept=0.89,slope=-1),color ="red",size=1.5)+
+  geom_point(data=poly, size=5, color = "burlywood")+
+  geom_point(aes(x=0.185,y=0.705),color="blue",size=3)+
+  geom_label(aes(x=0.22,y=0.705), label="1")+
+  geom_point(aes(x=0.25,y=0.64),color="blue",size=3)+
+  geom_label(aes(x=0.22,y=0.64), label="2")+
+  geom_point(aes(x=0.265,y=0.625),color="blue",size=3)+
+  geom_label(aes(x=0.29,y=0.625), label="3")+
+  geom_point(aes(x=0.315,y=0.575),color="blue",size=3)+
+  geom_label(aes(x=0.29,y=0.575), label="4")+
+  geom_point(aes(x=0.387,y=0.505),color="blue",size=3)+
+  geom_label(aes(x=0.42,y=0.505), label="5")+
+  geom_point(aes(x=0.58,y=0.31),color="blue",size=3)+
+  geom_label(aes(x=0.55,y=0.31), label="6")+
+  geom_point(aes(x=0.71,y=0.18),color="blue",size=3)+
+  geom_label(aes(x=0.71,y=0.21), label="7")+
+  geom_point(aes(x=0.725,y=0.165),color="blue",size=3)+
+  geom_label(aes(x=0.7,y=0.14), label="8")+
+  theme_void()+
+  coord_fixed(ratio = 1)
+```
+
+---
+class: middle, center
+
+```{r}
+ggplot() +
+  aes(x=x,y=y)+
+  geom_polygon(
+    data=poly,
+    aes(subgroup=holes),
+    color = "black", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_polygon_pattern(
+    data = poly_small,
+    pattern = "crosshatch",
+    pattern_angle = 45,
+    pattern_spacing = 0.035,
+    pattern_color = "green",
+    pattern_fill = "green",
+    pattern_size = 0.05,
+    pattern_density = 0.05,
+    fill = "white",
+    color = "black"
+  )+
+  geom_polygon(
+    data=poly_small,
+    color = "green", 
+    fill = "#3b528b",
+    alpha = 0,
+    size=1.5
+  )+
+  geom_point(data=poly, size=5)+
+  theme_void()
+```
+
+---
+class:inverse, center, middle
+
+# Correctif lors du tracage d'arcs de cercles
+
+---
+
+## Arcs de cercle
+
+.pull-left[
+
+- Lorsque la buse se déplace en ligne droite, elle dépose du matériel également de chaque côté de sa ligne centrale.
+
+- Si $R$ est très grand, nous avons $r\approx R+t/2$.
+
+- Par contre, lorsqu'un arc de cercle est créé, moins de matériel est nécessaire à l'intérieur de l'arc par rapport à l'extérieur.
+
+]
+
+.pull-right[
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=1.25]
+
+\def\R{2}
+\def\r{2.25}
+\def\A{2.5}
+
+\draw[blue] (0,\r) arc (90:180:\r) node[below] {\small{chemin}};
+\draw (0,\R) arc (90:180:\R);
+\draw (0,\A) arc (90:180:\A);
+
+\draw[->, gray] (0,0)--(150:\r) node[midway,above] {$r$};
+\draw[->, gray] (0,0)--(170:\R) node[midway,below] {$R$};
+
+\draw[<->] (0.1,\R)--(0.1,\A) node[right, midway] {$t$};
+
+\node at (120:2.125) {\small{$A_i$}};
+
+\end{tikzpicture}
+```
+]
+
+
+---
+
+## Arcs de cercle
+
+.pull-left[
+
+- En considérant le cercle entier, posons la circonférence du cercle $L=2\pi r$.
+
+- Pour une ligne droite ( $R$ infini) nous avons $A_i=2\pi r \cdot t/2=\pi r t$
+.
+
+- Pour un arc de cercle ( $R$ fini) nous avons $A_i=\pi(r^2-R^2)
+$.
+
+- En posant les deux équations précédentes égales, nous obtenons l'équation $r^2-rt-R^2=0$, qui possède la racine positive $r=(t+\sqrt{t^2+4R^2})/2$.
+
+]
+
+.pull-right[
+```{tikz}
+\usetikzlibrary{calc}
+\begin{tikzpicture}[scale=1.25]
+
+\def\R{2}
+\def\r{2.25}
+\def\A{2.5}
+
+\draw[blue] (0,\r) arc (90:180:\r) node[below] {\small{chemin}};
+\draw (0,\R) arc (90:180:\R);
+\draw (0,\A) arc (90:180:\A);
+
+\draw[->, gray] (0,0)--(150:\r) node[midway,above] {$r$};
+\draw[->, gray] (0,0)--(170:\R) node[midway,below] {$R$};
+
+\draw[<->] (0.1,\R)--(0.1,\A) node[right, midway] {$t$};
+
+\node at (120:2.125) {\small{$A_i$}};
+
+\end{tikzpicture}
+```
+]
+
+---
+
+```{r}
+t <- 0.5
+R <- tibble(R = seq(from=1, to = 10, by = 0.5))
+arc <- R %>% 
+  mutate(r = (t+sqrt(t^2+4*R^2))/2) %>% 
+  mutate(`R+t/2` = R+t/2) %>% 
+  mutate(`Différence` = abs(R+t/2-r))
+
+arc %>% 
+  kable(format = "html") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),font_size = 16)
+```
+
+
+
+
+

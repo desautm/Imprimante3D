@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3 Portable) (preloaded format=pdflatex 2022.4.27)  29 APR 2022 10:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.8.28 Portable) (preloaded format=pdflatex 2022.8.30)  1 SEP 2022 11:47
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -8,8 +8,8 @@ entations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/intersection_segment_plane.tex
 
 (C:/Users/mdesautels/OneDrive - CEGEP SAINT-JEAN-SUR-RICHELIEU/Documents/Presen
 tations/Congres AMQ/AMQ 2022/Imprimante3D/tikz/intersection_segment_plane.tex
-LaTeX2e <2021-11-15> patch level 1
-L3 programming layer <2022-04-20>
+LaTeX2e <2022-06-01> patch level 5
+L3 programming layer <2022-08-23>
 (C:\Miktex\texmfs\install\tex/latex/standalone\standalone.cls
 Document Class: standalone 2018/03/26 v1.3a Class to compile TeX sub-files stan
 dalone
@@ -24,7 +24,7 @@ Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 ))
 (C:\Miktex\texmfs\install\tex/latex/xkeyval\xkeyval.sty
-Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
+Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 
 (C:\Miktex\texmfs\install\tex/generic/xkeyval\xkeyval.tex
 (C:\Miktex\texmfs\install\tex/generic/xkeyval\xkvutils.tex
@@ -59,7 +59,7 @@ File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip48
 \bibindent=\dimen138
 )
-\sa@box=\box50
+\sa@box=\box51
 )
 (C:\Miktex\texmfs\install\tex/latex/pgf/frontendlayer\tikz.sty
 (C:\Miktex\texmfs\install\tex/latex/pgf/basiclayer\pgf.sty
@@ -71,7 +71,7 @@ File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
 
 (C:\Miktex\texmfs\install\tex/generic/pgf/utilities\pgfutil-common-lists.tex))
 (C:\Miktex\texmfs\install\tex/generic/pgf/utilities\pgfutil-latex.def
-\pgfutil@abb=\box51
+\pgfutil@abb=\box52
 )
 (C:\Miktex\texmfs\install\tex/generic/pgf/utilities\pgfrcs.code.tex
 (C:\Miktex\texmfs\install\tex/generic/pgf\pgf.revision.tex)
@@ -84,7 +84,7 @@ Package: pgf 2021/05/15 v3.1.9a (3.1.9a)
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 
 (C:\Miktex\texmfs\install\tex/latex/graphics\graphics.sty
-Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
 
 (C:\Miktex\texmfs\install\tex/latex/graphics\trig.sty
 Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
@@ -151,21 +151,23 @@ File: pgfsyssoftpath.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 (C:\Miktex\texmfs\install\tex/generic/pgf/systemlayer\pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )) (C:\Miktex\texmfs\install\tex/latex/xcolor\xcolor.sty
-Package: xcolor 2021/10/31 v2.13 LaTeX color extensions (UK)
+Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
 
 (C:\Miktex\texmfs\install\tex/latex/graphics-cfg\color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
 )
 Package xcolor Info: Driver file: pdftex.def on input line 227.
-Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1352.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1356.
-Package xcolor Info: Model `RGB' extended on input line 1368.
-Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1370.
-Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1371.
-Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1372.
-Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1373.
-Package xcolor Info: Model `Gray' substituted by `gray' on input line 1374.
-Package xcolor Info: Model `wave' substituted by `hsb' on input line 1375.
+
+(C:\Miktex\texmfs\install\tex/latex-dev/graphics\mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
+Package xcolor Info: Model `RGB' extended on input line 1369.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1371.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1372.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1373.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1374.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
 )
 (C:\Miktex\texmfs\install\tex/generic/pgf/basiclayer\pgfcore.code.tex
 Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
@@ -176,7 +178,7 @@ Package: pgfcore 2021/05/15 v3.1.9a (3.1.9a)
 (C:\Miktex\texmfs\install\tex/generic/pgf/math\pgfmathparser.code.tex
 \pgfmath@dimen=\dimen153
 \pgfmath@count=\count269
-\pgfmath@box=\box52
+\pgfmath@box=\box53
 \pgfmath@toks=\toks25
 \pgfmath@stack@operand=\toks26
 \pgfmath@stack@operation=\toks27
@@ -228,9 +230,9 @@ File: pgfcorepathusage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \pgf@shorten@start@additional=\dimen171
 ) (C:\Miktex\texmfs\install\tex/generic/pgf/basiclayer\pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfpic=\box53
-\pgf@hbox=\box54
-\pgf@layerbox@main=\box55
+\pgfpic=\box54
+\pgf@hbox=\box55
+\pgf@layerbox@main=\box56
 \pgf@picture@serial@count=\count271
 )
 (C:\Miktex\texmfs\install\tex/generic/pgf/basiclayer\pgfcoregraphicstate.code.t
@@ -270,7 +272,7 @@ File: pgfcoreimage.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 
 (C:\Miktex\texmfs\install\tex/generic/pgf/basiclayer\pgfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfexternal@startupbox=\box56
+\pgfexternal@startupbox=\box57
 )) (C:\Miktex\texmfs\install\tex/generic/pgf/basiclayer\pgfcorelayers.code.tex
 File: pgfcorelayers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
@@ -286,7 +288,7 @@ File: pgfcorerdf.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )))
 (C:\Miktex\texmfs\install\tex/generic/pgf/modules\pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2021/05/15 v3.1.9a (3.1.9a)
-\pgfnodeparttextbox=\box57
+\pgfnodeparttextbox=\box58
 )
 (C:\Miktex\texmfs\install\tex/generic/pgf/modules\pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2021/05/15 v3.1.9a (3.1.9a)
@@ -329,10 +331,10 @@ File: pgflibraryplothandlers.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 \tikz@lastmovetoy=\dimen188
 \tikzleveldistance=\dimen189
 \tikzsiblingdistance=\dimen190
-\tikz@figbox=\box58
-\tikz@figbox@bg=\box59
-\tikz@tempbox=\box60
-\tikz@tempbox@bg=\box61
+\tikz@figbox=\box59
+\tikz@figbox@bg=\box60
+\tikz@tempbox=\box61
+\tikz@tempbox@bg=\box62
 \tikztreelevel=\count275
 \tikznumberofchildren=\count276
 \tikznumberofcurrentchild=\count277
@@ -355,9 +357,9 @@ arycalc.code.tex
 File: tikzlibrarycalc.code.tex 2021/05/15 v3.1.9a (3.1.9a)
 )
 (C:\Miktex\texmfs\install\tex/latex/l3backend\l3backend-pdftex.def
-File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
+File: l3backend-pdftex.def 2022-08-23 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count283
-\l__pdf_internal_box=\box62
+\l__pdf_internal_box=\box63
 )
 (intersection_segment_plane.aux)
 \openout1 = `intersection_segment_plane.aux'.
@@ -381,7 +383,7 @@ LaTeX Font Info:    ... okay on input line 6.
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count284
 \scratchdimen=\dimen191
-\scratchbox=\box63
+\scratchbox=\box64
 \nofMPsegments=\count285
 \nofMParguments=\count286
 \everyMPshowfont=\toks30
@@ -399,26 +401,28 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
 ))
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 23.
+(Font)              <7> on input line 15.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 23.
+(Font)              <5> on input line 15.
  [1
 
 {C:/Miktex/texmfs/data/fonts/map/pdftex/pdftex.map}] (intersection_segment_plan
 e.aux) ) 
 Here is how much of TeX's memory you used:
- 12597 strings out of 478547
- 263194 string characters out of 2851257
- 521650 words of memory out of 3000000
- 30620 multiletter control sequences out of 15000+600000
+ 12519 strings out of 477843
+ 261508 string characters out of 2833021
+ 530906 words of memory out of 3000000
+ 31242 multiletter control sequences out of 15000+600000
  469259 words of font info for 28 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 100i,7n,104p,555b,619s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 100i,7n,104p,555b,621s stack positions out of 10000i,1000n,20000p,200000b,80000s
 <C:/Miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:
-/Miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmr7.pfb>
-Output written on intersection_segment_plane.pdf (1 page, 20361 bytes).
+/Miktex/texmfs/install/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Miktex/texm
+fs/install/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Miktex/texmfs/install/f
+onts/type1/public/amsfonts/cm/cmr7.pfb>
+Output written on intersection_segment_plane.pdf (1 page, 36501 bytes).
 PDF statistics:
- 19 PDF objects out of 1000 (max. 8388607)
+ 29 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  13 words of extra memory for PDF output out of 10000 (max. 10000000)
 

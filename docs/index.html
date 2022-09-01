@@ -11,6 +11,8 @@
     <script src="libs/tile-view/tile-view.js"></script>
     <link href="libs/animate.css/animate.xaringan.css" rel="stylesheet" />
     <link href="libs/tachyons/tachyons.min.css" rel="stylesheet" />
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
   </head>
   <body>
     <textarea id="source">
@@ -50,20 +52,6 @@ class:inverse, middle, center
 # Quelques rappels
 
 ---
-
-# TODO...
-
-- Équation de droite `\(\overrightarrow{\textbf{r}}=\overrightarrow{\textbf{r}_0}+t\overrightarrow{\textbf{v}}\)`
-
-- Équation du plan
-
-- Intersection droite avec plan (seulement savoir si il y a intersection et ensuite trouver l'intersection)
-
-- Trouver distance point-droite
-
-- Est-ce qu'un point est au-dessus ou au-dessous d'une droite?
-
----
 class:inverse, center, middle
 
 # L'équation d'une droite dans le plan
@@ -72,6 +60,11 @@ class:inverse, center, middle
 class: center, middle
 
 ![](index_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+
+---
+class:middle, center
+
+&lt;iframe src="https://www.geogebra.org/classic/fuebudnz?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"&gt;&lt;/iframe&gt;
 
 ---
 class:inverse, center, middle
@@ -216,6 +209,16 @@ class: inverse, center, middle
 
 ![](index_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
 
+---
+
+## Intersection Triangle - Plan
+
+![](index_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+- L'équation du segment de droite est donnée par `\((x,y,z)=(v_{1_x},v_{1_y},v_{1_z})+t(v_{2_x}-v_{1_x},v_{2_y}-v_{1_y},v_{2_z}-v_{1_z})\)`.
+
+- On résoud pour `\(z=0\)`
+
 - Nous avons donc une collection de points que nous relions ensemble pour former un polygone.
 
 - Le tour est donc joué! 
@@ -234,32 +237,32 @@ class: middle, center
 
 ## En théorie nous obtenons ceci
 
-![](index_files/figure-html/unnamed-chunk-6-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center
 
 ## En pratique nous obtenons plutôt cela
 
-![](index_files/figure-html/unnamed-chunk-7-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
 
 ---
 
 ## Comment passer de l'un à l'autre?
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
-![](index_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
 ]
 
 ---
 
 ## Trouver le plus proche voisin?
 
-&lt;img src="index_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-11-1.png" style="display: block; margin: auto;" /&gt;
 
 --
 
@@ -291,11 +294,6 @@ class: middle, center
 
 ---
 class:middle, center
-
-![](index_files/figure-html/unnamed-chunk-12-1.png)&lt;!-- --&gt;
-
----
-class: middle, center
 
 ![](index_files/figure-html/unnamed-chunk-13-1.png)&lt;!-- --&gt;
 
@@ -340,6 +338,11 @@ class: middle, center
 ![](index_files/figure-html/unnamed-chunk-21-1.png)&lt;!-- --&gt;
 
 ---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+
+---
 class: inverse, center, middle
 
 # Simplifier des droites
@@ -359,16 +362,13 @@ d &amp;= \frac{\left|\overrightarrow{QP}\cdot \vec n \right|}{\left\lVert\vec n\
 ]
 
 .pull-right[
-![](index_files/figure-html/unnamed-chunk-22-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
 ]
 
 --
 
 - De plus, le signe du produit scalaire indique si le point est **au-dessus** ou **en-dessous** de la droite.
 
----
-class:middle, center
-![](index_files/figure-html/unnamed-chunk-23-1.png)&lt;!-- --&gt;
 ---
 class:middle, center
 ![](index_files/figure-html/unnamed-chunk-24-1.png)&lt;!-- --&gt;
@@ -393,6 +393,9 @@ class:middle, center
 ---
 class:middle, center
 ![](index_files/figure-html/unnamed-chunk-31-1.png)&lt;!-- --&gt;
+---
+class:middle, center
+![](index_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
 
 ---
 class:middle, center
@@ -409,7 +412,7 @@ class: inverse, center, middle
 ## La largeur du filament
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-32-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
@@ -426,12 +429,12 @@ class: inverse, center, middle
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-33-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-34-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
 
 ---
 class: inverse, center, middle
@@ -467,14 +470,14 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-35-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
 
 Nous pouvons voir `\(H\)` comme une fonction booléenne sur le plan: `\(H(p)=\textbf{VRAI}\)` si et seulement si `\(p\in H\)`.
 
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-36-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
 
 ---
 class:middle, center
@@ -485,32 +488,32 @@ class:middle, center
 
 # Le complément
 
-![](index_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'union
 
-![](index_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-39-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'intersection
 
-![](index_files/figure-html/unnamed-chunk-39-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
 
 ---
 
 # La différence
 
-![](index_files/figure-html/unnamed-chunk-40-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-41-1.png)&lt;!-- --&gt;
 
 ---
 
 # L'expression d'une région convexe
 
 .center[
-![](index_files/figure-html/unnamed-chunk-41-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -531,11 +534,6 @@ class: inverse, center, middle
 ---
 class: center, middle
 
-![](index_files/figure-html/unnamed-chunk-42-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-
 ![](index_files/figure-html/unnamed-chunk-43-1.png)&lt;!-- --&gt;
 
 ---
@@ -544,13 +542,14 @@ class: center, middle
 ![](index_files/figure-html/unnamed-chunk-44-1.png)&lt;!-- --&gt;
 
 ---
+class: center, middle
+
+![](index_files/figure-html/unnamed-chunk-45-1.png)&lt;!-- --&gt;
+
+---
 class:middle, center, inverse
 
 # L'algorithme QuickHull
-
----
-class: center, middle
-![](index_files/figure-html/unnamed-chunk-45-1.png)&lt;!-- --&gt;
 
 ---
 class: center, middle
@@ -593,6 +592,10 @@ class: center, middle
 ![](index_files/figure-html/unnamed-chunk-55-1.png)&lt;!-- --&gt;
 
 ---
+class: center, middle
+![](index_files/figure-html/unnamed-chunk-56-1.png)&lt;!-- --&gt;
+
+---
 class: middle, center
 
 &lt;img src="quickhull.gif" width="75%" /&gt;
@@ -601,11 +604,6 @@ class: middle, center
 class: middle, center, inverse
 
 # La représentation d'un polygone sous forme d'arbre
-
----
-class: middle, center
-
-![](index_files/figure-html/unnamed-chunk-57-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center
@@ -627,9 +625,6 @@ class: middle, center
 
 ![](index_files/figure-html/unnamed-chunk-61-1.png)&lt;!-- --&gt;
 
-$$
-P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
-$$
 ---
 class: middle, center
 
@@ -638,17 +633,17 @@ class: middle, center
 $$
 P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
 $$
-
 ---
 class: middle, center
 
 ![](index_files/figure-html/unnamed-chunk-63-1.png)&lt;!-- --&gt;
+
 $$
 P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
 $$
 
 ---
-class:middle, center
+class: middle, center
 
 ![](index_files/figure-html/unnamed-chunk-64-1.png)&lt;!-- --&gt;
 $$
@@ -660,18 +655,26 @@ class:middle, center
 
 ![](index_files/figure-html/unnamed-chunk-65-1.png)&lt;!-- --&gt;
 $$
-P_1 = A \setminus \left( B_1 \cup B_2 \cup (C \setminus (D_1 \cup D_2)) \right)
+P_1 = A \setminus \left( B_1 \cup B_2 \cup B_3 \right)
 $$
----
-class: middle
 
-.pull-left[
+---
+class:middle, center
+
 ![](index_files/figure-html/unnamed-chunk-66-1.png)&lt;!-- --&gt;
+$$
+P_1 = A \setminus \left( B_1 \cup B_2 \cup (C \setminus (D_1 \cup D_2)) \right)
+$$
+---
+class: middle
+
+.pull-left[
+![](index_files/figure-html/unnamed-chunk-67-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-67-1.png" width="90%" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-68-1.png" width="90%" /&gt;
 
 ]
 
@@ -683,12 +686,12 @@ $$
 class: middle
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-68-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-69-1.png)&lt;!-- --&gt;
 
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-69-1.png" width="80%" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-70-1.png" width="80%" /&gt;
 
 ]
 
@@ -705,7 +708,7 @@ class: inverse, center, middle
 
 Puisque la buse de l'imprimate est positionnée à l'aide de moteurs pas à pas (*stepper motors*), ceux-ci ne peuvent se trouver qu'à un nombre discret de positions. Nous représenterons ces positions par une grille de points ou de pixels dans le plan.
 .center[
-![](index_files/figure-html/unnamed-chunk-70-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-71-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -713,7 +716,7 @@ Puisque la buse de l'imprimate est positionnée à l'aide de moteurs pas à pas 
 En considérant notre représentation GSC de la région à remplir comme une fonction booléenne `\(F\)` du plan, nous pouvons déterminer si les pixels sont à l'intérieur de notre région; c'est-à-dire `\(p\)` est dans la région si `\(F(p)\)` est `Vrai`.
 
 .center[
-![](index_files/figure-html/unnamed-chunk-71-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-72-1.png)&lt;!-- --&gt;
 ]
 ---
 
@@ -722,7 +725,7 @@ Pour déterminer quels pixels doivent être remplis, nous pourrions évaluer la 
 &gt; Soit un rectangle `\(R\)` et un demi-plan `\(H\)`, tous les points de `\(R\)` sont dans `\(H\)` si et seulement si les quatre sommets de `\(R\)` sont dans `\(H\)`.
 
 .center[
-![](index_files/figure-html/unnamed-chunk-72-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-73-1.png)&lt;!-- --&gt;
 ]
 
 ---
@@ -731,7 +734,7 @@ Pour déterminer quels pixels doivent être remplis, nous pourrions évaluer la 
 &gt; Soit un rectangle `\(R\)` et un demi-plan `\(H\)`, tous les points de `\(R\)` sont dans `\(H\)` si et seulement si les quatre sommets de `\(R\)` sont dans `\(H\)`
 
 .center[
-![](index_files/figure-html/unnamed-chunk-73-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-74-1.png)&lt;!-- --&gt;
 ]
 
 Ça ne fonctionne que si nous avons un polygone convexe!
@@ -743,79 +746,79 @@ Chaque noeud `\(A\)`, `\(B_1\)`, `\(B_2\)`, `\(C\)`, `\(D_1\)`, `\(D_2\)`, `\(D_
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-74-1.png" width="90%" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-75-1.png" width="90%" /&gt;
 ]
 
 ---
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-75-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-76-1.png)&lt;!-- --&gt;
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-76-1.png" width="90%" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-77-1.png" width="90%" /&gt;
 ]
 
 
 ---
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-77-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-78-1.png)&lt;!-- --&gt;
 On débute en divisant notre région en 4 rectangles et nous étudions chacun d'eux séparément.
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-78-1.png" width="90%" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-79-1.png" width="90%" /&gt;
 ]
 
 ---
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-79-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-80-1.png)&lt;!-- --&gt;
 Pour chacun des quatre rectangles, nous pouvons "simplifier" l'arbre en évaluant chacune des arêtes du rectangle avec les feuilles de l'arbre. Considérons les deux rectangles du haut et l'arête supérieure du trou `\(P_2\)`. En évaluant les quatre arêtes des rectangles par le demi-plan défini par l'arête supérieure du trou, nous obtenons `FAUX`.
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-80-1.png" width="90%" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-81-1.png" width="90%" /&gt;
 ]
 
 ---
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-81-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-82-1.png)&lt;!-- --&gt;
 En étudiant uniquement le rectangle en haut à gauche et en utilisant le même argument, aucun point de ce rectangle n'intersecte `\(B_2\)`.
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-82-1.png" width="90%" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-83-1.png" width="90%" /&gt;
 ]
 
 ---
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-83-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-84-1.png)&lt;!-- --&gt;
 Nous subdivisons ensuite le rectangle en haut à gauche en quatres rectangles.
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-84-1.png" width="90%" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-85-1.png" width="90%" /&gt;
 ]
 
 ---
 
 .pull-left[
-![](index_files/figure-html/unnamed-chunk-85-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-86-1.png)&lt;!-- --&gt;
 En étudiant uniquement le sous-rectangle en haut à droite, nous remarquons qu'il n'intersecte pas les polygones `\(C\)`, `\(D_1\)` et `\(D_2\)`.
 ]
 
 .pull-right[
-&lt;img src="index_files/figure-html/unnamed-chunk-86-1.png" width="60%" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-87-1.png" width="60%" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 class:center, middle
 
-![](index_files/figure-html/unnamed-chunk-87-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-88-1.png)&lt;!-- --&gt;
 
 ---
 class:inverse, center, middle
@@ -835,22 +838,17 @@ class:inverse, center, middle
 ---
 class:center,middle
 
-![](index_files/figure-html/unnamed-chunk-88-1.png)&lt;!-- --&gt;
-
----
-class: center, middle
-
 ![](index_files/figure-html/unnamed-chunk-89-1.png)&lt;!-- --&gt;
-
----
-class:middle, center
-
-&lt;iframe src="https://www.geogebra.org/classic/fuebudnz?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"&gt;&lt;/iframe&gt;
 
 ---
 class: center, middle
 
 ![](index_files/figure-html/unnamed-chunk-90-1.png)&lt;!-- --&gt;
+
+---
+class:middle, center
+
+&lt;iframe src="https://www.geogebra.org/classic/fuebudnz?embed" width="800" height="600" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"&gt;&lt;/iframe&gt;
 
 ---
 class: center, middle
@@ -862,6 +860,11 @@ class: center, middle
 
 ![](index_files/figure-html/unnamed-chunk-92-1.png)&lt;!-- --&gt;
 
+---
+class: center, middle
+
+![](index_files/figure-html/unnamed-chunk-93-1.png)&lt;!-- --&gt;
+
 
 ---
 class:center, middle, inverse
@@ -871,7 +874,7 @@ class:center, middle, inverse
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-93-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-94-1.png)&lt;!-- --&gt;
 
 ---
 
@@ -888,12 +891,202 @@ class: middle, center
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-94-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-95-1.png)&lt;!-- --&gt;
 
 ---
 class: middle, center
 
-![](index_files/figure-html/unnamed-chunk-95-1.png)&lt;!-- --&gt;
+![](index_files/figure-html/unnamed-chunk-96-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-97-1.png)&lt;!-- --&gt;
+
+---
+class: middle, center
+
+![](index_files/figure-html/unnamed-chunk-98-1.png)&lt;!-- --&gt;
+
+---
+class:inverse, center, middle
+
+# Correctif lors du tracage d'arcs de cercles
+
+---
+
+## Arcs de cercle
+
+.pull-left[
+
+- Lorsque la buse se déplace en ligne droite, elle dépose du matériel également de chaque côté de sa ligne centrale.
+
+- Si `\(R\)` est très grand, nous avons `\(r\approx R+t/2\)`.
+
+- Par contre, lorsqu'un arc de cercle est créé, moins de matériel est nécessaire à l'intérieur de l'arc par rapport à l'extérieur.
+
+]
+
+.pull-right[
+![](index_files/figure-html/unnamed-chunk-99-1.png)&lt;!-- --&gt;
+]
+
+
+---
+
+## Arcs de cercle
+
+.pull-left[
+
+- En considérant le cercle entier, posons la circonférence du cercle `\(L=2\pi r\)`.
+
+- Pour une ligne droite ( `\(R\)` infini) nous avons `\(A_i=2\pi r \cdot t/2=\pi r t\)`
+.
+
+- Pour un arc de cercle ( `\(R\)` fini) nous avons $A_i=\pi(r^2-R^2)
+$.
+
+- En posant les deux équations précédentes égales, nous obtenons l'équation `\(r^2-rt-R^2=0\)`, qui possède la racine positive `\(r=(t+\sqrt{t^2+4R^2})/2\)`.
+
+]
+
+.pull-right[
+![](index_files/figure-html/unnamed-chunk-100-1.png)&lt;!-- --&gt;
+]
+
+---
+
+&lt;table class="table table-striped table-hover table-condensed" style="font-size: 16px; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; R &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; r &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; R+t/2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Différence &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.280776 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0307764 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.770691 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0206906 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.265564 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0155644 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.762469 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0124689 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.260399 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0103986 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 3.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.758917 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0089172 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.257805 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0078049 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.756939 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0069391 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.256246 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0062461 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.755679 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0056789 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 6.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.255206 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0052061 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 6.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.754806 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0048059 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 7.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.254463 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0044629 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 7.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.754166 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0041655 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 8.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.253905 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0039053 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 8.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.753676 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0036757 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 9.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.253472 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0034716 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 9.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.753289 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0032889 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 10.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.253125 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.25 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0031245 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+
+
+
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
