@@ -124,7 +124,6 @@ c_b3 <- b3 %>%
 xaringanExtra::use_xaringan_extra(c("tile_view", "animate_css", "tachyons"))
 ```
 
-
 class: center, middle
 
 <iframe width="800" height="600" src="https://www.youtube.com/embed/m_QhY1aABsE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -258,6 +257,13 @@ class: center, inverse
 background-image: url("https://i.stack.imgur.com/ENvMe.png")
 background-size: contain
 ---
+class: inverse, center, middle
+
+# [RepRap](https://reprap.org/wiki/RepRap)
+
+> RepRap is humanity's first general-purpose self-replicating manufacturing machine.
+
+---
 
 # STL pour STéréoLitographie
 
@@ -267,7 +273,7 @@ background-size: contain
 
 - Cette surface est nécessairement fermée et définie par une série de triangles (ou de facettes). 
 
-- Chaque triangle est défini par les coordonnées cartésiennes (x, y, z) dans un trièdre direct de son vecteur normal unitaire (n) orienté vers l'extérieur de l'objet et de ses trois sommets ordonnés dans le sens trigonométrique. 
+- Chaque triangle est défini par les coordonnées cartésiennes ( $x$, $y$, $z$) dans un trièdre direct de son vecteur normal unitaire ( $\vec n$) orienté vers l'extérieur de l'objet et de ses trois sommets ordonnés dans le sens trigonométrique. 
 
 - Chaque triangle doit partager 2 sommets avec chacun des triangles le juxtaposant. Dit autrement, le sommet d'un triangle ne doit pas être sur l'arête d'un autre triangle. 
 
@@ -2379,11 +2385,17 @@ class:middle, center
 
 # L'expression d'une région convexe
 
+--
+
+Un polygone est convexe lorsque les angles intérieurs de ce polygone sont tous inférieurs à 180 degrés.
+
+--
+
 .center[
 ```{tikz}
 \usetikzlibrary{decorations.markings}
 \begin{tikzpicture}[
-  scale = 4,
+  scale = 3.75,
   decoration={
       markings,
       mark=at position 0.5 with {\arrow{>}}}
@@ -2422,11 +2434,12 @@ class:middle, center
 \draw[black, very thick, postaction={decorate}] (I)--(A);
 \draw[black, very thick, postaction={decorate}] (A)--(B);
 
-\node at (0.5,0.5) {$P=H_1\cap H_2 \cap ... \cap H_n$};
+\node at (0.5,0.5) {\small$P=H_1\cap H_2 \cap ... \cap H_n$};
 
 \end{tikzpicture}
 ```
 ]
+
 
 ---
 class: inverse, center, middle
@@ -2439,7 +2452,7 @@ class: inverse, center, middle
 
 - L'enveloppe convexe d'un objet ou d'un regroupement d'objets géométriques est l'ensemble convexe le plus petit parmi ceux qui le contiennent.
 
-- Dans un plan, l'enveloppe convexe peut être comparée à la région limitée par un élastique qui englobe tous les points qu'on relâche jusqu'à ce qu'il se contracte au maximum. 
+- Dans un plan, l'enveloppe convexe peut être comparée à la région limitée par un élastique qui englobe tous les points et qu'on relâche jusqu'à ce qu'il se contracte au maximum. 
 
 - L'idée serait la même dans l'espace avec un ballon qui se dégonflerait jusqu'à être en contact avec tous les points qui sont à la surface de l'enveloppe convexe.
 
@@ -3410,7 +3423,7 @@ scale = 0.8
 ]
 
 $$
-P_1 = (A \setminus \left( B_1 \cup B_2 \cup (C \setminus (D_1 \cup D_2)) \right) \setminus P_2 )
+P_1 = \left( A \setminus \left( B_1 \cup B_2 \cup (C \setminus (D_1 \cup D_2)) \right) \right) \setminus P_2 
 $$
 
 ---
@@ -3420,7 +3433,7 @@ class: inverse, center, middle
 
 ---
 
-Puisque la buse de l'imprimate est positionnée à l'aide de moteurs pas à pas (*stepper motors*), ceux-ci ne peuvent se trouver qu'à un nombre discret de positions. Nous représenterons ces positions par une grille de points ou de pixels dans le plan.
+Puisque la buse de l'imprimante est positionnée à l'aide de moteurs pas à pas (*stepper motors*), ceux-ci ne peuvent se trouver qu'à un nombre discret de positions. Nous représenterons ces positions par une grille de points ou de pixels dans le plan.
 .center[
 ```{r}
 delta <- 0.02
@@ -4481,11 +4494,9 @@ class:inverse, center, middle
 
 - En considérant le cercle entier, posons la circonférence du cercle $L=2\pi r$.
 
-- Pour une ligne droite ( $R$ infini) nous avons $A_i=2\pi r \cdot t/2=\pi r t$
-.
+- Pour une ligne droite ( $R$ infini) nous avons $A_i=2\pi r \cdot t/2=\pi r t$.
 
-- Pour un arc de cercle ( $R$ fini) nous avons $A_i=\pi(r^2-R^2)
-$.
+- Pour un arc de cercle ( $R$ fini) nous avons $A_i=\pi(r^2-R^2)$.
 
 - En posant les deux équations précédentes égales, nous obtenons l'équation $r^2-rt-R^2=0$, qui possède la racine positive $r=(t+\sqrt{t^2+4R^2})/2$.
 
@@ -4530,7 +4541,24 @@ arc %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"),font_size = 16)
 ```
 
+---
 
+```{r}
+t <- 0.5
+R <- tibble(R = seq(from=1, to = 10, by = 0.5))
+arc <- R %>% 
+  mutate(r = (t+sqrt(t^2+4*R^2))/2) %>% 
+  mutate(`R+t/2` = R+t/2) %>% 
+  mutate(`Différence` = abs(R+t/2-r))
 
+arc %>% 
+  kable(format = "html") %>% 
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"),font_size = 16) %>% 
+  row_spec(12:19, bold = T, color = "white", background = "#D7261E")
+```
 
+---
+class: inverse, middle, center
+
+# Des questions?
 
